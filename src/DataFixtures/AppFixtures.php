@@ -11,8 +11,10 @@ use App\Entity\Category;
 use App\Entity\Feedback;
 use App\Entity\Personal;
 use App\Entity\Resource;
+use App\Entity\Workload;
 use App\Entity\Interview;
 use App\Entity\TeamMember;
+use App\Entity\TypeInterview;
 use App\Entity\EmployeeSentiments;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -101,6 +103,20 @@ class AppFixtures extends Fixture
         $teamMember->setDescription('Membre de l\'équipe de développement.');
 
         $manager->persist($teamMember);
+
+        // TypeInterview
+        $typeInterview = new TypeInterview();
+        $typeInterview->setName('Entretien de recrutement');
+        $typeInterview->setDescription('Entretien utilisé pour recruter de nouveaux employés.');
+
+        $manager->persist($typeInterview);
+
+        // Workload
+        $workload = new Workload();
+        $workload->setDescription('Charge de travail pour le mois de mars 2024.');
+        $workload->setHours(160);
+
+        $manager->persist($workload);
     }
       
 

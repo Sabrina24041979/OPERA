@@ -27,6 +27,12 @@ class Workload
     #[ORM\JoinColumn(nullable: false)]
     private ?Personal $personal = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $hours = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +82,30 @@ class Workload
     public function setPersonal(?Personal $personal): static
     {
         $this->personal = $personal;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getHours(): ?string
+    {
+        return $this->hours;
+    }
+
+    public function setHours(string $hours): static
+    {
+        $this->hours = $hours;
 
         return $this;
     }
