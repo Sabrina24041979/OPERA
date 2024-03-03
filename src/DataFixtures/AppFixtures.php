@@ -2,22 +2,22 @@
 
 namespace App\DataFixtures;
 
-
-use App\Entity\Goal;
-use App\Entity\Team;
 use App\Entity\Action;
-use App\Entity\Profile;
 use App\Entity\Category;
+use App\Entity\EmployeeSentiments;
 use App\Entity\Feedback;
-use App\Entity\Personal;
-use App\Entity\Resource;
-use App\Entity\Workload;
+use App\Entity\Goal;
 use App\Entity\Interview;
+use App\Entity\Personal;
+use App\Entity\Profile;
+use App\Entity\Resource;
+use App\Entity\Team;
 use App\Entity\TeamMember;
 use App\Entity\TypeInterview;
-use App\Entity\EmployeeSentiments;
-use Doctrine\Persistence\ObjectManager;
+use App\Entity\Workload;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+
 
 
 class AppFixtures extends Fixture
