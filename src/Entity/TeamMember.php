@@ -32,6 +32,12 @@ class TeamMember
     #[ORM\JoinColumn(nullable: false)]
     private ?Team $team = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $Name = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
     public function __construct()
     {
         $this->personal = new ArrayCollection();
@@ -110,6 +116,30 @@ class TeamMember
     public function setTeam(?Team $team): static
     {
         $this->team = $team;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->Name;
+    }
+
+    public function setName(string $Name): static
+    {
+        $this->Name = $Name;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
