@@ -32,6 +32,10 @@ class Action
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $due_date = null;
 
+    #[ORM\ManyToOne(inversedBy: 'actions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Goal $goal = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +109,18 @@ class Action
     public function setDueDate(?\DateTimeInterface $due_date): static
     {
         $this->due_date = $due_date;
+
+        return $this;
+    }
+
+    public function getGoal(): ?Goal
+    {
+        return $this->goal;
+    }
+
+    public function setGoal(?Goal $goal): static
+    {
+        $this->goal = $goal;
 
         return $this;
     }

@@ -29,6 +29,10 @@ class EmployeeSentiments
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $intensity = null;
 
+    #[ORM\ManyToOne(inversedBy: 'employeeSentiments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Personal $personal = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class EmployeeSentiments
     public function setIntensity(?string $intensity): static
     {
         $this->intensity = $intensity;
+
+        return $this;
+    }
+
+    public function getPersonal(): ?Personal
+    {
+        return $this->personal;
+    }
+
+    public function setPersonal(?Personal $personal): static
+    {
+        $this->personal = $personal;
 
         return $this;
     }

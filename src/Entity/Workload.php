@@ -23,6 +23,10 @@ class Workload
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $comment = null;
 
+    #[ORM\ManyToOne(inversedBy: 'workloads')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Personal $personal = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +64,18 @@ class Workload
     public function setComment(?string $comment): static
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getPersonal(): ?Personal
+    {
+        return $this->personal;
+    }
+
+    public function setPersonal(?Personal $personal): static
+    {
+        $this->personal = $personal;
 
         return $this;
     }

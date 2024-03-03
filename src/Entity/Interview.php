@@ -20,6 +20,19 @@ class Interview
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $status = null;
 
+    #[ORM\OneToOne(mappedBy: 'interview', cascade: ['persist', 'remove'])]
+    private ?Feedback $feedback = null;
+
+    #[ORM\ManyToOne(inversedBy: 'interviews')]
+    private ?Personal $interviewer = null;
+
+    #[ORM\ManyToOne(inversedBy: 'interviewsAsInterviewee')]
+    private ?Personal $interviewee = null;
+
+    #[ORM\ManyToOne(inversedBy: 'interviews')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?TypeInterview $typeInterview = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -48,4 +61,62 @@ class Interview
 
         return $this;
     }
+
+    public function getFeedback(): ?Feedback
+    {
+        return $this->feedback;
+    }
+
+    public function setFeedback(?Feedback $feedback): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($feedback === null && $this->feedback !== null) {
+            $this->feedback->setInterview(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($feedback !== null && $feedback->getInterview() !== $this) {
+            $feedback->setInterview($this);
+        }
+
+        $this->feedback = $feedback;
+
+        return $this;
+    }
+
+    public function getInterviewer(): ?Personal
+    {
+        return $this->interviewer;
+    }
+
+    public function setInterviewer(?Personal $interviewer): static
+    {
+        $this->interviewer = $interviewer;
+
+        return $this;
+    }
+     // Nouvelles méthodes pour gérer l'interviewé
+     public function getInterviewee(): ?Personal
+     {
+         return $this->interviewee;
+     }
+ 
+     public function setInterviewee(?Personal $interviewee): self
+     {
+         $this->interviewee = $interviewee;
+ 
+         return $this;
+     }
+
+     public function getTypeInterview(): ?TypeInterview
+     {
+         return $this->typeInterview;
+     }
+
+     public function setTypeInterview(?TypeInterview $typeInterview): static
+     {
+         $this->typeInterview = $typeInterview;
+
+         return $this;
+     }
 }

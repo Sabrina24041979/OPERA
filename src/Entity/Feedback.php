@@ -23,6 +23,9 @@ class Feedback
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $type = null;
 
+    #[ORM\OneToOne(inversedBy: 'feedback', cascade: ['persist', 'remove'])]
+    private ?Interview $interview = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class Feedback
     public function setType(?string $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getInterview(): ?Interview
+    {
+        return $this->interview;
+    }
+
+    public function setInterview(?Interview $interview): static
+    {
+        $this->interview = $interview;
 
         return $this;
     }

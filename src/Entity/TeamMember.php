@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TeamMemberRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,18 @@ class TeamMember
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $status = null;
+
+    #[ORM\ManyToMany(targetEntity: Personal::class, inversedBy: 'teamMembers')]
+    private Collection $personal;
+
+    #[ORM\ManyToOne(inversedBy: 'teamMembers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Team $team = null;
+
+    public function __construct()
+    {
+        $this->personal = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +74,42 @@ class TeamMember
     public function setStatus(?string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Personal>
+     */
+    public function getPersonal(): Collection
+    {
+        return $this->personal;
+    }
+
+    public function addPersonal(Personal $personal): static
+    {
+        if (!$this->personal->contains($personal)) {
+            $this->personal->add($personal);
+        }
+
+        return $this;
+    }
+
+    public function removePersonal(Personal $personal): static
+    {
+        $this->personal->removeElement($personal);
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Team $team): static
+    {
+        $this->team = $team;
 
         return $this;
     }
