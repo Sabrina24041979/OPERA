@@ -33,6 +33,12 @@ class Interview
     #[ORM\JoinColumn(nullable: false)]
     private ?TypeInterview $typeInterview = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $Title = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -116,6 +122,30 @@ class Interview
      public function setTypeInterview(?TypeInterview $typeInterview): static
      {
          $this->typeInterview = $typeInterview;
+
+         return $this;
+     }
+
+     public function getTitle(): ?string
+     {
+         return $this->Title;
+     }
+
+     public function setTitle(string $Title): static
+     {
+         $this->Title = $Title;
+
+         return $this;
+     }
+
+     public function getDescription(): ?string
+     {
+         return $this->description;
+     }
+
+     public function setDescription(string $description): static
+     {
+         $this->description = $description;
 
          return $this;
      }
