@@ -73,20 +73,12 @@ class Interview
         return $this->feedback;
     }
 
-    public function setFeedback(?Feedback $feedback): static
+    public function setFeedback(?Feedback $feedback): self
     {
-        // unset the owning side of the relation if necessary
-        if ($feedback === null && $this->feedback !== null) {
-            $this->feedback->setInterview(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($feedback !== null && $feedback->getInterview() !== $this) {
+        $this->feedback = $feedback;
+        if ($feedback !== null) {
             $feedback->setInterview($this);
         }
-
-        $this->feedback = $feedback;
-
         return $this;
     }
 
@@ -95,58 +87,53 @@ class Interview
         return $this->interviewer;
     }
 
-    public function setInterviewer(?Personal $interviewer): static
+    public function setInterviewer(?Personal $interviewer): self
     {
         $this->interviewer = $interviewer;
-
         return $this;
     }
-     // Nouvelles méthodes pour gérer l'interviewé
-     public function getInterviewee(): ?Personal
-     {
-         return $this->interviewee;
-     }
- 
-     public function setInterviewee(?Personal $interviewee): self
-     {
-         $this->interviewee = $interviewee;
- 
-         return $this;
-     }
 
-     public function getTypeInterview(): ?TypeInterview
-     {
-         return $this->typeInterview;
-     }
+    public function getInterviewee(): ?Personal
+    {
+        return $this->interviewee;
+    }
 
-     public function setTypeInterview(?TypeInterview $typeInterview): static
-     {
-         $this->typeInterview = $typeInterview;
+    public function setInterviewee(?Personal $interviewee): self
+    {
+        $this->interviewee = $interviewee;
+        return $this;
+    }
 
-         return $this;
-     }
+    public function getTypeInterview(): ?TypeInterview
+    {
+        return $this->typeInterview;
+    }
 
-     public function getTitle(): ?string
-     {
-         return $this->Title;
-     }
+    public function setTypeInterview(?TypeInterview $typeInterview): self
+    {
+        $this->typeInterview = $typeInterview;
+        return $this;
+    }
 
-     public function setTitle(string $Title): static
-     {
-         $this->Title = $Title;
+    public function getTitle(): ?string
+    {
+        return $this->Title;
+    }
 
-         return $this;
-     }
+    public function setTitle(string $title): self
+    {
+        $this->Title = $title;
+        return $this;
+    }
 
-     public function getDescription(): ?string
-     {
-         return $this->description;
-     }
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
 
-     public function setDescription(string $description): static
-     {
-         $this->description = $description;
-
-         return $this;
-     }
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+        return $this;
+    }
 }

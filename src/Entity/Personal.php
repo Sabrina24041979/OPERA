@@ -49,10 +49,7 @@ class Personal
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $department = null;
 
-    #[ORM\OneToOne(mappedBy: 'personal', cascade: ['persist', 'remove'])]
-    private ?Profile $profile = null;
-
-    #[ORM\OneToMany(targetEntity: Goal::class, mappedBy: 'personal')]
+   #[ORM\OneToMany(targetEntity: Goal::class, mappedBy: 'personal')]
     private Collection $goals;
 
     #[ORM\ManyToMany(targetEntity: TeamMember::class, mappedBy: 'personal')]
@@ -69,6 +66,13 @@ class Personal
 
     #[ORM\OneToMany(targetEntity: Interview::class, mappedBy: 'interviewee')]
     private Collection $interviewsAsInterviewee;
+
+    #[ORM\OneToOne(mappedBy: 'personal', cascade: ['persist', 'remove'])]
+    private ?Profile $profile = null;
+
+    #[ORM\ManyToOne(inversedBy: 'manager')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Manager $manager = null;
 
     public function __construct()
     {
@@ -213,28 +217,6 @@ class Personal
     public function setDepartment(?string $department): static
     {
         $this->department = $department;
-
-        return $this;
-    }
-
-    public function getProfile(): ?Profile
-    {
-        return $this->profile;
-    }
-
-    public function setProfile(?Profile $profile): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($profile === null && $this->profile !== null) {
-            $this->profile->setPersonal(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($profile !== null && $profile->getPersonal() !== $this) {
-            $profile->setPersonal($this);
-        }
-
-        $this->profile = $profile;
 
         return $this;
     }
@@ -411,6 +393,35 @@ class Personal
         if ($this->interviewsAsInterviewee->removeElement($interview) && $interview->getInterviewee() === $this) {
             $interview->setInterviewee(null);
         }
+
+        return $this;
+    }
+
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(Profile $profile): static
+    {
+        // set the owning side of the relation if necessary
+        if ($profile->getPersonal() !== $this) {
+            $profile->setPersonal($this);
+        }
+
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    public function getManager(): ?Manager
+    {
+        return $this->manager;
+    }
+
+    public function setManager(?Manager $manager): static
+    {
+        $this->manager = $manager;
 
         return $this;
     }

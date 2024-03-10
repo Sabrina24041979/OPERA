@@ -29,12 +29,15 @@ class Resource
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $personal = null;
+    // Modification pour utiliser une relation d'entité au lieu d'un ID entier
+    #[ORM\ManyToOne(targetEntity: Personal::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Personal $personal = null;
 
     #[ORM\ManyToOne(inversedBy: 'resources')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
+
 
     public function getId(): ?int
     {
@@ -101,14 +104,16 @@ class Resource
         return $this;
     }
 
-    public function getPersonal(): ?int
+    public function getPersonal(): ?Personal
     {
         return $this->personal;
     }
 
-    public function setPersonal(?int $personal): static
+    public function setPersonal(?Personal $personal): self
     {
         $this->personal = $personal;
+
+        return $this;
     }
 
     public function getCategory(): ?Category

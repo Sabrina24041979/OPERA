@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Category; 
+use App\Entity\Personal;
 
 #[ORM\Entity(repositoryClass: GoalRepository::class)]
 class Goal
@@ -35,10 +37,14 @@ class Goal
     private ?\DateTimeInterface $updated_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'goals')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Personal $personal = null;
 
     #[ORM\OneToMany(targetEntity: Action::class, mappedBy: 'goal')]
     private Collection $actions;
+
+    #[ORM\ManyToOne(inversedBy: 'goals')]
+    private ?Category $category = null; // Déclaration de la propriété $category
 
     public function __construct()
     {
@@ -55,7 +61,7 @@ class Goal
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -67,7 +73,7 @@ class Goal
         return $this->deadline;
     }
 
-    public function setDeadline(?\DateTimeInterface $deadline): static
+    public function setDeadline(?\DateTimeInterface $deadline): self
     {
         $this->deadline = $deadline;
 
@@ -79,7 +85,7 @@ class Goal
         return $this->status;
     }
 
-    public function setStatus(?string $status): static
+    public function setStatus(?string $status): self
     {
         $this->status = $status;
 
@@ -91,7 +97,7 @@ class Goal
         return $this->priority;
     }
 
-    public function setPriority(?string $priority): static
+    public function setPriority(?string $priority): self
     {
         $this->priority = $priority;
 
@@ -103,7 +109,7 @@ class Goal
         return $this->created_at;
     }
 
-    public function setCreatedAt(?\DateTimeInterface $created_at): static
+    public function setCreatedAt(?\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
@@ -115,7 +121,7 @@ class Goal
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): static
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 
@@ -127,7 +133,7 @@ class Goal
         return $this->personal;
     }
 
-    public function setPersonal(?Personal $personal): static
+    public function setPersonal(?Personal $personal): self
     {
         $this->personal = $personal;
 
@@ -161,6 +167,12 @@ class Goal
             }
         }
 
+        return $this;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
         return $this;
     }
 }
