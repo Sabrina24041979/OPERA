@@ -26,9 +26,9 @@ class ActionFixtures extends Fixture implements DependentFixtureInterface
             for ($i = 1; $i <= 3; $i++) {
                 $action = new Action();
                 $action->setName('Action ' . $i);
-                $action->setDescription('Description of Action ' . $i);
-                $action->setPriority('High');
-                $action->setStatus('Pending');
+                $action->setDescription('Description de l\' Action ' . $i);
+                $action->setPriority('Haute');
+                $action->setStatus('En instance');
                 $action->setCreatedAt(new \DateTimeImmutable('now'));
                 $action->setUpdatedAt(new \DateTimeImmutable('now'));
                 $action->setDueDate(new \DateTimeImmutable('now +1 week'));

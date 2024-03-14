@@ -24,9 +24,9 @@ class FeedbackFixtures extends Fixture implements DependentFixtureInterface
 
         foreach ($interviews as $interview) {
             $feedback = new Feedback();
-            $feedback->setFeedbackText('Feedback text for interview ' . $interview->getId());
+            $feedback->setFeedbackText('Feedback text pour l\'entretien' . $interview->getId());
             $feedback->setDate(new \DateTimeImmutable('now'));
-            $feedback->setType('Type of feedback');
+            $feedback->setType('Type de feedback');
             $feedback->setInterview($interview);
 
             $manager->persist($feedback);

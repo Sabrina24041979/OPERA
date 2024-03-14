@@ -15,14 +15,21 @@ class ManagerFixtures extends Fixture
         // Définir les attributs du manager 1
         $manager1->setFullname('Sabrina SAYARI ');
         $manager1->setEmail('sabrina_sayari_montassar@yahoo.fr');
-        // ...
+        $manager1->setPosition('1');
+        $manager1->setMatricule('310257');
+        $manager1->setDepartment('Informatique');
+
+        
 
         $manager2 = new Manager();
         // Définir les attributs du manager 2
         $manager2->setFullname('sabrine.montassar');
         $manager2->setEmail('sabrina.montassar.04@gmail.com');
-        // ...
-
+        $manager1->setPosition('2');
+        $manager1->setMatricule('310258');
+        $manager1->setDepartment('Informatique');
+        
+        
         $manager->persist($manager1);
         $manager->persist($manager2);
         $manager->flush();

@@ -4,9 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Goal;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class GoalFixtures extends Fixture
+class GoalFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {

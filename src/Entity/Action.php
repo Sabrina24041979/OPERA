@@ -50,7 +50,7 @@ class Action
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -62,7 +62,7 @@ class Action
         return $this->priority;
     }
 
-    public function setPriority(?string $priority): static
+    public function setPriority(?string $priority): self
     {
         $this->priority = $priority;
 

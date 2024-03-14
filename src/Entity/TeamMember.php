@@ -19,7 +19,7 @@ class TeamMember
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $role_in_team = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $joined_at = null;
 
     #[ORM\Column(length: 255, nullable: true)]

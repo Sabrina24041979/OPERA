@@ -3,10 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Resource;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class ResourceFixtures extends Fixture
+class ResourceFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -18,6 +19,7 @@ class ResourceFixtures extends Fixture
             $resource->setFilePath('/path/to/resource_' . $i . '.pdf');
             $resource->setCreatedAt(new \DateTimeImmutable('2024-01-' . ($i < 10 ? '0' . $i : $i)));
             $resource->setUpdatedAt(new \DateTimeImmutable('2024-02-' . ($i < 10 ? '0' . $i : $i)));
+            $resource->setCategory($this->getReference("category_" . rand(1,5)));
 
             // Associer la ressource à une catégorie (à remplacer par la logique appropriée)
             // Exemple: $resource->setCategory($this->getReference('category_' . $i));
@@ -34,5 +36,12 @@ class ResourceFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            CategoryFixtures::class,
+        ];
     }
 }

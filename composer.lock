@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f177f477a93273637f0683d49b6506ef",
+    "content-hash": "c8b0ca1e8790e07cc853be18ff2d3645",
     "packages": [
         {
             "name": "composer/semver",
@@ -1371,6 +1371,56 @@
                 }
             ],
             "time": "2023-10-06T06:47:41+00:00"
+        },
+        {
+            "name": "espero-soft/faker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/espero-soft/Faker.git",
+                "reference": "857abadef673d5f06eec3c0ecc4883aca35b2b51"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/espero-soft/Faker/zipball/857abadef673d5f06eec3c0ecc4883aca35b2b51",
+                "reference": "857abadef673d5f06eec3c0ecc4883aca35b2b51",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EsperoSoft\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Espero-Soft Informatiques",
+                    "email": "contact@espero-soft.com"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "akpoli",
+                "data",
+                "espero",
+                "espero-soft",
+                "faker",
+                "fixtures",
+                "mudey"
+            ],
+            "support": {
+                "issues": "https://github.com/espero-soft/Faker/issues",
+                "source": "https://github.com/espero-soft/Faker/tree/master"
+            },
+            "time": "2023-10-06T07:59:47+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -9931,7 +9981,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "espero-soft/faker": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

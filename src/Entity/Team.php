@@ -46,6 +46,7 @@ class Team
     public function __construct()
     {
         $this->teamMembers = new ArrayCollection();
+        $this->members = new ArrayCollection();
     }
 
     public function getId(): ?int

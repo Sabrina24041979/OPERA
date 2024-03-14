@@ -22,7 +22,7 @@ class TeamMemberFixtures extends Fixture implements DependentFixtureInterface
 
             // Associer des personnes (Personal) à chaque membre d'équipe
             for ($j = 1; $j <= 3; $j++) {
-                $personalReference = $this->getReference('personal_' . (($i - 1) * 3 + $j));
+                $personalReference = $this->getReference('personal_' . rand(1,10));
                 $teamMember->addPersonal($personalReference);
             }
 

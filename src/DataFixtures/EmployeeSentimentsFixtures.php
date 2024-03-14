@@ -17,9 +17,9 @@ class EmployeeSentimentsFixtures extends Fixture implements DependentFixtureInte
             $employeeSentiment = new EmployeeSentiments();
             $employeeSentiment->setSentimentValue('Sentiment ' . $i);
             $employeeSentiment->setDate(new \DateTimeImmutable('now'));
-            $employeeSentiment->setComment('Comment for sentiment ' . $i);
-            $employeeSentiment->setCategory('Category ' . $i);
-            $employeeSentiment->setIntensity('Intensity ' . $i);
+            $employeeSentiment->setComment('Commentaire du sentiment ' . $i);
+            $employeeSentiment->setCategory('Categorie ' . $i);
+            $employeeSentiment->setIntensity('Intensité ' . $i);
 
             // Récupération aléatoire d'un employé
             $employee = $this->getRandomEmployee($manager);

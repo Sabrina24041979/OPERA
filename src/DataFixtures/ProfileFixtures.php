@@ -2,12 +2,14 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Profile;
 use App\Entity\Manager;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Entity\Personal;
+use App\Entity\Profile;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class ProfileFixtures extends Fixture
+class ProfileFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -21,11 +23,8 @@ class ProfileFixtures extends Fixture
             $profile->setProfilePicture(null); // Optionnel, à null si non utilisé
             
             // Obtenez une référence à un manager existant
-            $managerReference = $this->getReference('manager_' . rand(1, 2));
-            $profile->setManager($managerReference);
-
-            // Assurez-vous d'ajouter le profile au manager également
-            $managerReference->addProfile($profile);
+            $personalReference = $this->getReference('personal_' . $i);
+            $profile->setPersonal($personalReference);
 
             $manager->persist($profile);
         }
@@ -36,7 +35,7 @@ class ProfileFixtures extends Fixture
     public function getDependencies()
     {
         return [
-            ManagerFixtures::class,
+            PersonalFixtures::class,
         ];
     }
 }
