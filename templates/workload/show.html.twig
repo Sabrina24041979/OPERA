@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Workload{% endblock %}
+
+{% block body %}
+    <h1>Workload</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ workload.id }}</td>
+            </tr>
+            <tr>
+                <th>Workload_level</th>
+                <td>{{ workload.workloadLevel }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ workload.date ? workload.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ workload.comment }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ workload.description }}</td>
+            </tr>
+            <tr>
+                <th>Hours</th>
+                <td>{{ workload.hours }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_workload_index') }}">back to list</a>
+
+    <a href="{{ path('app_workload_edit', {'id': workload.id}) }}">edit</a>
+
+    {{ include('workload/_delete_form.html.twig') }}
+{% endblock %}

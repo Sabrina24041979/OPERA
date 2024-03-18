@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personal{% endblock %}
+
+{% block body %}
+    <h1>Personal</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ personal.id }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ personal.username }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ personal.email }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ personal.password }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ personal.createdAt ? personal.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ personal.updatedAt ? personal.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Entry_date</th>
+                <td>{{ personal.entryDate ? personal.entryDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Exit_date</th>
+                <td>{{ personal.exitDate ? personal.exitDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Matricule</th>
+                <td>{{ personal.matricule }}</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td>{{ personal.role }}</td>
+            </tr>
+            <tr>
+                <th>Manager_id</th>
+                <td>{{ personal.managerId }}</td>
+            </tr>
+            <tr>
+                <th>Department</th>
+                <td>{{ personal.department }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_personal_index') }}">back to list</a>
+
+    <a href="{{ path('app_personal_edit', {'id': personal.id}) }}">edit</a>
+
+    {{ include('personal/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Workload{% endblock %}
+
+{% block body %}
+    <h1>Create new Workload</h1>
+
+    {{ include('workload/_form.html.twig') }}
+
+    <a href="{{ path('app_workload_index') }}">back to list</a>
+{% endblock %}

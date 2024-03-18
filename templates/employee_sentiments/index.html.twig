@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EmployeeSentiments index{% endblock %}
+
+{% block body %}
+    <h1>EmployeeSentiments index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Sentiment_value</th>
+                <th>Date</th>
+                <th>Comment</th>
+                <th>Category</th>
+                <th>Intensity</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employee_sentiment in employee_sentiments %}
+            <tr>
+                <td>{{ employee_sentiment.id }}</td>
+                <td>{{ employee_sentiment.sentimentValue }}</td>
+                <td>{{ employee_sentiment.date ? employee_sentiment.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ employee_sentiment.comment }}</td>
+                <td>{{ employee_sentiment.category }}</td>
+                <td>{{ employee_sentiment.intensity }}</td>
+                <td>
+                    <a href="{{ path('app_employee_sentiments_show', {'id': employee_sentiment.id}) }}">show</a>
+                    <a href="{{ path('app_employee_sentiments_edit', {'id': employee_sentiment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_employee_sentiments_new') }}">Create new</a>
+{% endblock %}

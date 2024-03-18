@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit EmployeeSentiments{% endblock %}
+
+{% block body %}
+    <h1>Edit EmployeeSentiments</h1>
+
+    {{ include('employee_sentiments/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_employee_sentiments_index') }}">back to list</a>
+
+    {{ include('employee_sentiments/_delete_form.html.twig') }}
+{% endblock %}

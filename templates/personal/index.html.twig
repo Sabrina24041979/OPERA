@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personal index{% endblock %}
+
+{% block body %}
+    <h1>Personal index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>Entry_date</th>
+                <th>Exit_date</th>
+                <th>Matricule</th>
+                <th>Role</th>
+                <th>Manager_id</th>
+                <th>Department</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for personal in personals %}
+            <tr>
+                <td>{{ personal.id }}</td>
+                <td>{{ personal.username }}</td>
+                <td>{{ personal.email }}</td>
+                <td>{{ personal.password }}</td>
+                <td>{{ personal.createdAt ? personal.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ personal.updatedAt ? personal.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ personal.entryDate ? personal.entryDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ personal.exitDate ? personal.exitDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ personal.matricule }}</td>
+                <td>{{ personal.role }}</td>
+                <td>{{ personal.managerId }}</td>
+                <td>{{ personal.department }}</td>
+                <td>
+                    <a href="{{ path('app_personal_show', {'id': personal.id}) }}">show</a>
+                    <a href="{{ path('app_personal_edit', {'id': personal.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_personal_new') }}">Create new</a>
+{% endblock %}

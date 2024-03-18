@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EmployeeSentiments{% endblock %}
+
+{% block body %}
+    <h1>EmployeeSentiments</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ employee_sentiment.id }}</td>
+            </tr>
+            <tr>
+                <th>Sentiment_value</th>
+                <td>{{ employee_sentiment.sentimentValue }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ employee_sentiment.date ? employee_sentiment.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ employee_sentiment.comment }}</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{ employee_sentiment.category }}</td>
+            </tr>
+            <tr>
+                <th>Intensity</th>
+                <td>{{ employee_sentiment.intensity }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_employee_sentiments_index') }}">back to list</a>
+
+    <a href="{{ path('app_employee_sentiments_edit', {'id': employee_sentiment.id}) }}">edit</a>
+
+    {{ include('employee_sentiments/_delete_form.html.twig') }}
+{% endblock %}

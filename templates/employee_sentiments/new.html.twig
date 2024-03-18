@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New EmployeeSentiments{% endblock %}
+
+{% block body %}
+    <h1>Create new EmployeeSentiments</h1>
+
+    {{ include('employee_sentiments/_form.html.twig') }}
+
+    <a href="{{ path('app_employee_sentiments_index') }}">back to list</a>
+{% endblock %}

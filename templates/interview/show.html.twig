@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Interview{% endblock %}
+
+{% block body %}
+    <h1>Interview</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ interview.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ interview.date ? interview.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ interview.status }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ interview.Title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ interview.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_interview_index') }}">back to list</a>
+
+    <a href="{{ path('app_interview_edit', {'id': interview.id}) }}">edit</a>
+
+    {{ include('interview/_delete_form.html.twig') }}
+{% endblock %}
