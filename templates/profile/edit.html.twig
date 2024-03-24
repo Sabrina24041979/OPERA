@@ -1,13 +1,14 @@
+{# J'étends le layout de base pour assurer une cohérence visuelle dans toute l'application. #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Profile{% endblock %}
+{% block title %}Éditer le Profil{% endblock %}
 
 {% block body %}
-    <h1>Edit Profile</h1>
+    <h1>Éditer le Profil</h1>
 
-    {{ include('profile/_form.html.twig', {'button_label': 'Update'}) }}
+    {# J'inclus le formulaire d'édition du profil, avec un label de bouton personnalisé pour l'action d'édition. #}
+    {{ include('profile/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('app_profile_index') }}">back to list</a>
-
-    {{ include('profile/_delete_form.html.twig') }}
+    {# Je fournis un lien de retour à la liste des profils pour une meilleure navigation de l'utilisateur. #}
+    <a href="{{ path('app_profile_index') }}">Retour à la liste</a>
 {% endblock %}

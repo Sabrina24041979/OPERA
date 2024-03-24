@@ -1,11 +1,13 @@
+{# J'étends le layout de base et je définis un titre pour la page de création d'une nouvelle équipe. #}
 {% extends 'base.html.twig' %}
 
-{% block title %}New Team{% endblock %}
+{% block title %}Nouvelle Équipe{% endblock %}
 
 {% block body %}
-    <h1>Create new Team</h1>
+    <h1>Créer une Nouvelle Équipe</h1>
 
+    {# J'inclus le formulaire d'équipe pour la création. #}
     {{ include('team/_form.html.twig') }}
 
-    <a href="{{ path('app_team_index') }}">back to list</a>
+    <a href="{{ path('app_team_index') }}" class="btn btn-secondary">Retour à la liste</a>
 {% endblock %}

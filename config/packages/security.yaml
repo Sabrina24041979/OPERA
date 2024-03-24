@@ -4,14 +4,27 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        # Suppression du fournisseur en mémoire non utilisé
+        app_user_provider:
+            entity:
+                class: App\Entity\Personal  # Vérifiez que cette entité existe et est correctement mappée
+                property: email  # L'identifiant de connexion sera l'email de l'utilisateur
+    # Configuration des firewalls
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider  # Utilisation du fournisseur configuré plus haut
+
+            form_login:
+                login_path: login  # Chemin d'accès à la page de connexion
+                check_path: login  # Chemin utilisé pour la vérification des identifiants
+
+            logout:
+                path: /logout  # Chemin pour la déconnexion
+                target: home  # Route vers laquelle rediriger après déconnexion
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -21,10 +34,12 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+    
+    # Configuration du contrôle d'accès
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }
+# Configuration spécifique pour l'environnement de test
 when@test:
     security:
         password_hashers:

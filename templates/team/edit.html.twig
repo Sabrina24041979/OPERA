@@ -1,13 +1,16 @@
+{# J'étends le layout de base et je définis un titre pour la page d'édition d'une équipe. #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Team{% endblock %}
+{% block title %}Éditer Équipe{% endblock %}
 
 {% block body %}
-    <h1>Edit Team</h1>
+    <h1>Éditer Équipe</h1>
 
-    {{ include('team/_form.html.twig', {'button_label': 'Update'}) }}
+    {# J'inclus le formulaire d'équipe avec le label du bouton 'Mettre à jour'. #}
+    {{ include('team/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('app_team_index') }}">back to list</a>
+    <a href="{{ path('app_team_index') }}" class="btn btn-secondary">Retour à la liste</a>
 
+    {# J'inclus le formulaire de suppression pour cette équipe. #}
     {{ include('team/_delete_form.html.twig') }}
 {% endblock %}

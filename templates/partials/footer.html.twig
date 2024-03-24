@@ -1,0 +1,41 @@
+{# Je définis le bloc de pied de page du site #}
+<footer class="site-footer bg-light py-4">
+    <div class="container">
+        {# Section pour le logo et la description courte d'OPERA #}
+        <div class="row mb-4 justify-content-center">
+            <div class="col text-center">
+                {# J'affiche le logo d'OPERA avec un chemin vers l'asset correspondant #}
+                <img src="{{ asset('images/logo_opera.png') }}" alt="Logo OPERA" class="mb-3" style="max-width: 150px;">
+                <p class="text-muted">OPERA: Harmonisez, Optimisez, Réussissez - La symphonie de votre succès managérial.</p>
+            </div>
+        </div>
+
+        {# Je structure les liens rapides et informations légales dans deux colonnes #}
+        <div class="row">
+            {# Première colonne pour les liens rapides #}
+            <div class="col-md-6 mb-3">
+                <h5>Liens Rapides</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#notreSolution" class="link-dark">Notre Solution</a></li>
+                    <li><a href="#notreHistoire" class="link-dark">Notre Histoire</a></li>
+                    <li><a href="#valeurs" class="link-dark">Valeurs</a></li>
+                    <li><a href="#tarifs" class="link-dark">Tarifs</a></li>
+                    <li><a href="#faq" class="link-dark">FAQ</a></li>
+                </ul>
+            </div>
+
+            {# Seconde colonne pour les informations légales #}
+            <div class="col-md-6 mb-3">
+                <h5>Informations Légales</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#conditionsUtilisation" class="link-dark">Conditions d'utilisation</a></li>
+                    <li><a href="#politiqueConfidentialite" class="link-dark">Politique de confidentialité</a></li>
+                    <li><a href="#securiteDonnees" class="link-dark">Sécurité des données</a></li>
+                    <li><a href="#cookies" class="link-dark">Paramètres des cookies</a></li>
+                    <li><a href="#mentionsLegales" class="link-dark">Mentions légales</a></li>
+                    <li><a href="#contact" class="link-dark">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

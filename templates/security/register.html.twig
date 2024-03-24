@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2>Inscription sur OPERA</h2>
+    <p>Rejoignez-nous et transformez votre gestion d'équipe.</p>
+
+    {{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+        <div class="mb-3">
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+            {{ form_errors(registrationForm.email) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.password.first) }}
+            {{ form_widget(registrationForm.password.first, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }}
+            {{ form_errors(registrationForm.password.first) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.password.second) }}
+            {{ form_widget(registrationForm.password.second, {'attr': {'class': 'form-control', 'placeholder': 'Confirmez le mot de passe'}}) }}
+            {{ form_errors(registrationForm.password.second) }}
+        </div>
+
+        
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </div>
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}

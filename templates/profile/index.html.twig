@@ -1,21 +1,22 @@
+{# J'étends le layout de base pour maintenir une cohérence visuelle à travers l'application. #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Profile index{% endblock %}
+{% block title %}Index des Profils{% endblock %}
 
 {% block body %}
-    <h1>Profile index</h1>
+    <h1>Index des Profils</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Username</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>Nom d'utilisateur</th>
+                <th>Prénom</th>
+                <th>Nom</th>
                 <th>Position</th>
-                <th>Birthdate</th>
-                <th>ProfilePicture</th>
-                <th>actions</th>
+                <th>Date de naissance</th>
+                <th>Photo de profil</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -29,17 +30,17 @@
                 <td>{{ profile.birthdate ? profile.birthdate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ profile.profilePicture }}</td>
                 <td>
-                    <a href="{{ path('app_profile_show', {'id': profile.id}) }}">show</a>
-                    <a href="{{ path('app_profile_edit', {'id': profile.id}) }}">edit</a>
+                    <a href="{{ path('app_profile_show', {'id': profile.id}) }}">Voir</a>
+                    <a href="{{ path('app_profile_edit', {'id': profile.id}) }}">Éditer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Aucun profil trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_profile_new') }}">Create new</a>
+    <a href="{{ path('app_profile_new') }}">Créer un nouveau profil</a>
 {% endblock %}

@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\PersonalRepository;
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use App\Repository\PersonalRepository;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
+
 
 #[ORM\Entity(repositoryClass: PersonalRepository::class)]
 class Personal
@@ -40,8 +44,8 @@ class Personal
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $matricule = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $role = null;
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
     #[ORM\Column(nullable: true)]
     private ?int $manager_id = null;
@@ -89,9 +93,10 @@ class Personal
         return $this->id;
     }
 
-    public function getUsername(): ?string
-    {
-        return $this->username;
+    // Méthodes requises par l'interface UserInterface
+    public function getUsername(): ?string {
+        // Je choisis d'utiliser l'email comme "username" pour l'authentification
+        return $this->email;
     }
 
     public function setUsername(?string $username): static
@@ -113,8 +118,8 @@ class Personal
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
+    public function getPassword(): ?string {
+        // Je retourne simplement le mot de passe hashé
         return $this->password;
     }
 
@@ -185,14 +190,35 @@ class Personal
         return $this;
     }
 
-    public function getRole(): ?string
-    {
-        return $this->role;
+    public function getRoles(): array {
+        // Je m'assure qu'il y a toujours au moins un rôle
+        $roles = $this->roles;
+        // Je retourne les rôles de l'utilisateur, assurant qu'il y a toujours au moins 'ROLE_USER'
+        return array_unique($this->roles);
     }
 
     public function setRole(?string $role): static
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+     // Méthode pour ajouter un rôle à l'utilisateur
+     public function addRole(string $role): self {
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
+
+        return $this;
+    }
+
+    // Méthode pour retirer un rôle de l'utilisateur
+    public function removeRole(string $role): self {
+        if (($key = array_search($role, $this->roles, true)) !== false) {
+            unset($this->roles[$key]);
+            $this->roles = array_values($this->roles); // Je réindexe le tableau après suppression
+        }
 
         return $this;
     }

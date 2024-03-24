@@ -8,11 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    /**
-     * @Route("/", name="home")
-     */
+    #[Route("/", name: "home")]
     /*l'action index() sera invoquée lorsque l'utilisateur accédera à la racine du site*/
-    public function index(): Response
+        public function index(): Response
     {
         // Aucune logique métier spécifique n'est nécessaire ici pour le moment
         //La méthode render() est utilisée pour rendre la vue templates/home/index.html.twig 

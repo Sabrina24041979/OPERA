@@ -5,16 +5,18 @@ namespace App\Entity;
 use App\Repository\ProfileRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Manager;
 
+// J'assure que ma classe Profile est bien mappée comme une entité Doctrine.
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
 class Profile
 {
+    // Je définis l'identifiant unique pour chaque profil.
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    // Les attributs suivants représentent les diverses informations d'un profil.
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $username = null;
 
@@ -27,12 +29,15 @@ class Profile
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $position = null;
 
+    // Je choisis le type DATETIME_MUTABLE pour la date de naissance pour permettre des modifications.
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $birthdate = null;
 
+    // Le champ pour la photo de profil peut être nul si l'utilisateur ne souhaite pas en ajouter une.
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profilePicture = null;
 
+    // Chaque profil est associé à un utilisateur. L'association est unidirectionnelle ici, depuis le profil vers l'utilisateur.
     #[ORM\OneToOne(inversedBy: 'profile', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Personal $personal = null;
@@ -51,7 +56,7 @@ class Profile
         return $this->username;
     }
 
-    public function setUsername(string $username): static
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 
@@ -63,7 +68,7 @@ class Profile
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): static
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -75,7 +80,7 @@ class Profile
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): static
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -87,7 +92,7 @@ class Profile
         return $this->position;
     }
 
-    public function setPosition(string $position): static
+    public function setPosition(?string $position): self
     {
         $this->position = $position;
 
@@ -99,7 +104,7 @@ class Profile
         return $this->birthdate;
     }
 
-    public function setBirthdate(\DateTimeInterface $birthdate): static
+    public function setBirthdate(?\DateTimeInterface $birthdate): self
     {
         $this->birthdate = $birthdate;
 
@@ -111,7 +116,7 @@ class Profile
         return $this->profilePicture;
     }
 
-    public function setProfilePicture(?string $profilePicture): static
+    public function setProfilePicture(?string $profilePicture): self
     {
         $this->profilePicture = $profilePicture;
 
@@ -123,13 +128,13 @@ class Profile
         return $this->personal;
     }
 
-    public function setPersonal(Personal $personal): static
+    public function setPersonal(?Personal $personal): self
     {
         $this->personal = $personal;
 
         return $this;
     }
-
+    
     private $manager;
 
     public function getManager(): ?Manager

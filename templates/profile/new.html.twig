@@ -1,11 +1,14 @@
+{# J'étends le layout de base pour maintenir une cohérence visuelle à travers l'application. #}
 {% extends 'base.html.twig' %}
 
-{% block title %}New Profile{% endblock %}
+{% block title %}Nouveau Profil{% endblock %}
 
 {% block body %}
-    <h1>Create new Profile</h1>
+    <h1>Créer un nouveau Profil</h1>
 
+    {# J'inclus le formulaire de création de profil. #}
     {{ include('profile/_form.html.twig') }}
 
-    <a href="{{ path('app_profile_index') }}">back to list</a>
+    <a href="{{ path('app_profile_index') }}">Retour à la liste</a>
 {% endblock %}
+

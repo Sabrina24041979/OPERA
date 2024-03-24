@@ -10,9 +10,9 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route("/login", name="app_login")
-     */
+    
+    #[Route("/login", name: "app_login")] #Je prévoies d'avoir une page d'accueil séparée accessible aux utilisateurs non authentifiés, je déplace la route de connexion vers un autre chemin, par exemple "/login". 
+
     //AuthenticationUtils pour simplifier l'obtention des erreurs d'authentification et du dernier nom d'utilisateur entré
     //Ici la méthode login gère l'affichage du formulaire de connexion 
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -32,8 +32,9 @@ class SecurityController extends AbstractController
 
     /**
      * Ceci est la route de déconnexion. Symfony s'occupera de tout ici en raison de la configuration security.yaml
-     * @Route("/logout", name="app_logout", methods={"GET"})
-     */
+     */ 
+    #[Route("/logout", name: "app_logout", methods: ["GET"])]
+     
     // Ici la méthode logout est définie pour permettre la déconnexion, même si son corps reste vide
     public function logout(): void
     {
