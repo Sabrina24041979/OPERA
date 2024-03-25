@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Aperçu des Équipes{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Je visualise l'état des équipes</h1>
+    {# Tableau des équipes avec détails et actions de gestion #}
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom de l'équipe</th>
+                <th>Membres</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {# Boucle sur les équipes pour affichage #}
+        </tbody>
+    </table>
+    {# Lien vers le formulaire d'ajout d'une nouvelle équipe #}
+    <a href="#" class="btn btn-primary">Créer une équipe</a>
+</div>
+{% endblock %}

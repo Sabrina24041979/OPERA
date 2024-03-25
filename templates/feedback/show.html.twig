@@ -1,34 +1,41 @@
+{# J'étends le layout de base pour maintenir une cohérence visuelle à travers l'application. #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Feedback{% endblock %}
+{# Je définis le titre de la page pour refléter le contenu affiché. #}
+{% block title %}Détails du Feedback{% endblock %}
 
+{# Je commence le contenu principal de ma page. #}
 {% block body %}
-    <h1>Feedback</h1>
+    <div class="container mt-4">
+        <h1 class="text-center">Détails du Feedback</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ feedback.id }}</td>
-            </tr>
-            <tr>
-                <th>Feedback_text</th>
-                <td>{{ feedback.feedbackText }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ feedback.date ? feedback.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ feedback.type }}</td>
-            </tr>
-        </tbody>
-    </table>
+        {# Je crée un tableau pour afficher les informations du feedback de manière structurée. #}
+        <table class="table table-hover mt-3">
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <td>{{ feedback.id }}</td>
+                </tr>
+                <tr>
+                    <th>Texte du Feedback</th>
+                    <td>{{ feedback.feedbackText }}</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td>{{ feedback.date ? feedback.date|date('Y-m-d H:i:s') : 'Non spécifiée' }}</td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td>{{ feedback.type }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_feedback_index') }}">back to list</a>
-
-    <a href="{{ path('app_feedback_edit', {'id': feedback.id}) }}">edit</a>
-
-    {{ include('feedback/_delete_form.html.twig') }}
+        {# Je fournis des boutons pour les actions possibles : retour à la liste, modification et suppression du feedback. #}
+        <div class="text-center">
+            <a href="{{ path('app_feedback_index') }}" class="btn btn-secondary">Retour à la liste</a>
+            <a href="{{ path('app_feedback_edit', {'id': feedback.id}) }}" class="btn btn-primary">Modifier</a>
+            {{ include('feedback/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

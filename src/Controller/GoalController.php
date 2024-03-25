@@ -14,14 +14,17 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/goal')]
 class GoalController extends AbstractController
 {
+    // Méthode pour lister tous les objectifs
     #[Route('/', name: 'app_goal_index', methods: ['GET'])]
     public function index(GoalRepository $goalRepository): Response
     {
+        // Je récupère tous les objectifs grâce au repository et je les passe à la vue
         return $this->render('goal/index.html.twig', [
             'goals' => $goalRepository->findAll(),
         ]);
     }
 
+    // Méthode pour créer un nouvel objectif
     #[Route('/new', name: 'app_goal_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -33,23 +36,28 @@ class GoalController extends AbstractController
             $entityManager->persist($goal);
             $entityManager->flush();
 
+            // Redirection vers la liste des objectifs après création
             return $this->redirectToRoute('app_goal_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        // Rendu du formulaire de création d'un objectif
         return $this->render('goal/new.html.twig', [
             'goal' => $goal,
-            'form' => $form,
+            'form' => $form->createView(), // Correction : utilisez createView() pour passer le formulaire à la vue
         ]);
     }
 
+    // Méthode pour afficher les détails d'un objectif
     #[Route('/{id}', name: 'app_goal_show', methods: ['GET'])]
     public function show(Goal $goal): Response
     {
+        // Affichage des détails d'un objectif spécifique
         return $this->render('goal/show.html.twig', [
             'goal' => $goal,
         ]);
     }
 
+    // Méthode pour éditer un objectif existant
     #[Route('/{id}/edit', name: 'app_goal_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Goal $goal, EntityManagerInterface $entityManager): Response
     {
@@ -59,15 +67,18 @@ class GoalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            // Redirection vers la liste des objectifs après édition
             return $this->redirectToRoute('app_goal_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        // Rendu du formulaire d'édition d'un objectif
         return $this->render('goal/edit.html.twig', [
             'goal' => $goal,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
+    // Méthode pour supprimer un objectif
     #[Route('/{id}', name: 'app_goal_delete', methods: ['POST'])]
     public function delete(Request $request, Goal $goal, EntityManagerInterface $entityManager): Response
     {
@@ -76,6 +87,7 @@ class GoalController extends AbstractController
             $entityManager->flush();
         }
 
+        // Redirection vers la liste des objectifs après suppression
         return $this->redirectToRoute('app_goal_index', [], Response::HTTP_SEE_OTHER);
     }
 }

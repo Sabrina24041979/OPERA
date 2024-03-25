@@ -268,7 +268,7 @@ class Personal
     public function removeGoal(Goal $goal): static
     {
         if ($this->goals->removeElement($goal)) {
-            // set the owning side to null (unless already changed)
+            // Je définis le côté propriétaire sur null (sauf s’il a déjà été modifié)
             if ($goal->getPersonal() === $this) {
                 $goal->setPersonal(null);
             }
@@ -325,7 +325,7 @@ class Personal
     public function removeEmployeeSentiment(EmployeeSentiments $employeeSentiment): static
     {
         if ($this->employeeSentiments->removeElement($employeeSentiment)) {
-            // set the owning side to null (unless already changed)
+            // Je définis le côté propriétaire sur null (sauf s’il a déjà été modifié)
             if ($employeeSentiment->getPersonal() === $this) {
                 $employeeSentiment->setPersonal(null);
             }
@@ -355,7 +355,7 @@ class Personal
     public function removeWorkload(Workload $workload): static
     {
         if ($this->workloads->removeElement($workload)) {
-            // set the owning side to null (unless already changed)
+            // Je définis le côté propriétaire sur null (sauf s’il a déjà été modifié)
             if ($workload->getPersonal() === $this) {
                 $workload->setPersonal(null);
             }
@@ -366,8 +366,9 @@ class Personal
 
    /**
      * @return Collection<int, Interview>
-     * Obtient la collection des entretiens où la personne est l'interviewer
+     * J'obtiens la collection des entretiens où la personne est l'interviewer
      */
+
     public function getInterviewsAsInterviewer(): Collection
     {
         return $this->interviewsAsInterviewer;
@@ -430,7 +431,7 @@ class Personal
 
     public function setProfile(Profile $profile): static
     {
-        // set the owning side of the relation if necessary
+        // Définir le côté propriétaire de la relation si nécessaire
         if ($profile->getPersonal() !== $this) {
             $profile->setPersonal($this);
         }

@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Category; 
-use App\Entity\Personal;
 
 #[ORM\Entity(repositoryClass: GoalRepository::class)]
 class Goal
@@ -31,134 +29,51 @@ class Goal
     private ?string $priority = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $created_at = null;
+    private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updated_at = null;
+    private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'goals')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Personal $personal = null;
 
-    #[ORM\OneToMany(targetEntity: Action::class, mappedBy: 'goal')]
+    #[ORM\OneToMany(mappedBy: 'goal', targetEntity: Action::class, cascade: ['persist', 'remove'])]
     private Collection $actions;
 
     #[ORM\ManyToOne(inversedBy: 'goals')]
-    private ?Category $category = null; // Déclaration de la propriété $category
+    private ?Category $category = null;
 
     public function __construct()
     {
         $this->actions = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    // Getters and setters...
 
-    public function getDescription(): ?string
+    public function setCategory(?Category $category): self
     {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
+        $this->category = $category;
 
         return $this;
     }
 
-    public function getDeadline(): ?\DateTimeInterface
+    public function getCategory(): ?Category
     {
-        return $this->deadline;
+        return $this->category;
     }
 
-    public function setDeadline(?\DateTimeInterface $deadline): self
-    {
-        $this->deadline = $deadline;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    public function getPriority(): ?string
-    {
-        return $this->priority;
-    }
-
-    public function setPriority(?string $priority): self
-    {
-        $this->priority = $priority;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(?\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
-    {
-        $this->updated_at = $updated_at;
-
-        return $this;
-    }
-
-    public function getPersonal(): ?Personal
-    {
-        return $this->personal;
-    }
-
-    public function setPersonal(?Personal $personal): self
-    {
-        $this->personal = $personal;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Action>
-     */
-    public function getActions(): Collection
-    {
-        return $this->actions;
-    }
-
-    public function addAction(Action $action): static
+    // Méthodes pour gérer la collection d'actions liées à cet objectif
+    public function addAction(Action $action): self
     {
         if (!$this->actions->contains($action)) {
-            $this->actions->add($action);
+            $this->actions[] = $action;
             $action->setGoal($this);
         }
 
         return $this;
     }
 
-    public function removeAction(Action $action): static
+    public function removeAction(Action $action): self
     {
         if ($this->actions->removeElement($action)) {
             // set the owning side to null (unless already changed)
@@ -167,12 +82,6 @@ class Goal
             }
         }
 
-        return $this;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
         return $this;
     }
 }

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Personnels{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Je gère les personnels</h1>
+    <!-- Tableau pour afficher et gérer les personnels -->
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom d'utilisateur</th>
+                <th>Email</th>
+                <th>Rôles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {# Boucle sur les personnels pour affichage #}
+            {% for personal in personals %}
+            <tr>
+                <td>{{ personal.id }}</td>
+                <td>{{ personal.username }}</td>
+                <td>{{ personal.email }}</td>
+                <td>{{ personal.roles|join(', ') }}</td>
+                <td>
+                    <a href="{{ path('admin_personal_edit', {'id': personal.id}) }}" class="btn btn-sm btn-primary">Éditer</a>
+                    <a href="{{ path('admin_personal_delete', {'id': personal.id}) }}" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">Aucun personnel trouvé</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Lien pour ajouter un nouvel utilisateur -->
+    <a href="{{ path('admin_personal_new') }}" class="btn btn-success">Ajouter un personnel</a>
+</div>
+{% endblock %}

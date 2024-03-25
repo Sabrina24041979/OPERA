@@ -1,4 +1,6 @@
+{# J'initialise le formulaire associé au feedback, utilisant la variable `form` passée depuis le contrôleur. Le bouton porte une étiquette qui varie en fonction du contexte (sauvegarder pour un nouveau feedback ou mettre à jour pour une modification). #}
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
+

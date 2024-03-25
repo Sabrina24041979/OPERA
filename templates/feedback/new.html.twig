@@ -1,11 +1,12 @@
+{# J'utilise le layout de base pour cette vue et je prépare un formulaire pour la création d'un nouveau feedback. Une fois le formulaire soumis, l'utilisateur est redirigé vers la liste des feedbacks. #}
 {% extends 'base.html.twig' %}
 
-{% block title %}New Feedback{% endblock %}
+{% block title %}Nouveau Feedback{% endblock %}
 
 {% block body %}
-    <h1>Create new Feedback</h1>
+    <h1>Créer un nouveau Feedback</h1>
 
-    {{ include('feedback/_form.html.twig') }}
+    {{ include('feedback/_form.html.twig', {'form': form, 'button_label': 'Créer'}) }}
 
-    <a href="{{ path('app_feedback_index') }}">back to list</a>
+    <a href="{{ path('app_feedback_index') }}" class="btn btn-secondary">Retour à la liste</a>
 {% endblock %}
