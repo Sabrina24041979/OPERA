@@ -1,0 +1,41 @@
+{# Je prolonge le layout de base pour assurer une cohérence dans le design de mon application.#}
+{% extends 'base.html.twig' %}
+
+{# Je définis le titre de la page pour informer l'utilisateur sur le contenu de la page.#}
+{% block title %}Gestion des permissions{% endblock %}
+
+{# Je structure le contenu principal de la page dans un conteneur Bootstrap (container) pour une meilleure mise en page et réactivité.#}
+{% block body %}
+<div class="container mt-5">
+    <h1>Gestion des permissions</h1>
+    {# Je crée une table responsive avec Bootstrap (table-responsive) pour afficher la liste des utilisateurs et leurs permissions.#}
+    <table class="table table-responsive">
+        {# Je définis les entêtes pour clarifier les données présentées : nom d'utilisateur, permissions actuelles et les actions possibles.#}
+        <thead>
+            <tr>
+                <th>Nom d'utilisateur</th>
+                <th>Permissions actuelles</th>
+                <th>Modifier</th>
+            </tr>
+        </thead>
+        <tbody>
+            {# Je boucle sur chaque utilisateur (for user in users), affichant son nom, ses permissions (séparées par des virgules) et un lien pour modifier ses permissions. Le lien mène à une route nommée admin_edit_permissions. #}
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.roles | join(', ') }}</td>
+                    <td>
+                        {# Je fournis un bouton pour revenir au tableau de bord, améliorant ainsi la navigation dans l'interface d'administration.#}
+                        <a href="{{ path('admin_edit_user_permissions', {'id': user.id}) }}" class="btn btn-primary">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    {# Si aucun utilisateur n'est trouvé, je prévois un message indiquant l'absence d'utilisateur à gérer. #}
+                    <td colspan="3">Aucun utilisateur trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

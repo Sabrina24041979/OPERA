@@ -84,4 +84,16 @@ class Goal
 
         return $this;
     }
+
+    public function getPersonal(): ?Personal
+    {
+        return $this->personal;
+    }
+
+    public function setPersonal(?Personal $personal): self
+    {
+        $this->personal = $personal;
+
+        return $this;
+    }
 }

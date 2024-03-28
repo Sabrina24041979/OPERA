@@ -1,5 +1,7 @@
 <?php
 
+// J'inclus les namespaces nécessaires pour les fonctionnalités que je vais utiliser.
+
 namespace App\Controller;
 
 use App\Entity\Personal;
@@ -13,10 +15,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\PersonalPermissionsType;
+use App\Repository\ConfigRepository;
+use App\Service\ConfigService;
+use App\Repository\PerformanceRepository;
+use App\Repository\EvaluationRepository;
 
 #[Route('/admin')]
 class AdminController extends AbstractController
 {
+    private $configService;
+
+    // Je déclare une propriété pour ConfigService et je l'injecte via le constructeur
+    public function __construct(ConfigService $configService)
+    {
+        $this->configService = $configService;
+    }
+
     #[Route('/personals', name: 'admin_personals_manage')]
     public function managePersonals(PersonalRepository $personalRepository): Response
     {
@@ -145,49 +160,23 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_teams_overview');
     }
 
-    // Méthode pour afficher et gérer les performances des employés
-    #[Route('/performances', name: 'admin_performances', methods: ['GET'])]
-    public function managePerformances(PerformanceRepository $performanceRepository): Response
-    {
-        // Je récupère les données des performances pour les afficher
-        $performances = $performanceRepository->findAll();
-
-        // Je retourne la vue des performances avec les données récupérées
-        return $this->render('admin/performances_manage.html.twig', [
-            'performances' => $performances,
-        ]);
-    }
-
-    // Méthode pour gérer les évaluations des employés
-    #[Route('/evaluations', name: 'admin_evaluations', methods: ['GET'])]
-    public function manageEvaluations(EvaluationRepository $evaluationRepository): Response
-    {
-        // Je récupère les évaluations pour les afficher
-        $evaluations = $evaluationRepository->findAll();
-
-        // Je retourne la vue des évaluations
-        return $this->render('admin/evaluations_manage.html.twig', [
-            'evaluations' => $evaluations,
-        ]);
-    }
-
     // Méthode pour afficher et modifier les permissions des utilisateurs
     #[Route('/permissions', name: 'admin_permissions', methods: ['GET', 'POST'])]
-    public function managePermissions(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    public function managePermissions(Request $request, PersonalRepository $personalRepository, EntityManagerInterface $entityManager): Response
     {
         // Je récupère tous les utilisateurs
-        $users = $userRepository->findAll();
+        $personals = $personalRepository->findAll();
 
         // Je crée un formulaire pour chaque utilisateur pour modifier ses permissions
         $forms = [];
-        foreach ($users as $user) {
-            $form = $this->createForm(UserPermissionsType::class, $user);
+        foreach ($personals as $personal) {
+            $form = $this->createForm(PersonalPermissionsType::class, $personal);
             $form->handleRequest($request);
-            $forms[$user->getId()] = $form->createView();
+            $forms[$personal->getId()] = $form->createView();
 
             // Si le formulaire est soumis et valide, je mets à jour les permissions
             if ($form->isSubmitted() && $form->isValid()) {
-                $entityManager->persist($user);
+                $entityManager->persist($personal);
                 $entityManager->flush();
 
                 // Redirection pour éviter la resoumission du formulaire
@@ -197,7 +186,7 @@ class AdminController extends AbstractController
 
         // Je retourne la vue des permissions avec les utilisateurs et leurs formulaires
         return $this->render('admin/permissions_manage.html.twig', [
-            'users' => $users,
+            'personals' => $personals,
             'forms' => $forms,
         ]);
     }
@@ -213,4 +202,93 @@ class AdminController extends AbstractController
         ]);
     }
 
-}
+    #[Route('/dashboard', name: 'admin_dashboard')]
+    public function dashboard(PersonalRepository $personalRepository): Response
+    {
+    
+        // Je récupère les données nécessaires.
+        // Imaginons que je souhaite obtenir le nombre total d'utilisateurs et le nombre de nouveaux utilisateurs de cette semaine :
+        $totalPersonals = $personalRepository->countAllPersonals();
+        $newPersonalsThisWeek = $personalRepository->countNewPersonalsThisWeek();
+    
+        // De même, je peux récupérer d'autres données nécessaires, comme des alertes, des statistiques sur d'autres entités, etc.
+    
+        // Je prépare un tableau avec toutes les données que je souhaite passer à la vue.
+        $dashboardData = [
+            'totalPersonals' => $totalPersonals,
+            'newPersonalsThisWeek' => $newPersonalsThisWeek,
+            // Je peux ajouter d'autres données nécessaires ici.
+        ];
+    
+        // Je retourne la vue du tableau de bord, en passant les données préparées.
+        return $this->render('admin/dashboard.html.twig', $dashboardData);
+    }
+
+    #[Route('/settings', name: 'admin_settings')]
+
+    public function settings(): Response
+    {
+
+        // Je récupère les paramètres de configuration actuels.
+        // Imaginons que mon application a des paramètres comme 'email_support' et 'maintenance_mode' :
+        $emailSupport = $this->configService->get('email_support');
+        $maintenanceMode = $this->configService->get('maintenance_mode');
+
+        // Je prépare un tableau associatif avec tous les paramètres de configuration que je souhaite passer à la vue.
+        $settings = [
+            'emailSupport' => $emailSupport,
+            'maintenanceMode' => $maintenanceMode,
+            // Je peux ajouter d'autres paramètres de configuration ici.
+        ];
+
+        // Je retourne la vue des paramètres de configuration, en passant les paramètres récupérés pour leur affichage et modification.
+        return $this->render('admin/settings_manage.html.twig', [
+            'settings' => $settings,
+        ]);
+    }
+    
+    #[Route('/settings/save', name: 'admin_settings_save', methods: ['POST'])]
+    public function saveSettings(Request $request): Response
+    {
+        // Je récupère les données soumises par le formulaire de configuration grâce à l'objet Request.
+        $formData = $request->request->all();
+
+        // Je prévois une logique de validation pour les données soumises, pour m'assurer qu'elles sont valides et conformes à mes attentes.
+        // Par exemple, je vérifie que l'adresse e-mail de support est bien une adresse e-mail valide.
+        if (!filter_var($formData['emailSupport'], FILTER_VALIDATE_EMAIL)) {
+            // Si la validation échoue, je redirige vers la page de configuration avec un message d'erreur.
+            $this->addFlash('error', 'L\'adresse e-mail de support est invalide.');
+            return $this->redirectToRoute('admin_settings');
+        }
+
+        // J'utilise $this->configService pour accéder directement au service
+        $this->configService->set('emailSupport', $formData['emailSupport']);
+        $this->configService->set('maintenanceMode', $formData['maintenanceMode']);
+
+        // Après la sauvegarde, je redirige l'administrateur vers la page du tableau de bord avec un message de succès.
+        $this->addFlash('success', 'Les paramètres ont été sauvegardés avec succès.');
+        return $this->redirectToRoute('admin_dashboard');
+    }
+        // Je peux ajouter ici d'autres méthodes pour gérer les utilisateurs, les équipes, et d'autres fonctionnalités d'administration (A définir).
+    #[Route('/performances', name: 'admin_performances', methods: ['GET'])]
+        public function managePerformances(PerformanceRepository $performanceRepository): Response
+        {
+            $performances = $performanceRepository->findAll(); // Récupère toutes les performances
+        
+            return $this->render('admin/performances_manage.html.twig', [
+                'performances' => $performances,
+            ]);
+        }
+        
+        #[Route('/evaluations', name: 'admin_evaluations', methods: ['GET'])]
+        public function manageEvaluations(EvaluationRepository $evaluationRepository): Response
+        {
+            $evaluations = $evaluationRepository->findAll(); // Récupère toutes les évaluations
+        
+            return $this->render('admin/evaluations_manage.html.twig', [
+                'evaluations' => $evaluations,
+            ]);
+        }
+        
+    }
+

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Paramètres{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2>Je configure les paramètres de l'application</h2>
+    <form method="post" action="{{ path('admin_settings_save') }}">
+        <div class="form-group">
+            <label for="app_name">Nom de l'application</label>
+            <input type="text" id="app_name" name="app_name" class="form-control" value="{{ settings.app_name }}" placeholder="Nom de mon application OPERA">
+        </div>
+        <div class="form-group">
+            <label for="app_email">Email de contact</label>
+            <input type="email" id="app_email" name="app_email" class="form-control" value="{{ settings.app_email }}" placeholder="Email de contact">
+        </div>
+        <div class="form-group">
+            <label for="maintenance_mode">Mode maintenance</label>
+            <select id="maintenance_mode" name="maintenance_mode" class="form-control">
+                <option value="0" {% if not settings.maintenance_mode %}selected{% endif %}>Désactivé</option>
+                <option value="1" {% if settings.maintenance_mode %}selected{% endif %}>Activé</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Je sauvegarde les modifications</button>
+    </form>
+    <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary mt-3">Retour au tableau de bord</a>
+</div>
+{% endblock %}

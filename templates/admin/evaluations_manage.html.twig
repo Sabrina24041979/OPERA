@@ -1,0 +1,43 @@
+{# Je prolonge le layout de base pour garantir l'uniformité de l'apparence de mon application. #}
+{% extends 'base.html.twig' %}
+{# Je définis le titre de ma page pour communiquer clairement sur son objectif. #}
+{% block title %}Gestion des Évaluations{% endblock %}
+{# J'organise le contenu principal dans un container de Bootstrap pour une mise en page et une réactivité optimales. #}
+{% block body %}
+<div class="container mt-4">
+    <h2>Je gère les évaluations</h2>
+    {# Je mets en place une table responsive avec Bootstrap pour lister les évaluations. Chaque ligne représente une évaluation avec les informations suivantes : le collaborateur évalué, le contenu de l'évaluation et les actions possibles (modification, consultation). #}
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Je liste les collaborateurs</th>
+                    <th scope="col">Je liste les évaluations</th>
+                    <th scope="col">Je propose des actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evaluation in evaluations %}
+                    <tr>
+                        <td>{{ evaluation.collaborateur }}</td>
+                        <td>{{ evaluation.content }}</td>
+                        <td>
+                            {# Pour chaque évaluation, je propose des boutons pour modifier et consulter les détails.  #}
+                            <a href="{{ path('evaluation_edit', {'id': evaluation.id}) }}" class="btn btn-sm btn-primary">Je modifie</a>
+                            <a href="{{ path('evaluation_view', {'id': evaluation.id}) }}" class="btn btn-sm btn-secondary">Je consulte</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        {# S'il n'y a pas d'évaluation, j'affiche un message indiquant cette absence.#}
+                        <td colspan="3">Je n'ai trouvé aucune évaluation.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {# Je fournis des boutons pour retourner au tableau de bord et pour créer une nouvelle évaluation, facilitant ainsi la navigation au sein de l'interface d'administration. #}
+    <a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Retour au tableau de bord</a>
+    <a href="{{ path('evaluation_new') }}" class="btn btn-success">Je crée une nouvelle évaluation</a>
+</div>
+{% endblock %}

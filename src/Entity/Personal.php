@@ -13,6 +13,7 @@ use Doctrine\DBAL\Types\Types;
 
 
 #[ORM\Entity(repositoryClass: PersonalRepository::class)]
+
 class Personal
 {
     #[ORM\Id]
@@ -20,6 +21,7 @@ class Personal
     #[ORM\Column]
     private ?int $id = null;
 
+    // J'inclus toutes les autres propriétés ici
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $username = null;
 
@@ -191,20 +193,14 @@ class Personal
     }
 
     public function getRoles(): array {
-        // Je m'assure qu'il y a toujours au moins un rôle
+        // Je m'assure qu'il y a toujours au moins un rôle, 'ROLE_USER' par défaut
         $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
         // Je retourne les rôles de l'utilisateur, assurant qu'il y a toujours au moins 'ROLE_USER'
         return array_unique($this->roles);
     }
 
-    public function setRole(?string $role): static
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-     // Méthode pour ajouter un rôle à l'utilisateur
+         // Méthode pour ajouter un rôle à l'utilisateur
      public function addRole(string $role): self {
         if (!in_array($role, $this->roles, true)) {
             $this->roles[] = $role;
