@@ -1,0 +1,21 @@
+/* Je stylise le mur social et les posts */
+.social-feed {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.post {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.post-content {
+    margin-bottom: 10px;
+}
+
+.post-actions a {
+    margin-right: 5px;
+}

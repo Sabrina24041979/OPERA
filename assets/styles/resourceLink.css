@@ -1,0 +1,28 @@
+/* Je stylise le formulaire des liens de ressources */
+#resource-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+}
+
+/* Je stylise les inputs et les textareas du formulaire */
+#resource-form input, #resource-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+}
+
+/* Je stylise les boutons du formulaire */
+#resource-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#resource-form button:hover {
+    background-color: #0056b3;
+}
