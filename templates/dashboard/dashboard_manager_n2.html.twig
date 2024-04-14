@@ -1,0 +1,83 @@
+{# templates/dashboard/dashboard_manager_n2.html.twig #}
+{# J'étends le layout de base pour maintenir une cohérence visuelle à travers l'application. #}
+{% extends 'base.html.twig' %}
+
+{# Je définis le titre de la page pour le navigateur. #}
+{% block title %}Tableau de Bord Manager Niveau 2{% endblock %}
+
+{# Je définis le bloc de contenu principal pour cette page spécifique. #}
+{% block body %}
+<div class="container">
+    <h1>Tableau de Bord pour les Managers de Deuxième Niveau</h1>
+    {# J'accueille les managers avec une introduction personnalisée. #}
+    <p>Bienvenue, {{ app.user.username }}! Voici les analyses avancées et la synthèse des performances des équipes sous votre supervision.</p>
+
+    <section>
+        <h2>Vue d'Ensemble des Équipes</h2>
+        {# Je fournis une vue agrégée des performances de chaque équipe. #}
+        <canvas id="overviewPerformanceChart"></canvas>
+    </section>
+
+    <section>
+        <h2>Rapports de Performance Détaillés</h2>
+        {# Je génère des rapports détaillés pour des analyses approfondies. #}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Équipe</th>
+                    <th>Performances ce Mois</th>
+                    <th>Progression Annuelle</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in teams %}
+                <tr>
+                    <td>{{ team.name }}</td>
+                    <td>{{ team.monthly_performance }}%</td>
+                    <td>{{ team.yearly_growth }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Alertes et Notifications Stratégiques</h2>
+        {# Je fournis une section pour des alertes qui affectent plusieurs équipes ou le département entier. #}
+        <ul>
+            {% for alert in strategic_alerts %}
+            <li>{{ alert }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    {# J'intègre des scripts pour la création des graphiques, assumant que Chart.js est utilisé. #}
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            var ctx = document.getElementById('overviewPerformanceChart').getContext('2d');
+            var overviewPerformanceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: {{ team_names|json_encode }},
+                    datasets: [{
+                        label: 'Performance',
+                        data: {{ team_performances|json_encode }},
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    {% endblock %}
+</div>
+{% endblock %}

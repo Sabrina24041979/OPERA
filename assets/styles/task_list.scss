@@ -1,0 +1,26 @@
+// assets/styles/task_list.scss
+// J'importe les bases nécessaires pour les listes, si besoin
+@import 'base/lists'; // Adapte ce chemin selon tes fichiers
+
+// J'applique des styles spécifiques à la liste des tâches
+.tasks-list {
+    list-style: none; // Je retire le style de liste par défaut
+    padding: 0;
+
+    li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc; // Une légère bordure pour séparer les tâches
+        &:last-child {
+            border-bottom: none; // Pas de bordure sur le dernier élément
+        }
+
+        &.completed {  // Je stylise les tâches complétées
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        &.pending {  // Je stylise les tâches en attente
+            color: #333;
+        }
+    }
+}

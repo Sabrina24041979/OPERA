@@ -1,0 +1,30 @@
+{# templates/dashboard/dashboard_user.html.twig #}
+{# J'étends le layout principal pour garder une cohérence dans le design de l'application. #}
+{% extends 'base.html.twig' %}
+
+{# Je définis le titre de la page, qui apparaîtra dans l'onglet du navigateur. #}
+{% block title %}Tableau de Bord Utilisateur{% endblock %}
+
+{# Je commence à définir le contenu principal de cette page. #}
+{% block body %}
+<div class="container">
+    <h1>Bienvenue sur votre Tableau de Bord, {{ app.user.username }}!</h1>
+    {# J'utilise le nom de l'utilisateur connecté pour personnaliser l'accueil. #}
+
+    {# J'inclus le composant pour les tâches quotidiennes en utilisant un template séparé. #}
+    {% include 'components/tasks_list.twig' %}
+
+    {# J'inclus le composant pour les notifications importantes en utilisant un autre template. #}
+    {% include 'components/notifications_center.twig' %}
+
+    {# J'inclus le composant pour les ressources disponibles pour l'utilisateur. #}
+    {% include 'components/resources_link.twig' %}
+
+    {# Optionnel : J'inclus un flux social ou d'autres widgets interactifs si nécessaire. #}
+    {% include 'components/social_feed.twig' %}
+
+    {# Section pour aide et documentation, disponible via un composant séparé. #}
+    {% include 'components/help_widget.twig' %}
+    
+   </div>
+{% endblock %}

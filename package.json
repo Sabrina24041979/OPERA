@@ -2,11 +2,13 @@
     "devDependencies": {
         "@babel/core": "^7.17.0",
         "@babel/preset-env": "^7.16.0",
+        "@symfony/stimulus-bridge": "^3.2.2",
         "@symfony/webpack-encore": "^4.0.0",
-        "@vue/cli-plugin-router": "~5.0.0",
         "core-js": "^3.23.0",
         "regenerator-runtime": "^0.13.9",
-        "sass": "^1.70.0",
+        "sass": "^1.75.0",
+        "sass-loader": "^14.0.0",
+        "stimulus": "^3.2.2",
         "webpack": "^5.74.0",
         "webpack-cli": "^4.10.0",
         "webpack-notifier": "^1.15.0"
@@ -21,6 +23,9 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.5.1",
+        "@fullcalendar/core": "^6.1.11",
+        "@fullcalendar/daygrid": "^6.1.11",
+        "@fullcalendar/interaction": "^6.1.11",
         "bootstrap": "^5.3.3",
         "chart.js": "^4.4.1"
     }

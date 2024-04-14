@@ -16,10 +16,12 @@ class Config
     private $id;
 
     #[ORM\Column(type: "string", length: 255)]
-    private $name;
+
+    private ?string $name = null;
 
     #[ORM\Column(type: "string", length: 255)]
-    private $value;
+
+    private ?string $value = null;
 
     public function getId(): ?int
     {
@@ -34,7 +36,6 @@ class Config
     public function setName(string $name): self
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -46,7 +47,6 @@ class Config
     public function setValue(string $value): self
     {
         $this->value = $value;
-
         return $this;
     }
 }

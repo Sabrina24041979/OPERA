@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Utilisateurs{% endblock %}
+
+{% block body %}
+<h1>Liste des Utilisateurs</h1>
+
+{# Je vérifie s'il y a des utilisateurs à afficher #}
+{% if users is not empty %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {# Je parcours chaque utilisateur pour créer une ligne dans le tableau #}
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                {# Je crée des liens pour modifier et supprimer des utilisateurs #}
+                <a href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
+                <a href="{{ path('user_delete', {'id': user.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    {# Je montre un message s'il n'y a pas d'utilisateurs #}
+    <p>Aucun utilisateur trouvé.</p>
+{% endif %}
+{% endblock %}

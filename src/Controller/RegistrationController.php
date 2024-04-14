@@ -16,17 +16,17 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
-        $user = new Personal(); // Je crée une nouvelle instance de mon entité Personal pour un nouvel utilisateur.
+        $personal = new Personal(); // Je crée une nouvelle instance de mon entité Personal pour un nouvel utilisateur.
         
-        $form = $this->createForm(RegistrationFormType::class, $user); // Je crée le formulaire d'enregistrement en lui associant mon utilisateur.
+        $form = $this->createForm(RegistrationFormType::class, $personal); // Je crée le formulaire d'enregistrement en lui associant mon utilisateur.
 
         $form->handleRequest($request); // Je gère la requête pour voir si le formulaire a été soumis et est valide.
     
         if ($form->isSubmitted() && $form->isValid()) {
-            $hashedPassword = $passwordHasher->hashPassword($user, $form->get('plainPassword')->getData()); // Je hash le mot de passe de l'utilisateur.
-            $user->setPassword($hashedPassword); // Je définis le mot de passe hashé pour l'utilisateur.
+            $hashedPassword = $passwordHasher->hashPassword($personal, $form->get('plainPassword')->getData()); // Je hash le mot de passe de l'utilisateur.
+            $personal->setPassword($hashedPassword); // Je définis le mot de passe hashé pour l'utilisateur.
     
-            $entityManager->persist($user); // J'enregistre l'utilisateur dans la base de données.
+            $entityManager->persist($personal); // J'enregistre l'utilisateur dans la base de données.
             $entityManager->flush(); // Je valide les changements dans la base de données.
 
             return $this->redirectToRoute('app_login'); // Je redirige l'utilisateur vers la page de connexion après l'enregistrement.

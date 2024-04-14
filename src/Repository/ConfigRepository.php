@@ -44,16 +44,25 @@ class ConfigRepository extends ServiceEntityRepository
     public function setValueByName(string $name, string $value): void
     {
         $entityManager = $this->getEntityManager();
-        $config = $this->findOneBy(['name' => $name]);
+        $entityManager->beginTransaction();  // Début de la transaction
 
-        if (!$config) {
-            $config = new Config();
-            $config->setName($name);
+        try {
+            $config = $this->findOneBy(['name' => $name]);
+
+            if (!$config) {
+                $config = new Config();
+                $config->setName($name);
+            }
+
+            $config->setValue($value);
+            $entityManager->persist($config);
+            $entityManager->flush();
+
+            $entityManager->commit();  // Valider la transaction
+        } catch (\Exception $e) {
+            $entityManager->rollback();  // Annuler la transaction en cas d'erreur
+            throw $e;
         }
-
-        $config->setValue($value);
-        $entityManager->persist($config);
-        $entityManager->flush();
     }
 
     /**

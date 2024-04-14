@@ -1,0 +1,21 @@
+// assets/styles/calendar.scss
+
+// J'ajoute des styles personnalisés pour le calendrier
+.calendar-container {
+    padding: 20px;
+    background-color: #f4f4f4;  // Un fond neutre qui s'intègre bien dans la plupart des designs
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);  // Une légère ombre pour ajouter de la profondeur
+
+    .fc-toolbar { // Je stylise la barre d'outils de FullCalendar
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .fc-day-today {  // Je mets en évidence le jour actuel
+        background-color: #e3f2fd;
+    }
+}

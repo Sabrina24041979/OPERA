@@ -1,0 +1,53 @@
+{% components/tasks_list.twig %}
+
+<div class="tasks-list">
+    <h2>Liste de Tâches</h2>
+   //Je vérifie si la liste des tâches est vide. Si oui, j'affiche un message indiquant qu'il n'y a aucune tâche à montrer.
+    {% if tasks is empty %}
+        <p>Aucune tâche à afficher.</p>
+    {% else %}
+        <ul>
+            {# Pour chaque tâche dans la liste des tâches, je crée un élément de liste. #}
+            {% for task in tasks %}
+                <li class="{{ task.completed ? 'completed' : 'pending' }}">
+                    {# J'affiche le nom de la tâche et la date d'échéance. #}
+                    {{ task.name }}
+                    <small>{{ task.due_date|date('d/m/Y') }}</small>
+                    {# Si la tâche n'est pas complétée, je montre un bouton permettant de la marquer comme complétée. #}
+                    {% if not task.completed %}
+                        <button onclick="completeTask('{{ task.id }}')">Marquer comme Complétée</button>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+<script>
+    // Je définis une fonction pour gérer l'action de compléter une tâche.
+    function completeTask(taskId) {
+        // Je fais une requête AJAX pour envoyer l'ID de la tâche à compléter au serveur.
+        fetch(`/tasks/${taskId}/complete`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json())
+          .then(data => {
+              console.log('Tâche complétée:', data);
+              // Je rafraîchis la page pour montrer les changements.
+              window.location.reload();
+          })
+          .catch(error => console.error('Erreur:', error));
+    }
+</script>
+
+<style>
+    .completed {
+        text-decoration: line-through;
+        color: grey;
+    }
+    .pending {
+        color: black;
+    }
+</style>

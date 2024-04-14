@@ -1,0 +1,83 @@
+{# templates/dashboard/dashboard_director.html.twig #}
+{# J'étends le layout principal pour assurer une cohérence visuelle à travers l'application. #}
+{% extends 'base.html.twig' %}
+
+{# Je définis le titre de la page qui sera visible dans l'onglet du navigateur. #}
+{% block title %}Tableau de Bord Directeur{% endblock %}
+
+{# Je commence le bloc de contenu principal de cette page. #}
+{% block body %}
+<div class="container">
+    <h1>Tableau de Bord pour le Directeur</h1>
+    {# Je souhaite la bienvenue au directeur en personnalisant l'accueil avec son nom d'utilisateur. #}
+    <p>Bienvenue, {{ app.user.username }}! Voici les indicateurs clés et les analyses stratégiques pour l'ensemble de l'organisation.</p>
+
+    <section>
+        <h2>Analyse Globale de Performance</h2>
+        {# J'affiche des graphiques récapitulatifs pour une vue d'ensemble rapide. #}
+        <canvas id="globalPerformanceChart"></canvas>
+    </section>
+
+    <section>
+        <h2>Synthèse des Indicateurs Clés</h2>
+        {# Je mets en place un tableau pour montrer des données cruciales comme le chiffre d'affaires, la productivité et autres. #}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Indicateur</th>
+                    <th>Valeur</th>
+                    <th>Comparaison Annuelle</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for indicator in key_indicators %}
+                <tr>
+                    <td>{{ indicator.name }}</td>
+                    <td>{{ indicator.value }}</td>
+                    <td>{{ indicator.annual_comparison }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Alertes Stratégiques</h2>
+        {# Je fournis une liste des alertes importantes qui nécessitent l'attention du directeur. #}
+        <ul>
+            {% for alert in strategic_alerts %}
+            <li>{{ alert }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    {# J'ajoute des scripts pour les graphiques en utilisant Chart.js ou une librairie similaire. #}
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            var ctx = document.getElementById('globalPerformanceChart').getContext('2d');
+            var globalPerformanceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: {{ months|json_encode }},
+                    datasets: [{
+                        label: 'Performance Globale',
+                        data: {{ performance_data|json_encode }},
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    {% endblock %}
+</div>
+{% endblock %}

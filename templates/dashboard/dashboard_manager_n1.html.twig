@@ -1,0 +1,87 @@
+{# templates/dashboard/dashboard_manager_n1.html.twig #}
+{# J'étends le layout de base pour maintenir la cohérence de l'interface utilisateur à travers l'application. #}
+{% extends 'base.html.twig' %}
+
+{# Je définis le titre de la page pour le navigateur. #}
+{% block title %}Tableau de Bord Manager Niveau 1{% endblock %}
+
+{# Je définis le bloc de contenu principal pour cette page spécifique. #}
+{% block body %}
+<div class="container">
+    <h1>Tableau de Bord pour les Managers de Premier Niveau</h1>
+    {# J'accueille les managers avec une introduction personnalisée. #}
+    <p>Bienvenue, {{ app.user.username }}! Voici un aperçu de votre équipe et des tâches en cours.</p>
+
+    <section>
+        <h2>Synthèse de l'Équipe</h2>
+        {# Je présente des informations récapitulatives sur l'équipe que le manager supervise. #}
+        <p>Vous supervisez actuellement {{ team_members_count }} membres dans votre équipe.</p>
+
+        <h3>Performance Récente de l'Équipe</h3>
+        <canvas id="teamPerformanceChart"></canvas>
+        {# J'inclus un graphique pour visualiser la performance de l'équipe. #}
+    </section>
+
+    <section>
+        <h2>Projets en Cours</h2>
+        {# Je liste les projets actifs avec leur état pour une gestion simplifiée. #}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Projet</th>
+                    <th>Statut</th>
+                    <th>Date de Fin Prévue</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                <tr>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.status }}</td>
+                    <td>{{ project.end_date|date('Y-m-d') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Alertes et Notifications</h2>
+        {# Je fournis une section pour les alertes concernant les membres de l'équipe ou les projets. #}
+        <ul>
+            {% for alert in alerts %}
+            <li>{{ alert.message }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    {# J'intègre des scripts pour la création des graphiques, assumant que Chart.js est utilisé. #}
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            var ctx = document.getElementById('teamPerformanceChart').getContext('2d');
+            var teamPerformanceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: {{ performance_labels|json_encode }},
+                    datasets: [{
+                        label: 'Performance',
+                        data: {{ performance_data|json_encode }},
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    {% endblock %}
+</div>
+{% endblock %}

@@ -1,4 +1,15 @@
-const Encore = require('@symfony/webpack-encore');
+const rules = [
+    {
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        'css-loader'
+      ]
+    },
+    // Autres chargeurs pour JavaScript, images, etc.
+  ];
+
+  const Encore = require('@symfony/webpack-encore');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -23,6 +34,10 @@ Encore
     .addEntry('app', './assets/app.js')
 
     .addStyleEntry('bootstrap', './node_modules/bootstrap/dist/css/bootstrap.css')
+    .addStyleEntry('calendar', './assets/styles/calendar.scss') // Créer ce fichier pour quil importe les styles de FullCalendar.
+
+    .addEntry('notification', './assets/js/notification.js') // Ajoute notification.js comme une nouvelle entrée
+    .addStyleEntry('notification-style', './assets/styles/notification.css') // Ajoute notification.css comme une entrée de style
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -59,7 +74,7 @@ Encore
     })
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader() // Je décommente cette ligne pour activer le support Sass/SCSS.
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()

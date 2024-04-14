@@ -1,24 +1,35 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
+# Ce fichier est le point d'entrée pour configurer vos propres services.
+# Les fichiers dans le sous-dossier packages/ configurent vos dépendances.
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+# Placez ici les paramètres qui n'ont pas besoin de changer sur chaque machine où l'application est déployée
+# Pour plus d'informations : https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
 
 services:
-    # default configuration for services in *this* file
+    # configuration par défaut pour les services dans *ce* fichier
+    Symfony\Component\Security\Core\Security: '@security.helper'
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true      # Injecte automatiquement les dépendances dans vos services.
+        autoconfigure: true # Enregistre automatiquement vos services comme commandes, abonnés aux événements, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+    # Rend les classes dans src/ disponibles pour être utilisées comme services
+    # cela crée un service par classe dont l'identifiant est le nom de classe complet
     App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}' # Exclut certains répertoires
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Configuration spécifique pour les contrôleurs pour permettre l'injection de dépendances via les arguments de service
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # Définition manuelle de services spécifiques si nécessaire
+    App\Service\ConfigService:
+        # Injecte explicitement des références à d'autres services
+        arguments:
+            $configRepository: '@App\Repository\ConfigRepository'
+            $entityManager: '@doctrine.orm.entity_manager'
+
+    # Enregistrement des dépôts comme services si nécessaire
+    App\Repository\ConfigRepository:
+        # Si vous avez besoin d'arguments spécifiques ou d'appels de méthodes, définissez-les ici
