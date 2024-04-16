@@ -21,5 +21,12 @@
             <!-- Scripts gérés par Webpack Encore -->
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
+        </div>
+
+    <!-- Bouton pour réserver une démo -->
+        <div>
+            <a href="{{ path('reservation_demo') }}" class="btn btn-primary">Réservez une démo</a>
+        </div>
     </body>
 </html>

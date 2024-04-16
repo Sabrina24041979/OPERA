@@ -46,3 +46,55 @@ social_feed_edit:
     methods: [GET, POST]
     requirements:
         id: '\d+'
+
+# config/routes.yaml
+# Routes pour la gestion des documents d'aide
+
+help_index:
+    path: /help
+    controller: App\Controller\HelpController::index
+    methods: GET
+    # Je crée une route pour lister tous les documents d'aide disponibles.
+
+help_view:
+    path: /help/view/{id}
+    controller: App\Controller\HelpController::view
+    methods: GET
+    requirements:
+        id: '\d+'
+    # Je crée une route pour afficher un document d'aide spécifique.
+
+help_create:
+    path: /help/create
+    controller: App\Controller\HelpController::create
+    methods: [GET, POST]
+    # Je crée une route pour ajouter un nouveau document d'aide.
+
+help_edit:
+    path: /help/edit/{id}
+    controller: App\Controller\HelpController::edit
+    methods: [GET, POST]
+    requirements:
+        id: '\d+'
+    # Je crée une route pour éditer un document d'aide existant.
+
+help_delete:
+    path: /help/delete/{id}
+    controller: App\Controller\HelpController::delete
+    methods: DELETE
+    requirements:
+        id: '\d+'
+    # Je crée une route pour supprimer un document d'aide. La méthode DELETE est utilisée pour renforcer la sémantique de l'action.
+    # Ces routes assurent une gestion complète des documents d'aide, de la création à la suppression.
+
+app_notre_solution:
+    path: /notre-solution
+    controller: App\Controller\SolutionController::index
+
+app_history:
+    path: /notre-histoire
+    controller: App\Controller\HistoryController::index
+
+app_values:
+    path: /valeurs
+    controller: App\Controller\ValuesController::index

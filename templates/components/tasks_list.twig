@@ -1,4 +1,5 @@
 {% components/tasks_list.twig %}
+{% block stylesheets %}
 
 <div class="tasks-list">
     <h2>Liste de Tâches</h2>
@@ -20,6 +21,7 @@
                 </li>
             {% endfor %}
         </ul>
+    {% block javascripts %}
     {% endif %}
 </div>
 

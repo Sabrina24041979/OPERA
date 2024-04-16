@@ -1,5 +1,6 @@
 {# templates/components/social_feed.twig #}
 
+{% block stylesheets %}
 <div class="social-feed">
     <h2>Mur Social</h2>
     {# Je crée un formulaire pour ajouter un nouveau post en utilisant le formulaire PostType #}
@@ -27,6 +28,7 @@
             </div>
         {% else %}
             <p>Aucun post à afficher.</p>
+        {% block javascripts %}
         {% endfor %}
     </div>
 </div>

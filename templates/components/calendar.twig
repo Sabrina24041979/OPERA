@@ -1,6 +1,7 @@
 {# templates/components/calendar.twig #}
 {# J'intègre ce composant de calendrier dans les pages nécessitant un suivi d'événements ou de tâches. #}
 {{ encore_entry_script_tags('app') }}
+{% block stylesheets %}
 
 <div class="calendar-container">
     {# J'affiche le titre du calendrier #}
@@ -25,5 +26,6 @@
             });
             calendar.render();  // Je rends le calendrier visible sur la page.
         });
+{% block javascripts %}
     </script>
 </div>

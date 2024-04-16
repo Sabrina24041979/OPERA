@@ -1,0 +1,37 @@
+/* Je définis le style de base pour le widget d'aide */
+.help-widget {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Je style les titres des sections d'aide pour qu'ils soient plus interactifs */
+.help-widget h3 {
+    cursor: pointer;
+    color: #0056b3;
+    margin-bottom: 5px;
+}
+
+/* Je cache le contenu par défaut pour permettre l'effet d'accordéon */
+.help-widget div {
+    display: none;
+    padding: 5px;
+    border-top: 1px solid #ccc;
+}
+
+/* Je marque les sections actives pour améliorer la visibilité */
+.help-widget h3.active {
+    color: #ff6347;
+}
+
+/* Je style les liens pour qu'ils soient clairs et visibles */
+.help-widget a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.help-widget a:hover {
+    text-decoration: underline;
+}

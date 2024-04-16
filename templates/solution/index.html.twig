@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notre Solution{% endblock %}
+ {% block stylesheets %}
+
+{% block body %}
+{% block javascripts %}
+<div class="container">
+     <section>
+        <h1>Transformez votre culture de management</h1>
+        <p>Découvrez OPERA, la solution tout-en-un conçue pour révolutionner les pratiques managériales au sein de votre organisation. Avec OPERA, engagez-vous dans une transformation profonde de vos méthodes de gestion, en favorisant une approche plus dynamique, collaborative et efficace.</p>
+
+        <!-- Détails sur pourquoi choisir OPERA -->
+        <div>
+            <h2>Pourquoi choisir OPERA ?</h2>
+            <ul>
+                <li><strong>Centralisation des Outils :</strong> Regroupez toutes vos nécessités managériales en une seule plateforme intuitive.</li>
+                <li><strong>Amélioration de la Communication :</strong> Facilitez les échanges entre managers et équipes grâce à des outils de communication intégrés.</li>
+                <li><strong>Analyse et Rapports Avancés :</strong> Profitez de tableaux de bord détaillés pour suivre les performances en temps réel.</li>
+                <li><strong>Engagement des Employés :</strong> Renforcez l'engagement de vos équipes grâce à des mécanismes de reconnaissance et de récompense.</li>
+            </ul>
+
+    <p>Votre gestion transformée</p>
+    <p>Avec OPERA, dépassez les méthodes traditionnelles et adoptez une gestion qui reflète les valeurs de modernité, de flexibilité et d'efficacité. Que ce soit pour un petit groupe ou une entreprise à grande échelle, OPERA est prêt à s'adapter et à évoluer selon vos besoins.</p>
+
+    <p>Prêt à redéfinir votre gestion ?</p>
+    <p>Rejoignez les nombreux leaders qui ont choisi OPERA pour piloter leur transformation managériale. Réservez une démo dès aujourd'hui et commencez votre parcours vers une gestion réinventée!</p>
+    
+    </div>
+
+    <!-- Bouton pour réserver une démo -->
+        <div>
+            <a href="{{ path('reservation_demo') }}" class="btn btn-primary">Réservez une démo</a>
+        </div>
+    </section>
+</div>
+{% endblock %}

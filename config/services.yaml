@@ -22,7 +22,7 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
-
+     
     # Définition manuelle de services spécifiques si nécessaire
     App\Service\ConfigService:
         # Injecte explicitement des références à d'autres services

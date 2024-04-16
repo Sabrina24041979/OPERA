@@ -1,0 +1,30 @@
+/* Je style le tableau de bord */
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: #f4f4f4; /* Je choisis une couleur de fond neutre */
+}
+
+.dashboard-item {
+    flex: 1 1 200px; /* Je donne une base et une flexibilité à chaque élément */
+    margin: 10px;
+    padding: 20px;
+    background: white; /* Je mets un fond blanc pour les éléments du tableau de bord */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Je rajoute une ombre pour un effet élévé */
+    border-radius: 8px; /* Je rajoute des coins arrondis */
+}
+
+.dashboard-btn {
+    padding: 10px 20px;
+    background-color: #007BFF; /* Je définis la couleur principale des boutons */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Je rajoute une transition pour les interactions */
+}
+
+.dashboard-btn:hover {
+    background-color: #0056b3; /* Je change la couleur au survol */
+}
