@@ -1,0 +1,44 @@
+{# templates/manager/level1/partials/actions_form.html.twig #}
+
+{# Je définis le formulaire pour la création ou la modification d'une action #}
+<form action="{{ path('manager_action_save') }}" method="post" class="form">
+    {# Je vérifie si l'action existe déjà pour adapter le formulaire en mode édition #}
+    {% if action.id %}
+        <input type="hidden" name="id" value="{{ action.id }}">
+    {% endif %}
+
+    {# Je crée un champ pour le titre de l'action #}
+    <div class="form-group">
+        <label for="title">Titre de l'action</label>
+        <input type="text" id="title" name="title" class="form-control" value="{{ action.title }}" required>
+    </div>
+
+    {# Je crée un champ pour la description de l'action #}
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" class="form-control" required>{{ action.description }}</textarea>
+    </div>
+
+    {# Je crée des champs pour la date de début et de fin #}
+    <div class="form-row">
+        <div class="col">
+            <label for="startDate">Date de début</label>
+            <input type="date" id="startDate" name="startDate" class="form-control" value="{{ action.startDate|date('Y-m-d') }}" required>
+        </div>
+        <div class="col">
+            <label for="endDate">Date de fin</label>
+            <input type="date" id="endDate" name="endDate" class="form-control" value="{{ action.endDate|date('Y-m-d') }}" required>
+        </div>
+    </div>
+
+    {# Je crée un champ pour les commentaires #}
+    <div class="form-group">
+        <label for="comments">Commentaires</label>
+        <textarea id="comments" name="comments" class="form-control">{{ action.comments }}</textarea>
+    </div>
+
+    {# Je crée un bouton pour soumettre le formulaire #}
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </div>
+</form>

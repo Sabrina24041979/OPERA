@@ -1,0 +1,69 @@
+{# templates/manager/level1/partials/sidebar.html.twig #}
+
+{# Je commence par inclure le logo OPERA qui servira aussi de lien vers le dashboard principal si nécessaire #}
+<div class="sidebar-logo">
+    <a href="{{ path('manager_dashboard') }}">
+        <img src="{{ asset('images/logo_opera.png') }}" alt="Logo OPERA">
+    </a>
+</div>
+
+{# Je crée la navigation principale du manager de niveau 1 #}
+<nav class="mt-4">
+    <ul class="nav flex-column">
+        {# Je configure le lien pour la création et gestion des profils #}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('manager_profile') }}">
+                <i class="fas fa-user"></i> Profils
+            </a>
+        </li>
+
+        {# Je configure le lien pour la gestion des équipes #}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('manager_teams') }}">
+                <i class="fas fa-users"></i> Équipes
+            </a>
+        </li>
+
+        {# Je configure le lien pour la gestion des objectifs #}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('manager_objectives') }}">
+                <i class="fas fa-bullseye"></i> Objectifs
+            </a>
+        </li>
+
+        {# Je configure le lien pour la gestion des actions #}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('manager_actions') }}">
+                <i class="fas fa-tasks"></i> Actions
+            </a>
+        </li>
+
+        {# Je configure le lien pour la consultation des feedbacks #}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('manager_feedbacks') }}">
+                <i class="fas fa-comment-dots"></i> Feedbacks
+            </a>
+        </li>
+
+        {# Je configure le lien pour accéder aux ressources de formation #}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('manager_resources') }}">
+                <i class="fas fa-book-open"></i> Ressources
+            </a>
+        </li>
+
+        {# Je configure un lien pour modifier le profil du manager #}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('edit_manager_profile') }}">
+                <i class="fas fa-user-edit"></i> Modifier mon profil
+            </a>
+        </li>
+
+        {# Je configure un bouton pour déconnecter le manager #}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('manager_logout') }}">
+                <i class="fas fa-lock"></i> Déconnexion
+            </a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,80 @@
+{# Je commence par étendre le layout de base pour assurer la cohérence de l'interface à travers toute l'application #}
+{% extends 'base.html.twig' %}
+
+{# Je définis le bloc titre pour la page, qui sera utile pour le référencement et l'accessibilité #}
+{% block title %}Dashboard Manager Niveau 1 - OPERA{% endblock %}
+
+{# Je commence le bloc body où tout le contenu spécifique à cette page sera inséré #}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        {# Je crée un menu latéral pour permettre une navigation facile entre les différentes fonctionnalités du manager #}
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <span data-feather="home"></span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file"></span>
+                            Créer un profil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="shopping-cart"></span>
+                            Créer une équipe
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="users"></span>
+                            Objectifs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="bar-chart-2"></span>
+                            Actions
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="layers"></span>
+                            Feedback
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="layers"></span>
+                            Ressources
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        {# Je définis la section principale pour l'affichage des données ou des formulaires #}
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Bienvenue, Manager Niveau 1</h1>
+            </div>
+            {# Je peux inclure ici les widgets ou les contenus spécifiques, tels que des graphiques, des listes ou des formulaires #}
+            {# Exemple d'inclusion d'un composant #}
+            {% include 'manager/level1/partials/profile_form.html.twig' %}
+        </main>
+    </div>
+</div>
+
+{# Je termine le bloc body #}
+{% endblock %}
+
+{# Suggestions d'amélioration :
+   - Utiliser AJAX pour la mise à jour des sections sans recharger la page.
+   - Ajouter des notifications en temps réel pour les feedbacks ou les changements d'état des objectifs.
+   - Implementer des modales Bootstrap pour les formes de création/édition pour ne pas quitter la page courante.
+#}

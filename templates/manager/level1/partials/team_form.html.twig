@@ -1,0 +1,26 @@
+{# templates/manager/level1/partials/team_form.html.twig #}
+
+{# Je commence par définir le formulaire pour la création ou la modification d'une équipe #}
+<form action="{{ path('manager_team_save') }}" method="post" class="form">
+    {# Je vérifie si l'équipe existe déjà pour adapter le formulaire en mode édition #}
+    {% if team.id %}
+        <input type="hidden" name="id" value="{{ team.id }}">
+    {% endif %}
+
+    {# Je crée un champ pour le nom de l'équipe #}
+    <div class="form-group">
+        <label for="teamName">Nom de l'équipe</label>
+        <input type="text" id="teamName" name="teamName" class="form-control" value="{{ team.teamName }}" required>
+    </div>
+
+    {# Je crée un champ pour la description de l'équipe #}
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" class="form-control" required>{{ team.description }}</textarea>
+    </div>
+
+    {# Je crée un bouton de soumission pour le formulaire #}
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </div>
+</form>

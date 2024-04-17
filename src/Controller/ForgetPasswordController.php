@@ -19,7 +19,7 @@ class ForgetPasswordController extends AbstractController
     }
 
     /**
-     * Vous pouvez ajouter d'autres méthodes ici pour gérer la soumission du formulaire,
+     * Je peux ajouter d'autres méthodes ici pour gérer la soumission du formulaire,
      * l'envoi d'un email de réinitialisation, etc.
      */
 }

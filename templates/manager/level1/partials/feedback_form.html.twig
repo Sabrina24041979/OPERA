@@ -1,0 +1,32 @@
+{# templates/manager/level1/partials/feedback_form.html.twig #}
+
+{# Je commence par définir le formulaire pour la création ou la modification d'un feedback #}
+<form action="{{ path('manager_feedback_save') }}" method="post" class="form">
+    {# Si le feedback existe déjà, je passe son ID en champ caché pour le mode édition #}
+    {% if feedback.id %}
+        <input type="hidden" name="id" value="{{ feedback.id }}">
+    {% endif %}
+
+    {# Je crée un champ pour la date du feedback #}
+    <div class="form-group">
+        <label for="date">Date du feedback</label>
+        <input type="date" id="date" name="date" class="form-control" value="{{ feedback.date|date('Y-m-d') }}" required>
+    </div>
+
+    {# Je crée un champ pour le motif du feedback #}
+    <div class="form-group">
+        <label for="reason">Motif du feedback</label>
+        <input type="text" id="reason" name="reason" class="form-control" value="{{ feedback.reason }}" required>
+    </div>
+
+    {# Je crée un champ de textarea pour les commentaires associés au feedback #}
+    <div class="form-group">
+        <label for="comments">Commentaires</label>
+        <textarea id="comments" name="comments" class="form-control" rows="4">{{ feedback.comments }}</textarea>
+    </div>
+
+    {# Je crée un bouton pour soumettre le formulaire #}
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Enregistrer le feedback</button>
+    </div>
+</form>

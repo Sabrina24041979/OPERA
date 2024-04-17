@@ -24,10 +24,9 @@ class SocialFeedController extends AbstractController
         $this->postRepository = $postRepository;
     }
 
-    /**
-     * @Route("/social-feed", name="social_feed")
-     * Je montre tous les posts sur le mur social.
-     */
+   #[Route("/social-feed", name:"social_feed")]
+    /* Je montre tous les posts sur le mur social.*/
+    
     public function index(): Response
     {
         $posts = $this->postRepository->findAllPosts();
@@ -37,10 +36,9 @@ class SocialFeedController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/social-feed/create", name="social_feed_create", methods={"GET", "POST"})
-     * Je gère la création de nouveaux posts.
-     */
+    #[Route("/social-feed/create", name:"social_feed_create", methods:["GET", "POST"])]
+    /* Je gère la création de nouveaux posts.*/
+
     public function create(Request $request, UserInterface $user): Response
     {
         $post = new Post();
@@ -62,10 +60,9 @@ class SocialFeedController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/social-feed/edit/{id}", name="social_feed_edit", methods={"GET", "POST"})
-     * Je gère la modification des posts existants.
-     */
+    #[Route("/social-feed/edit/{id}", name:"social_feed_edit", methods:["GET", "POST"])]
+    /* Je gère la modification des posts existants.*/
+     
     public function edit(Request $request, Post $post): Response
     {
         $form = $this->createForm(PostType::class, $post);

@@ -1,0 +1,45 @@
+{# templates/manager/level1/partials/profile_form.html.twig #}
+
+{# Je crée un formulaire pour la gestion des profils de collaborateurs #}
+<form action="{{ path('manager_profile_save') }}" method="post" class="form-horizontal">
+    {# Je vérifie si le formulaire est en mode édition ou création en vérifiant si l'id du profil existe #}
+    {% if profile.id %}
+        <input type="hidden" name="id" value="{{ profile.id }}">
+    {% endif %}
+
+    {# Je crée un champ pour le nom du collaborateur #}
+    <div class="form-group">
+        <label for="name">Nom</label>
+        <input type="text" id="name" name="name" class="form-control" value="{{ profile.name }}" required>
+    </div>
+
+    {# Je crée un champ pour le prénom du collaborateur #}
+    <div class="form-group">
+        <label for="firstname">Prénom</label>
+        <input type="text" id="firstname" name="firstname" class="form-control" value="{{ profile.firstname }}" required>
+    </div>
+
+    {# Je crée un champ pour l'équipe du collaborateur #}
+    <div class="form-group">
+        <label for="team">Équipe</label>
+        <select id="team" name="team" class="form-control">
+            {# Je parcours les équipes disponibles pour les options du select #}
+            {% for team in teams %}
+                <option value="{{ team.id }}" {% if team.id == profile.teamId %}selected{% endif %}>
+                    {{ team.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    {# Je crée un champ pour le rôle du collaborateur #}
+    <div class="form-group">
+        <label for="role">Rôle</label>
+        <input type="text" id="role" name="role" class="form-control" value="{{ profile.role }}" required>
+    </div>
+
+    {# Je crée un bouton de soumission pour le formulaire #}
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </div>
+</form>
