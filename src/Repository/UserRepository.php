@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Personal;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -79,7 +80,7 @@ class UserRepository extends ServiceEntityRepository
      * @param User $user L'utilisateur à mettre à jour.
      * @param array $data Les données à mettre à jour.
      */
-    public function updateUser(User $user, array $data): void
+    public function updateUser(Personal $user, array $data): void
     {
         if (isset($data['email'])) {
             $user->setEmail($data['email']);

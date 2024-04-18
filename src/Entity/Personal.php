@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: PersonalRepository::class)]
 
-class Personal implements PasswordAuthenticatedUserInterface
+class Personal implements PasswordAuthenticatedUserInterface, UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -448,6 +448,16 @@ class Personal implements PasswordAuthenticatedUserInterface
         $this->manager = $manager;
 
         return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+        // Si vous stockez des données temporaires sensibles sur l'utilisateur, effacez-les ici
     }
 }
 

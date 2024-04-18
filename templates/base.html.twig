@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            <!-- Intégration de Bootstrap -->
-            <link rel="stylesheet" href="{{ asset('build/bootstrap.css') }}">
-            <!-- Intégration de FontAwesome -->
-            <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
-            <!-- Styles gérés par Webpack Encore -->
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        <link rel="stylesheet" href="/node_modules/@fullcalendar/core/main.css">
-        <link rel="stylesheet" href="/node_modules/@fullcalendar/daygrid/main.css">
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}
-            <!-- Scripts gérés par Webpack Encore -->
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-
-        </div>
-
-    <!-- Bouton pour réserver une démo -->
-        <div>
-            <a href="{{ path('reservation_demo') }}" class="btn btn-primary">Réservez une démo</a>
-        </div>
-    </body>
-</html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			<!-- Intégration de Bootstrap -->
+			<link
+			rel="stylesheet" href="{{ asset('build/bootstrap.css') }}">
+			<!-- Intégration de FontAwesome -->
+			<link
+			href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
+			<!-- Styles gérés par Webpack Encore -->
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<link rel="stylesheet" href="/node_modules/@fullcalendar/core/main.css">
+		<link rel="stylesheet" href="/node_modules/@fullcalendar/daygrid/main.css">
+	</head>
+	<body>
+		{% include "partials/header.html.twig" %}
+		{% block body %}{% endblock %}
+		{% include "partials/footer.html.twig" %}
+		{% block javascripts %}
+			<!-- Scripts gérés par Webpack Encore -->
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</body>
+</html></div><!-- Bouton pour réserver une démo --><div>
+<a href="#" class="btn btn-primary">Réservez une démo</a></div></body></html>

@@ -1,0 +1,94 @@
+/* Styles généraux pour l'interface manager */
+.manager-dashboard {
+    font-family: 'Arial', sans-serif; /* Je définis une police plus lisible */
+}
+
+/* Amélioration des boutons pour une meilleure interactivité */
+.manager-dashboard .btn-primary:hover {
+    background-color: #0056b3; /* Je change la couleur au survol */
+}
+
+/* Je stylise les en-têtes de table pour une meilleure distinction */
+.manager-dashboard th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Je stylise les formulaires pour une meilleure cohérence visuelle */
+.manager-dashboard .form-control {
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+}
+
+/* Styles pour les alertes et notifications */
+.alert {
+    padding: 10px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.alert-info {
+    background-color: #17a2b8;
+}
+
+.alert-success {
+    background-color: #28a745;
+}
+
+.alert-warning {
+    background-color: #ffc107;
+}
+
+.alert-danger {
+    background-color: #dc3545;
+}
+
+/* Styles pour les icônes, utilisant FontAwesome par exemple */
+.manager-dashboard .fa {
+    margin-right: 5px;
+}
+
+/* Je rends les listes déroulantes plus attrayantes */
+.select2-container--default .select2-selection--single {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+/* Je stylise les titres de section pour une meilleure hiérarchisation de l'information */
+.manager-dashboard .section-title {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Styles pour améliorer l'expérience utilisateur des tableaux responsifs */
+@media screen and (max-width: 768px) {
+    .manager-dashboard table {
+        width: 100%;
+        overflow-x: auto;
+        display: block;
+    }
+}
+
+/* Je stylise les tooltips pour donner plus d'informations sans surcharger l'interface */
+.tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #fff;
+    text-align: center;
+    background-color: #000;
+    border-radius: .25rem;
+}
+
+/* Je personnalise les champs de saisie pour les rendre plus interactifs */
+.input-group-text {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+/* Styles pour les liens actifs dans la barre latérale pour améliorer la navigation */
+.sidebar .nav-link.active {
+    color: #fff;
+    background-color: #007bff;
+}

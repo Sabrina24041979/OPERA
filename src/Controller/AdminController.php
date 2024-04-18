@@ -208,8 +208,8 @@ class AdminController extends AbstractController
     
         // Je récupère les données nécessaires.
         // Imaginons que je souhaite obtenir le nombre total d'utilisateurs et le nombre de nouveaux utilisateurs de cette semaine :
-        $totalPersonals = $personalRepository->countAllPersonals();
-        $newPersonalsThisWeek = $personalRepository->countNewPersonalsThisWeek();
+        $totalPersonals = [];
+        $newPersonalsThisWeek = [];
     
         // De même, je peux récupérer d'autres données nécessaires, comme des alertes, des statistiques sur d'autres entités, etc.
     

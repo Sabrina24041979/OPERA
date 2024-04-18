@@ -20,6 +20,7 @@ security:
             form_login:
                 login_path: app_login  # Chemin d'accès à la page de connexion
                 check_path: app_login  # Chemin utilisé pour la vérification des identifiants
+                success_handler: App\Security\Authentication\AuthenticationSuccessHandler
             logout:
                 path: app_logout  # Chemin pour la déconnexion
                 target: home  # Route vers laquelle rediriger après déconnexion
@@ -53,9 +54,9 @@ when@test:
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
         role_hierarchy:
-            ROLE_MANAGER_N1: ROLE_USER
-            ROLE_MANAGER_N2: ROLE_MANAGER_N1
-            ROLE_DIRECTOR: ROLE_MANAGER_N2
+            ROLE_MANAGER_L1: ROLE_USER
+            ROLE_MANAGER_L2: ROLE_MANAGER_l1
+            ROLE_DIRECTOR: ROLE_MANAGER_L2
             ROLE_ADMIN: ROLE_DIRECTOR
         access_control:
             - { path: ^/tasks, roles: ROLE_USER }

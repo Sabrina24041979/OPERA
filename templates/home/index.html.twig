@@ -1,110 +1,115 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}OPERA - Accueil{% endblock %}
-{% block stylesheets %}
+{% block title %}OPERA - Accueil
+{% endblock %}
+{% block stylesheets %}{% endblock %}
 
 {% block body %}
+	<main
+		class="container">
+		<!-- Section 1 : Présentation de l'application OPERA -->
+		<section id="notre-solution" class="row my-5">
+			<div class="col-md-6">
+				<h2>Réinventez les dynamiques managériales au sein de votre organisation</h2>
+				<p>Votre passerelle vers une gestion d'équipe optimisée et harmonieuse</p>
+				<a href="#" class="btn btn-primary">Réserver une démo</a>
+				<a href="#" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</a>
+			</div>
+			<div class="col-md-6">
+				<img src="manager_collaborateur.jpg" alt="Manager et collaborateur" class="img-fluid">
+			</div>
+		</section>
 
+		<!-- Section 2 : Engagement pour les managers et les collaborateurs -->
+		<section id="notre-engagement" class="row my-5">
+			<div class="col-md-6">
+				<h2>Renforcez le leadership et cultivez la motivation</h2>
+				<p>OPERA, propulsez l'esprit d'équipe au sommet</p>
+				<a href="#" class="btn btn-primary">Réserver une démo</a>
+				<a href="#" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</a>
+			</div>
+			<div class="col-md-6">
+				<img src="opera_screen.jpg" alt="copie écran OPERA" class="img-fluid">
+			</div>
+		</section>
 
-{% include 'partials/header.html.twig' %}
-{% block javascripts %}
+		<!-- Section 3 : Leadership et Outils pour Managers -->
+		<section id="objectifs_actions" class="container mt-5">
+			<div
+				class="row">
+				<!-- Je parle ici des outils que nous proposons pour améliorer le leadership des managers. -->
+				<div class="col-md-6">
+					<h2>Empowerment des Managers avec OPERA</h2>
+					<p>OPERA met à disposition des outils conçus pour renforcer le leadership des managers, leur permettant de transformer les défis en opportunités et d'améliorer la cohésion d'équipe.</p>
+					<a href="#" class="btn btn-primary">Réserver une démo</a>
+					<a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
+				</div>
+				<div
+					class="col-md-6">
+					<!-- Image symbolisant les outils pour managers -->
+					<img src="screen_objectifs.jpg" alt="Outils pour managers" class="img-fluid">
+				</div>
+			</div>
+		</section>
 
-<main class="container">
-  <!-- Section 1 : Présentation de l'application OPERA -->
-  <section id="notre-solution" class="row my-5">
-    <div class="col-md-6">
-      <h2>Réinventez les dynamiques managériales au sein de votre organisation</h2>
-      <p>Votre passerelle vers une gestion d'équipe optimisée et harmonieuse</p>
-      <a href="#" class="btn btn-primary">Réserver une démo</a>
-      <a href="#" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</a>
-    </div>
-    <div class="col-md-6">
-      <img src="manager_collaborateur.jpg" alt="Manager et collaborateur" class="img-fluid">
-    </div>
-  </section>
+		<!-- Section 4 : Aperçu des Performances des Équipes -->
+		<section id="performances" class="container mt-5">
+			<div
+				class="row">
+				<!-- Je discute de la manière dont OPERA peut aider à mieux comprendre les performances des équipes. -->
+				<div class="col-md-6">
+					<h2>Vue d'ensemble sur les Performances</h2>
+					<p>OPERA fournit une analyse détaillée des performances, permettant une gestion plus efficace et un renforcement de la réussite collective.</p>
+					<a href="#" class="btn btn-primary">Réserver une démo</a>
+					<a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
+				</div>
+				<div
+					class="col-md-6">
+					<!-- Image illustrant les performances des équipes -->
+					<img src="performances.jpg" alt="Performances des équipes" class="img-fluid">
+				</div>
+			</div>
+		</section>
 
-  <!-- Section 2 : Engagement pour les managers et les collaborateurs -->
-  <section id="notre-engagement" class="row my-5">
-    <div class="col-md-6">
-      <h2>Renforcez le leadership et cultivez la motivation</h2>
-      <p>OPERA, propulsez l'esprit d'équipe au sommet</p>
-      <a href="#" class="btn btn-primary">Réserver une démo</a>
-      <a href="#" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</a>
-    </div>
-    <div class="col-md-6">
-      <img src="opera_screen.jpg" alt="copie écran OPERA" class="img-fluid">
-    </div>
-  </section>
+		<!-- Section 5 : Intégration avec Outils Externes -->
+		<section id="outils" class="container mt-5">
+			<div
+				class="row">
+				<!-- Je parle de l'intégration d'OPERA avec d'autres outils pour faciliter la gestion quotidienne. -->
+				<div class="col-md-6">
+					<h2>Intégration Transparente</h2>
+					<p>OPERA s'intègre harmonieusement à vos outils quotidiens, améliorant ainsi l'efficacité sans bouleverser les routines établies.</p>
+					<a href="#" class="btn btn-primary">Réserver une démo</a>
+					<a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
+				</div>
+				<div
+					class="col-md-6">
+					<!-- Image des outils intégrés -->
+					<img src="outils_integres.jpg" alt="Outils intégrés" class="img-fluid">
+				</div>
+			</div>
+		</section>
 
-    <!-- Section 3 : Leadership et Outils pour Managers -->
-<section id="objectifs_actions" class="container mt-5">
-    <div class="row">
-        <!-- Je parle ici des outils que nous proposons pour améliorer le leadership des managers. -->
-        <div class="col-md-6">
-            <h2>Empowerment des Managers avec OPERA</h2>
-            <p>OPERA met à disposition des outils conçus pour renforcer le leadership des managers, leur permettant de transformer les défis en opportunités et d'améliorer la cohésion d'équipe.</p>
-            <a href="#" class="btn btn-primary">Réserver une démo</a>
-            <a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
-        </div>
-        <div class="col-md-6">
-            <!-- Image symbolisant les outils pour managers -->
-            <img src="screen_objectifs.jpg" alt="Outils pour managers" class="img-fluid">
-        </div>
-    </div>
-</section>
+		<!-- Section 6 : Témoignages Clients -->
+		<section id="avis_client" class="container mt-5">
+			<div
+				class="row">
+				<!-- Je partage des témoignages de clients pour montrer l'impact positif d'OPERA. -->
+				<div class="col-md-6">
+					<h2>Témoignages inspirants</h2>
+					<p>Les retours de nos utilisateurs illustrent comment OPERA a transformé leur approche managériale, en améliorant l'efficacité et la satisfaction des équipes.</p>
+					<a href="#" class="btn btn-primary">Réserver une démo</a>
+					<a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
+				</div>
+				<div
+					class="col-md-6">
+					<!-- Image ou logo symbolisant les avis clients -->
+					<img src="avis_clients.jpg" alt="Témoignages clients" class="img-fluid">
+				</div>
+			</div>
+		</section>
 
-<!-- Section 4 : Aperçu des Performances des Équipes -->
-<section id="performances" class="container mt-5">
-    <div class="row">
-        <!-- Je discute de la manière dont OPERA peut aider à mieux comprendre les performances des équipes. -->
-        <div class="col-md-6">
-            <h2>Vue d'ensemble sur les Performances</h2>
-            <p>OPERA fournit une analyse détaillée des performances, permettant une gestion plus efficace et un renforcement de la réussite collective.</p>
-            <a href="#" class="btn btn-primary">Réserver une démo</a>
-            <a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
-        </div>
-        <div class="col-md-6">
-            <!-- Image illustrant les performances des équipes -->
-            <img src="performances.jpg" alt="Performances des équipes" class="img-fluid">
-        </div>
-    </div>
-</section>
-
-<!-- Section 5 : Intégration avec Outils Externes -->
-<section id="outils" class="container mt-5">
-    <div class="row">
-        <!-- Je parle de l'intégration d'OPERA avec d'autres outils pour faciliter la gestion quotidienne. -->
-        <div class="col-md-6">
-            <h2>Intégration Transparente</h2>
-            <p>OPERA s'intègre harmonieusement à vos outils quotidiens, améliorant ainsi l'efficacité sans bouleverser les routines établies.</p>
-            <a href="#" class="btn btn-primary">Réserver une démo</a>
-            <a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
-        </div>
-        <div class="col-md-6">
-            <!-- Image des outils intégrés -->
-            <img src="outils_integres.jpg" alt="Outils intégrés" class="img-fluid">
-        </div>
-    </div>
-</section>
-
-<!-- Section 6 : Témoignages Clients -->
-<section id="avis_client" class="container mt-5">
-    <div class="row">
-        <!-- Je partage des témoignages de clients pour montrer l'impact positif d'OPERA. -->
-        <div class="col-md-6">
-            <h2>Témoignages inspirants</h2>
-            <p>Les retours de nos utilisateurs illustrent comment OPERA a transformé leur approche managériale, en améliorant l'efficacité et la satisfaction des équipes.</p>
-            <a href="#" class="btn btn-primary">Réserver une démo</a>
-            <a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
-        </div>
-        <div class="col-md-6">
-            <!-- Image ou logo symbolisant les avis clients -->
-            <img src="avis_clients.jpg" alt="Témoignages clients" class="img-fluid">
-        </div>
-    </div>
-</section>
-    
-</main>
-
-{% include 'partials/footer.html.twig' %}
+	</main>
 {% endblock %}
+
+{% block javascripts %}{% endblock %}
