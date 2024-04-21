@@ -1,6 +1,6 @@
-{# templates/dashboard/dashboard_manager_n1.html.twig #}
+{# templates/dashboard/dashboard_manager_n1.html.twig
 {# J'étends le layout de base pour maintenir la cohérence de l'interface utilisateur à travers l'application. #}
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {# Je définis le titre de la page pour le navigateur. #}
 {% block title %}Tableau de Bord Manager Niveau 1{% endblock %}
@@ -10,7 +10,7 @@
 <div class="container">
     <h1>Tableau de Bord pour les Managers de Premier Niveau</h1>
     {# J'accueille les managers avec une introduction personnalisée. #}
-    <p>Bienvenue, {{ app.user.username }}! Voici un aperçu de votre équipe et des tâches en cours.</p>
+    <p>Bienvenue, {{ app.user.username }}! dans votre interface</p>
 
     <section>
         <h2>Synthèse de l'Équipe</h2>
@@ -22,28 +22,7 @@
         {# J'inclus un graphique pour visualiser la performance de l'équipe. #}
     </section>
 
-    <section>
-        <h2>Projets en Cours</h2>
-        {# Je liste les projets actifs avec leur état pour une gestion simplifiée. #}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Projet</th>
-                    <th>Statut</th>
-                    <th>Date de Fin Prévue</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for project in projects %}
-                <tr>
-                    <td>{{ project.name }}</td>
-                    <td>{{ project.status }}</td>
-                    <td>{{ project.end_date|date('Y-m-d') }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </section>
+    
 
     <section>
         <h2>Alertes et Notifications</h2>
@@ -55,7 +34,7 @@
         </ul>
     </section>
 
-    {# J'intègre des scripts pour la création des graphiques, assumant que Chart.js est utilisé. #}
+    {# J'intègre des scripts pour la création des graphiques, Chart.js est utilisé. #}
     {% block javascripts %}
         {{ parent() }}
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -84,4 +63,4 @@
         </script>
     {% endblock %}
 </div>
-{% endblock %}
+{% endblock %} #}

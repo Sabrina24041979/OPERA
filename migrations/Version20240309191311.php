@@ -20,10 +20,10 @@ final class Version20240309191311 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE personal CHANGE username username VARCHAR(255) NOT NULL');
-        $this->addSql('ALTER TABLE resource CHANGE personal personal_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE resource ADD CONSTRAINT FK_BC91F4165D430949 FOREIGN KEY (personal_id) REFERENCES personal (id)');
-        $this->addSql('CREATE INDEX IDX_BC91F4165D430949 ON resource (personal_id)');
+        // $this->addSql('ALTER TABLE personal CHANGE username username VARCHAR(255) NOT NULL');
+        // $this->addSql('ALTER TABLE resource CHANGE personal personal_id INT DEFAULT NULL');
+        // $this->addSql('ALTER TABLE resource ADD CONSTRAINT FK_BC91F4165D430949 FOREIGN KEY (personal_id) REFERENCES personal (id)');
+        // $this->addSql('CREATE INDEX IDX_BC91F4165D430949 ON resource (personal_id)');
     }
 
     public function down(Schema $schema): void

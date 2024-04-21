@@ -1,0 +1,33 @@
+dashboard_manager_l1:
+    path: /manager/dashboard
+    controller: App\Controller\ManagerL1Controller::index
+
+dashboard_user:
+    path: /dashboard/user
+    controller: App\Controller\UserDashboardController::index
+    methods: [GET]
+
+app_notre_solution:
+    path: /notre-solution
+    controller: App\Controller\SolutionController::index
+
+app_history:
+    path: /notre-histoire
+    controller: App\Controller\HistoryController::index
+
+app_values:
+    path: /valeurs
+    controller: App\Controller\ValuesController::index
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+demo_request:
+    path: /demo-request
+    controller: App\Controller\DemoController::demoRequest
+    methods: [GET]
+
+contact_us:
+    path: /contact
+    controller: App\Controller\ContactController::contactPage

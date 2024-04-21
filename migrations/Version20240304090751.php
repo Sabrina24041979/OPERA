@@ -20,9 +20,9 @@ final class Version20240304090751 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE profile DROP FOREIGN KEY FK_8157AA0F5D430949');
-        $this->addSql('DROP INDEX UNIQ_8157AA0F5D430949 ON profile');
-        $this->addSql('ALTER TABLE profile DROP personal_id');
+        // $this->addSql('ALTER TABLE profile DROP FOREIGN KEY FK_8157AA0F5D430949');
+        // $this->addSql('DROP INDEX UNIQ_8157AA0F5D430949 ON profile');
+        // $this->addSql('ALTER TABLE profile DROP personal_id');
     }
 
     public function down(Schema $schema): void

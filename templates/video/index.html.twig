@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Opera Video{% endblock %}
+
+{% block body %}
+<h1>Découvrez OPERA à travers une vidéo</h1>
+<video width="750" controls>
+    <source src="chemin/vers/votre/video.mp4" type="video/mp4">
+    Votre navigateur ne supporte pas la balise vidéo.
+</video>
+{% endblock %}

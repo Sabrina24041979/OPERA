@@ -81,6 +81,9 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Manager $manager = null;
 
+    #[ORM\ManyToMany(targetEntity: Team::class, mappedBy: "members")]
+    private Collection $teams; // Ajout de la collection pour les équipes
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
@@ -89,6 +92,7 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
         $this->workloads = new ArrayCollection();
         $this->interviewsAsInterviewer = new ArrayCollection();
         $this->interviewsAsInterviewee = new ArrayCollection();
+        $this->teams = new ArrayCollection(); // Initialisation de la collection pour les équipes
     }
 
     public function getId(): ?int
@@ -458,6 +462,33 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
     public function eraseCredentials()
     {
         // Si vous stockez des données temporaires sensibles sur l'utilisateur, effacez-les ici
+    }
+
+    /**
+     * @return Collection<int, Team>
+     */
+    public function getTeams(): Collection
+    {
+        return $this->teams;
+    }
+
+    public function addTeam(Team $team): self
+    {
+        if (!$this->teams->contains($team)) {
+            $this->teams->add($team);
+            $team->addMember($this); // Assurez-vous que la méthode addMember est définie dans Team
+        }
+
+        return $this;
+    }
+
+    public function removeTeam(Team $team): self
+    {
+        if ($this->teams->removeElement($team)) {
+            $team->removeMember($this); // Assurez-vous que la méthode removeMember est définie dans Team
+        }
+
+        return $this;
     }
 }
 

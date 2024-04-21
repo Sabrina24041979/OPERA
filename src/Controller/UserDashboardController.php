@@ -5,35 +5,31 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
 use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
 
 class UserDashboardController extends AbstractController
 {
-    private $security;
     private $taskRepository;
     private $userRepository;
 
-    // Injection des dépendances Security, TaskRepository et UserRepository
-    public function __construct(Security $security, TaskRepository $taskRepository, UserRepository $userRepository)
+    // Simplification du constructeur
+    public function __construct(TaskRepository $taskRepository, UserRepository $userRepository)
     {
-        $this->security = $security;
         $this->taskRepository = $taskRepository;
         $this->userRepository = $userRepository;
     }
 
-    #[Route("/dashboard", name: "user_dashboard")]
-    public function index(): Response
-    {
-        $user = $this->security->getUser();
-        $dashboardData = $this->getDashboardDataForRole($user);
-
+    #[Route("/dashboard/user", name: "dashboard_user")]
+    public function index(): Response {
+        $user = $this->getUser(); // Utilisation de getUser() de AbstractController
+        $tasks = $this->taskRepository->findBy(['user' => $user]);
+    
         return $this->render('dashboard/index.html.twig', [
-            'dashboardData' => $dashboardData
+            'tasks' => $tasks,
         ]);
     }
-
+    
     // Méthode pour récupérer les données de tableau de bord en fonction du rôle de l'utilisateur
     private function getDashboardDataForRole($user)
     {

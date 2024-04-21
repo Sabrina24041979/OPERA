@@ -23,11 +23,13 @@ class Interview
     #[ORM\OneToOne(mappedBy: 'interview', cascade: ['persist', 'remove'])]
     private ?Feedback $feedback = null;
 
-    #[ORM\ManyToOne(inversedBy: 'interviews')]
-    private ?Personal $interviewer = null;
+    #[ORM\ManyToOne(targetEntity: Personal::class, inversedBy: "interviewsAsInterviewer")]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Personal $interviewer;
 
-    #[ORM\ManyToOne(inversedBy: 'interviewsAsInterviewee')]
-    private ?Personal $interviewee = null;
+    #[ORM\ManyToOne(targetEntity: Personal::class, inversedBy: "interviewsAsInterviewee")]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Personal $interviewee;
 
     #[ORM\ManyToOne(inversedBy: 'interviews')]
     #[ORM\JoinColumn(nullable: false)]

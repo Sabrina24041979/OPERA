@@ -1,12 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Notre Solution{% endblock %}
- {% block stylesheets %}
 
 {% block body %}
-{% block javascripts %}
 <div class="container">
-     <section>
+    <section>
         <h1>Transformez votre culture de management</h1>
         <p>Découvrez OPERA, la solution tout-en-un conçue pour révolutionner les pratiques managériales au sein de votre organisation. Avec OPERA, engagez-vous dans une transformation profonde de vos méthodes de gestion, en favorisant une approche plus dynamique, collaborative et efficace.</p>
 
@@ -19,18 +17,18 @@
                 <li><strong>Analyse et Rapports Avancés :</strong> Profitez de tableaux de bord détaillés pour suivre les performances en temps réel.</li>
                 <li><strong>Engagement des Employés :</strong> Renforcez l'engagement de vos équipes grâce à des mécanismes de reconnaissance et de récompense.</li>
             </ul>
+        </div>
 
-    <p>Votre gestion transformée</p>
-    <p>Avec OPERA, dépassez les méthodes traditionnelles et adoptez une gestion qui reflète les valeurs de modernité, de flexibilité et d'efficacité. Que ce soit pour un petit groupe ou une entreprise à grande échelle, OPERA est prêt à s'adapter et à évoluer selon vos besoins.</p>
+        <p>Votre gestion transformée</p>
+        <p>Avec OPERA, dépassez les méthodes traditionnelles et adoptez une gestion qui reflète les valeurs de modernité, de flexibilité et d'efficacité. Que ce soit pour un petit groupe ou une entreprise à grande échelle, OPERA est prêt à s'adapter et à évoluer selon vos besoins.</p>
 
-    <p>Prêt à redéfinir votre gestion ?</p>
-    <p>Rejoignez les nombreux leaders qui ont choisi OPERA pour piloter leur transformation managériale. Réservez une démo dès aujourd'hui et commencez votre parcours vers une gestion réinventée!</p>
-    
-    </div>
+        <p>Prêt à redéfinir votre gestion ?</p>
+        <p>Rejoignez les nombreux leaders qui ont choisi OPERA pour piloter leur transformation managériale. Réservez une démo dès aujourd'hui et commencez votre parcours vers une gestion réinventée!</p>
 
-    <!-- Bouton pour réserver une démo -->
+        <!-- Bouton pour réserver une démo -->
         <div>
-            <a href="{{ path('reservation_demo') }}" class="btn btn-primary">Réservez une démo</a>
+            <button onclick="location.href='{{ path('demo_request') }}'" class="btn btn-primary">Réservez une démo</button>
+			<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
         </div>
     </section>
 </div>

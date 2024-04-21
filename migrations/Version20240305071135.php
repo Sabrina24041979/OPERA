@@ -20,9 +20,9 @@ final class Version20240305071135 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE profile ADD personal_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE profile ADD CONSTRAINT FK_8157AA0F5D430949 FOREIGN KEY (personal_id) REFERENCES profile (id)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_8157AA0F5D430949 ON profile (personal_id)');
+        // $this->addSql('ALTER TABLE profile ADD personal_id INT DEFAULT NULL');
+        // $this->addSql('ALTER TABLE profile ADD CONSTRAINT FK_8157AA0F5D430949 FOREIGN KEY (personal_id) REFERENCES profile (id)');
+        // $this->addSql('CREATE UNIQUE INDEX UNIQ_8157AA0F5D430949 ON profile (personal_id)');
     }
 
     public function down(Schema $schema): void

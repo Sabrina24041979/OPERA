@@ -12,8 +12,8 @@
 			<div class="col-md-6">
 				<h2>Réinventez les dynamiques managériales au sein de votre organisation</h2>
 				<p>Votre passerelle vers une gestion d'équipe optimisée et harmonieuse</p>
-				<a href="#" class="btn btn-primary">Réserver une démo</a>
-				<a href="#" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</a>
+				<button onclick="location.href='{{ path('demo_request') }}'">Réserver une démo</button>
+				<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
 			</div>
 			<div class="col-md-6">
 				<img src="manager_collaborateur.jpg" alt="Manager et collaborateur" class="img-fluid">
@@ -25,8 +25,8 @@
 			<div class="col-md-6">
 				<h2>Renforcez le leadership et cultivez la motivation</h2>
 				<p>OPERA, propulsez l'esprit d'équipe au sommet</p>
-				<a href="#" class="btn btn-primary">Réserver une démo</a>
-				<a href="#" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</a>
+				<button onclick="location.href='{{ path('demo_request') }}'">Réserver une démo</button>
+				<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
 			</div>
 			<div class="col-md-6">
 				<img src="opera_screen.jpg" alt="copie écran OPERA" class="img-fluid">
@@ -39,10 +39,10 @@
 				class="row">
 				<!-- Je parle ici des outils que nous proposons pour améliorer le leadership des managers. -->
 				<div class="col-md-6">
-					<h2>Empowerment des Managers avec OPERA</h2>
-					<p>OPERA met à disposition des outils conçus pour renforcer le leadership des managers, leur permettant de transformer les défis en opportunités et d'améliorer la cohésion d'équipe.</p>
-					<a href="#" class="btn btn-primary">Réserver une démo</a>
-					<a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
+					<h2>Développement du Leadership à travers OPERA</h2>
+					<p>OPERA fournit des outils spécialement conçus pour amplifier le leadership des managers, en les équipant pour transformer les défis en opportunités et pour renforcer la cohésion de leurs équipes.</p>
+					<button onclick="location.href='{{ path('demo_request') }}'">Réserver une démo</button>
+					<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
 				</div>
 				<div
 					class="col-md-6">
@@ -60,8 +60,8 @@
 				<div class="col-md-6">
 					<h2>Vue d'ensemble sur les Performances</h2>
 					<p>OPERA fournit une analyse détaillée des performances, permettant une gestion plus efficace et un renforcement de la réussite collective.</p>
-					<a href="#" class="btn btn-primary">Réserver une démo</a>
-					<a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
+					<button onclick="location.href='{{ path('demo_request') }}'">Réserver une démo</button>
+					<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
 				</div>
 				<div
 					class="col-md-6">
@@ -79,8 +79,8 @@
 				<div class="col-md-6">
 					<h2>Intégration Transparente</h2>
 					<p>OPERA s'intègre harmonieusement à vos outils quotidiens, améliorant ainsi l'efficacité sans bouleverser les routines établies.</p>
-					<a href="#" class="btn btn-primary">Réserver une démo</a>
-					<a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
+					<button onclick="location.href='{{ path('demo_request') }}'">Réserver une démo</button>
+					<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
 				</div>
 				<div
 					class="col-md-6">
@@ -90,25 +90,150 @@
 			</div>
 		</section>
 
-		<!-- Section 6 : Témoignages Clients -->
-		<section id="avis_client" class="container mt-5">
+		{# Section pour la visibilité sur les équipes #}
+		<section id="visivility" class="container mt-5">
+			<div class="visibility-section">
+				<h2>Gestion Éclairée : Visualisez les Performances Équipe</h2>
+				<p>OPERA vous offre une vision claire et précise des performances et des progrès de vos équipes, permettant une gestion proactive et dynamique. Optimisez l'efficacité et boostez la productivité grâce à nos outils analytiques avancés.</p>
+				<button onclick="location.href='{{ path('demo_request') }}'">Réserver une démo</button>
+				<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
+			</div>
+		</section>
+
+		{# Section pour la montée en compétence des managers #}
+		<section id="skills" class="container mt-5">
+			<div class="skills-section">
+				<h2>Investissement Intelligent, Gestion Efficiente et Management Efficace</h2>
+				<p>Grâce à OPERA, renforcez les compétences managériales au cœur de votre organisation. Nos modules de formation intégrés permettent aux managers de développer leurs capacités de leadership et de gestion d'équipe efficacement.</p>
+				<button onclick="location.href='{{ path('demo_request') }}'">Réserver une démo</button>
+				<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
+			</div>
+		</section>
+
+		{# Section économique #}
+		<section id="skicostlls" class="container mt-5">
 			<div
 				class="row">
-				<!-- Je partage des témoignages de clients pour montrer l'impact positif d'OPERA. -->
-				<div class="col-md-6">
-					<h2>Témoignages inspirants</h2>
-					<p>Les retours de nos utilisateurs illustrent comment OPERA a transformé leur approche managériale, en améliorant l'efficacité et la satisfaction des équipes.</p>
-					<a href="#" class="btn btn-primary">Réserver une démo</a>
-					<a href="#" class="btn btn-secondary">Voir la vidéo de présentation</a>
+				<!-- Première colonne pour le titre et la description -->
+				<div class="col-md-6 cost-section">
+					<h2>Gestion Performante à Coût Réduit</h2>
+					<p>Choisissez OPERA et optimisez la gestion de vos équipes avec un outil conçu pour s'adapter à toutes les tailles d'entreprises. Profitez d'une plateforme qui allie efficacité et économie.</p>
 				</div>
-				<div
-					class="col-md-6">
-					<!-- Image ou logo symbolisant les avis clients -->
-					<img src="avis_clients.jpg" alt="Témoignages clients" class="img-fluid">
+
+				<!-- Deuxième colonne pour les détails du coût et le CTA -->
+				<div class="col-md-6">
+					<ul>
+						<li>👥 Support dédié à chaque étape</li>
+						<li>🌍 Multilingue: Français et Anglais</li>
+						<li>📚 Formations reconnues Qualiopi</li>
+						<li>🔒 Sécurité et conformité RGPD garanties</li>
+					</ul>
+					<p>À partir de seulement</p>
+					<p>
+						<strong>8€</strong>
+					</p>
+					<p>par mois et par collaborateur</p>
+					<button onclick="location.href='{{ path('demo_request') }}'" class="btn btn-primary">Réservez une démo</button>
+					<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
 				</div>
 			</div>
 		</section>
 
+		<section id="faqSection" class="faq-section container my-5">
+			<h2 class="text-center">Foire aux questions</h2>
+			<div class="accordion" id="faqAccordion">
+				<!-- Question 1 -->
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingOne">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							Est-ce qu'OPERA permet un gain de productivité?
+						</button>
+					</h2>
+					<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+						<div class="accordion-body">
+							Oui, OPERA augmente la productivité en centralisant la gestion des ressources humaines et en facilitant le suivi des performances des équipes, ce qui permet aux managers de prendre des décisions plus éclairées et rapides.
+						</div>
+					</div>
+				</div>
+				<!-- Question 2 -->
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingTwo">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+							Est-ce que les ressources mises à disposition permettent de former les managers de proximité sans intervention d'un formateur?
+						</button>
+					</h2>
+					<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+						<div class="accordion-body">
+							Absolument, les ressources d'OPERA sont conçues pour permettre une auto-formation efficace avec des modules interactifs et des contenus certifiés qui soutiennent les managers dans leur développement professionnel autonome.
+						</div>
+					</div>
+				</div>
+				<!-- Question 3 -->
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingThree">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+							Quel est le tarif d'OPERA en fonction du volume de collaborateurs?
+						</button>
+					</h2>
+					<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+						<div class="accordion-body">
+							OPERA offre des tarifications flexibles adaptées à la taille de votre entreprise. Pour les grandes équipes, des remises de volume sont disponibles pour maximiser votre investissement.
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Question 4 -->
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="headingFour">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+						Comment faire pour déployer OPERA dans mon entreprise?
+					</button>
+				</h2>
+				<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+					<div class="accordion-body">
+						Le déploiement d'OPERA est simple et rapide grâce à notre assistance technique. Un consultant dédié vous guidera à travers chaque étape du processus pour assurer une transition en douceur et une adoption réussie par toutes les parties prenantes.
+					</div>
+				</div>
+			</div>
+		</div>
+		</section>
+				
+		<!-- Section 6 : Témoignages Clients -->
+		<section id="avis_client" class="container mt-5">
+			<div class="row">
+				<h2 class="text-center col-12">Témoignages inspirants</h2>
+				<!-- Témoignage 1 -->
+				<div class="col-md-4">
+					<img src="path_to_image/marie.jpg" alt="Marie Dupont" class="img-fluid">
+					<blockquote>
+						"Depuis que nous utilisons OPERA, la coordination entre nos équipes s'est nettement améliorée. Les outils d'analyse nous permettent de prendre des décisions éclairées."
+						<footer>- Marie Dupont, Directrice des Ressources Humaines</footer>
+					</blockquote>
+				</div>
+				<!-- Témoignage 2 -->
+				<div class="col-md-4">
+					<img src="path_to_image/jean.jpg" alt="Jean Laval" class="img-fluid">
+					<blockquote>
+						"OPERA a transformé notre manière de gérer le personnel. Les fonctionnalités de suivi des performances sont particulièrement utiles."
+						<footer>- Jean Laval, CEO de TechInnov</footer>
+					</blockquote>
+				</div>
+				<!-- Témoignage 3 -->
+				<div class="col-md-4">
+					<img src="path_to_image/sophie.jpg" alt="Sophie Martin" class="img-fluid">
+					<blockquote>
+						"Le module de formation d'OPERA est fantastique. Il permet à nos managers de se former en continu sans intervention physique."
+						<footer>- Sophie Martin, Manager de projet</footer>
+					</blockquote>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col-12 text-center">
+					<button onclick="location.href='{{ path('demo_request') }}'" class="btn btn-primary">Réservez une démo</button>
+					<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
+				</div>
+			</div>
+		</section>
 	</main>
 {% endblock %}
 

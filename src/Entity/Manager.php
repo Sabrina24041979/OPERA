@@ -33,9 +33,13 @@ class Manager
     #[ORM\OneToMany(targetEntity: Personal::class, mappedBy: 'manager')]
     private Collection $manager;
 
+    #[ORM\OneToMany(mappedBy: 'manager', targetEntity: Team::class)]
+    private Collection $teams; // La nouvelle collection pour les équipes
+
     public function __construct()
     {
         $this->manager = new ArrayCollection();
+        $this->teams = new ArrayCollection(); // Initialiser la collection des équipes
     }
 
     public function getId(): ?int
@@ -130,6 +134,26 @@ class Manager
             }
         }
 
+        return $this;
+    }
+
+    public function addTeam(Team $team): self
+    {
+        if (!$this->teams->contains($team)) {
+            $this->teams[] = $team;
+            $team->setManager($this);
+        }
+        return $this;
+    }
+
+    public function removeTeam(Team $team): self
+    {
+        if ($this->teams->removeElement($team)) {
+            // set the owning side to null (unless already changed)
+            if ($team->getManager() === $this) {
+                $team->setManager(null);
+            }
+        }
         return $this;
     }
 }

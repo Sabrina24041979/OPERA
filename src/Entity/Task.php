@@ -5,33 +5,32 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: "App\Repository\TaskRepository")]
- 
 class Task
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    
+    #[ORM\Column(type: "integer")]
     private $id;
 
-    #[ORM\Column(type: "boolean")]
-    
-    private $completed = false;
+    #[ORM\Column(type: "string")]
+    private $name;
 
-    // Getters et setters
-    public function getId(): ?int
+    // Assurez-vous que cette relation est bien définie
+    #[ORM\ManyToOne(targetEntity: "App\Entity\User", inversedBy: "tasks")]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
+    // Getters et Setters pour $user
+    public function getUser(): ?User
     {
-        return $this->id;
+        return $this->user;
     }
 
-    public function getCompleted(): ?bool
+    public function setUser(?User $user): self
     {
-        return $this->completed;
-    }
-
-    public function setCompleted(bool $completed): self
-    {
-        $this->completed = $completed;
+        $this->user = $user;
         return $this;
     }
+
+    // Autres getters et setters...
 }

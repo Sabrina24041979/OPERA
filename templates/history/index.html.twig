@@ -1,8 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Notre Histoire
-{% endblock %}
-{% block stylesheets %}{% endblock %}
+{% block title %}Notre Histoire{% endblock %}
+
 
 {% block body %}{% endblock %}
 {% block javascripts %}
@@ -14,7 +13,8 @@
 
 		<!-- Bouton pour réserver une démo -->
 		<div>
-			<a href="#" class="btn btn-primary">Réservez une démo</a>
+			<button onclick="location.href='{{ path('demo_request') }}'" class="btn btn-primary">Réservez une démo</button>
+			<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
 		</div>
 	</main>
 {% endblock %}

@@ -1,0 +1,19 @@
+{# templates/dashboard/dashboard_manager_l1.html.twig #}
+{% extends 'base_bo.html.twig' %}
+
+{% block title %}Tableau de Bord Manager Niveau 1{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Votre espace manager</h1>
+    <p>Bienvenue, {{ app.user.username }}! dans votre interface</p>
+
+    <section>
+        <h2>Synthèse de l'Équipe</h2>
+        <p>Vous supervisez actuellement {{ team_members_count }} membres dans votre équipe.</p>
+    </section>
+
+    <!-- Plus de contenu ici -->
+
+</div>
+{% endblock %}

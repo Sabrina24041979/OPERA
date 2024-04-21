@@ -25,9 +25,9 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
             case 'ROLE_ADMIN':
                 return new RedirectResponse($this->router->generate('admin_dashboard'));
             case 'ROLE_DIRECTOR':
-                return new RedirectResponse($this->router->generate('dashboard_manager_n2'));
-            case 'ROLE_MANAGER_N1':
-                return new RedirectResponse($this->router->generate('dashboard_manager_n1'));
+                return new RedirectResponse($this->router->generate('dashboard_manager_l2'));
+            case 'ROLE_MANAGER_L1':
+                return new RedirectResponse($this->router->generate('dashboard_manager_l1'));
             case 'ROLE_USER':
             default:
             return new RedirectResponse($this->router->generate('dashboard_user'));

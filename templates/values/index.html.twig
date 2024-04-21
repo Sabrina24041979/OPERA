@@ -1,23 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Valeurs d'OPERA{% endblock %}
- {% block stylesheets %}
 
 {% block body %}
-{% block javascripts %}
 <div class="container my-5">
     <h1 class="text-center">Nos Valeurs</h1>
     <p>Chaque jour, chez OPERA, nous nous engageons à transformer la gestion d'équipe en une expérience enrichissante et productive. Découvrez les principes qui nous guident :</p>
     
     <div class="row">
-        {% for value in values %}
+        <!-- Valeur 1 : Innovation -->
         <div class="col-md-4">
             <div class="value-item">
-                <h2>{{ value.title }}</h2>
-                <p>{{ value.description }}</p>
+                <img class="innovation" src="" alt="image valeur innovation">
+                <h2>Innovation</h2>
+                <p>Nous cherchons constamment à repousser les limites de ce qui est possible pour optimiser la gestion des ressources humaines.</p>
             </div>
         </div>
-        {% endfor %}
+        <!-- Valeur 2 : Collaboration -->
+        <div class="col-md-4">
+            <div class="value-item">
+                <h2>Collaboration</h2>
+                <img class="collaboration" src="" alt="image valeur collaboration">
+                <p>Le travail d'équipe et la communication ouverte sont au cœur de notre approche pour atteindre l'excellence collective.</p>
+            </div>
+        </div>
+        <!-- Valeur 3 : Intégrité -->
+        <div class="col-md-4">
+            <div class="value-item">
+                <h2>Intégrité</h2>
+                <img class="intégrité" src="" alt="image valeur intégrité">
+                <p>Nous agissons avec honnêteté et transparence, assurant une base de confiance entre nos employés, partenaires et clients.</p>
+            </div>
+        </div>
+        <!-- Valeur 4 : Respect -->
+        <div class="col-md-4">
+            <div class="value-item">
+                <h2>Respect</h2>
+                <img class="respect" src="" alt="image valeur respect">
+                <p>Nous valorisons la diversité et nous engageons à traiter chaque individu avec respect et équité.</p>
+            </div>
+        </div>
+        <!-- Valeur 5 : Responsabilité -->
+        <div class="col-md-4">
+            <div class="value-item">
+                <h2>Responsabilité</h2>
+                <img class="responsabité" src="" alt="image valeur responsabilité">
+                <p>Nous prenons à cœur notre rôle dans le succès des organisations et nous nous engageons à délivrer des résultats mesurables.</p>
+            </div>
+        </div>
+         <!-- Bouton pour réserver une démo -->
+        <div>
+            <button onclick="location.href='{{ path('demo_request') }}'" class="btn btn-primary">Réservez une démo</button>
+			<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
+        </div>
     </div>
 </div>
 {% endblock %}

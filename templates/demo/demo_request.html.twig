@@ -1,0 +1,39 @@
+{# J'étends le layout principal pour maintenir une cohérence visuelle dans toute l'application. #}
+{% extends 'base.html.twig' %}
+
+{# Je définis le titre de la page qui apparaîtra dans l'onglet du navigateur. #}
+{% block title %}Demande de Démonstration pour OPERA{% endblock %}
+
+{# Je commence à définir le contenu principal de cette page. #}
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center">Bienvenue à la Démonstration d'OPERA</h1>
+    <p>Découvrez comment OPERA peut transformer la gestion de votre équipe et améliorer la productivité.</p>
+
+    {# J'affiche les points forts d'OPERA pour attirer l'attention du visiteur. #}
+    <section>
+        <h2>Points Forts de la Plateforme</h2>
+        <ul>
+            {% for key, value in highlights %}
+                <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    {# Je présente des détails sur les fonctionnalités spécifiques d'OPERA. #}
+    <section>
+        <h2>Détails des Fonctionnalités</h2>
+        <dl>
+            {% for feature, description in demoData %}
+                <dt><strong>{{ feature }}</strong></dt>
+                <dd>{{ description }}</dd>
+            {% endfor %}
+        </dl>
+    </section>
+
+    {# J'inclus un appel à l'action pour encourager le visiteur à réserver une démo ou à contacter pour plus d'informations. #}
+    <div class="text-center">
+        <button class="btn btn-primary" onclick="location.href='{{ path('contact_us') }}'">Réservez une Démonstration</button>
+    </div>
+</div>
+{% endblock %}

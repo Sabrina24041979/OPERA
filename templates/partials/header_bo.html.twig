@@ -1,0 +1,97 @@
+{# Je définis le bloc d'en-tête de mon site #}
+<header>
+	{# J'utilise une barre de navigation Bootstrap pour une meilleure apparence et réactivité #}
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			{# J'insère le logo d'OPERA qui sert aussi de lien vers la page d'accueil #}
+			<a class="navbar-brand" href="{{ path('home') }}">
+				<img src="{{ asset('images/logo_opera.png') }}" alt="Logo OPERA" style="width: 100px;">
+			</a>
+			{# Bouton pour le menu en version mobile #}
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			{# Liens de la barre de navigation #}
+			<div class="collapse navbar-collapse" id="navbarNav">
+				{{app.user.roles[0]}}
+				<ul
+					class="navbar-nav">
+					{# Je vérifie si un utilisateur est connecté avant d'accéder à ses rôles #}
+					{% if app.user %}
+						{% if 'ROLE_ADMIN' in app.user.roles %}
+							{# Menu spécifique pour l'administrateur #}
+							<li class="nav-item">
+								<a class="nav-link" href="#statistiques">Statistiques</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#gestion-utilisateurs">Gestion des utilisateurs</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#gestion-équipes">Gestion des équipes</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#gestion-équipes">Gestion des entretiens</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#gestion-équipes">Gestion des ressources manager</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#gestion-équipes">Gestion des équipes collaborateur</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#configurations">Configurations</a>
+							</li>
+						{% elseif 'ROLE_MANAGER_L1' in app.user.roles %}
+							{# Menu spécifique pour le manager #}
+							<li class="nav-item">
+								<a class="nav-link" href="#gestion-collaborateurs">Gestion Collaborateurs</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#gestion-equipes">Gestion des équipes</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#statistiques">Statistiques</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#planning">Plannings</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#entretiens">Entretiens</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#objectifs">Objectifs</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#actions">Actions</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#ressources">Ressources</a>
+							</li>
+						{% elseif 'ROLE_USER' in app.user.roles %}
+							{# Menu spécifique pour le collaborateur #}
+							<li class="nav-item">
+								<a class="nav-link" href="#statistiques">Mes Statistiques</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#entretiens">Mes Entretiens</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#objectifs">Mes Objectifs</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#actions">Mes Actions</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#actions">Mes Feedbacks</a>
+							</li>
+						{% endif %}
+						{% endif %}
+				</ul>
+			</div>
+		</div>
+				<a href="#" class="nav_link">
+					<i class='bx bx-log-out nav_icon'></i>
+					<span class="nav_name">SignOut</span>
+				</a>
+	</nav>
+</header>
