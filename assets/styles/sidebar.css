@@ -1,0 +1,17 @@
+header .navbar {
+    min-height: 100vh; /* Hauteur complète */
+    flex-direction: column; /* Éléments empilés verticalement */
+}
+
+.navbar-nav {
+    width: 100%;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link i {
+    margin-right: 10px; /* Espacement entre l'icône et le texte */
+}

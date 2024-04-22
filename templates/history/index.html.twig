@@ -3,9 +3,9 @@
 {% block title %}Notre Histoire{% endblock %}
 
 
-{% block body %}{% endblock %}
-{% block javascripts %}
-	<main class="container">
+{% block body %}
+
+<main class="container">
 		<h1>Notre Histoire</h1>
 		<p>En juin 2023, j'ai entamé une formation enrichissante en développement web et mobile, visant à compléter mes compétences en tant que manager. Cette formation m'a permis de développer des outils dédiés aux managers de proximité et de soutenir les activités stratégiques de l'entreprise, en ciblant notamment l'amélioration de la productivité, l'accroissement de la satisfaction client, et le renforcement du bien-être des collaborateurs.</p>
 		<p>Dans le cadre de ma certification, il m'était requis de concevoir soit un site internet, soit une application. J'ai choisi de développer l'application OPERA, une plateforme conçue pour instaurer des rituels d'entretien efficaces et pour élaborer un parcours collaborateur structuré. L'objectif principal d'OPERA est de soutenir les collaborateurs dans leur développement professionnel par la mise en place de plans d'action ciblés, favorisant ainsi leur montée en compétence.</p>
@@ -16,5 +16,7 @@
 			<button onclick="location.href='{{ path('demo_request') }}'" class="btn btn-primary">Réservez une démo</button>
 			<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
 		</div>
-	</main>
+	</main>{% endblock %}
+{% block javascripts %}
+	
 {% endblock %}

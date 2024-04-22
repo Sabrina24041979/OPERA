@@ -22,21 +22,20 @@ class InterviewType extends AbstractType
             ->add('description')
             ->add('feedback', EntityType::class, [
                 'class' => Feedback::class,
-'choice_label' => 'id',
+                'choice_label' => 'id',
             ])
             ->add('interviewer', EntityType::class, [
                 'class' => Personal::class,
-'choice_label' => 'id',
+                'choice_label' => 'id',
             ])
             ->add('interviewee', EntityType::class, [
                 'class' => Personal::class,
-'choice_label' => 'id',
+                'choice_label' => 'id',
             ])
             ->add('typeInterview', EntityType::class, [
                 'class' => TypeInterview::class,
-'choice_label' => 'id',
-            ])
-        ;
+                'choice_label' => 'id',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

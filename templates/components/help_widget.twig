@@ -1,22 +1,22 @@
 {# Je crée le bloc principal pour le widget d'aide #}
-{% block stylesheets %}
+{% block stylesheets %}{% endblock %}
 <div class="help-widget">
-    <h3>Documents d'Aide</h3>
-    {# Je vérifie si la liste des documents n'est pas vide #}
-    {% if documents|length > 0 %}
-        <ul>
-            {# Je boucle sur chaque document pour afficher son titre et un lien vers le contenu détaillé #}
-            {% for document in documents %}
-                <li>
-                    <a href="{{ path('help_view', {'id': document.id}) }}">
-                        {{ document.title }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        {# Je montre un message si aucun document n'est disponible #}
-        <p>Aucun document d'aide disponible pour le moment.</p>
-    {% block javascripts %}
-    {% endif %}
+	<h3>Documents d'Aide</h3>
+	{# Je vérifie si la liste des documents n'est pas vide #}
+	{% if documents|length > 0 %}
+		<ul>
+			{# Je boucle sur chaque document pour afficher son titre et un lien vers le contenu détaillé #}
+			{% for document in documents %}
+				<li>
+					<a href="{{ path('help_view', {'id': document.id}) }}">
+						{{ document.title }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		{# Je montre un message si aucun document n'est disponible #}
+		<p>Aucun document d'aide disponible pour le moment.</p>
+	{% endif %}
 </div>
+{% block javascripts %}{% endblock %}

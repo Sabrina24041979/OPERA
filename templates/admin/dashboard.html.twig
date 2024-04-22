@@ -1,4 +1,10 @@
 {% extends "base_bo.html.twig" %}
+
+{% block title %}Tableau de Bord Administrateur{% endblock %}
+
 {% block body %}
-    Je suis chez l'admin
+<div class="container">
+    <h1>Votre espace Administrateur</h1>
+    <p>Bienvenue, {{ app.user.username }}! dans votre interface</p>    
+</div>
 {% endblock %}

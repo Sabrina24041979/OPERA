@@ -4,55 +4,76 @@
 
 {% block body %}
 <div class="container my-5">
-    <h1 class="text-center">Nos Valeurs</h1>
-    <p>Chaque jour, chez OPERA, nous nous engageons à transformer la gestion d'équipe en une expérience enrichissante et productive. Découvrez les principes qui nous guident :</p>
+    <h1 class="text-center mb-5">Nos Valeurs</h1>
+    <p class="text-center mb-4">Chaque jour, chez OPERA, nous nous engageons à transformer la gestion d'équipe en une expérience enrichissante et productive. Découvrez les principes qui nous guident :</p>
     
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         <!-- Valeur 1 : Innovation -->
-        <div class="col-md-4">
-            <div class="value-item">
-                <img class="innovation" src="" alt="image valeur innovation">
-                <h2>Innovation</h2>
-                <p>Nous cherchons constamment à repousser les limites de ce qui est possible pour optimiser la gestion des ressources humaines.</p>
+        <div class="col">
+            <div class="card h-100 text-center shadow">
+             <i class="fas fa-lightbulb fa-3x"></i>
+                <div class="card-body">
+                    <h2 class="card-title">Innovation</h2>
+                    <p class="card-text">Nous cherchons constamment à repousser les limites de ce qui est possible pour optimiser la gestion des ressources humaines.</p>
+                </div>
             </div>
         </div>
         <!-- Valeur 2 : Collaboration -->
-        <div class="col-md-4">
-            <div class="value-item">
-                <h2>Collaboration</h2>
-                <img class="collaboration" src="" alt="image valeur collaboration">
-                <p>Le travail d'équipe et la communication ouverte sont au cœur de notre approche pour atteindre l'excellence collective.</p>
+        <div class="col">
+            <div class="card h-100 text-center shadow">
+            <i class="fas fa-users fa-3x"></i>
+                <div class="card-body">
+                    <h2 class="card-title">Collaboration</h2>
+                    <p class="card-text">Le travail d'équipe et la communication ouverte sont au cœur de notre approche pour atteindre l'excellence collective.</p>
+                </div>
             </div>
         </div>
         <!-- Valeur 3 : Intégrité -->
-        <div class="col-md-4">
-            <div class="value-item">
-                <h2>Intégrité</h2>
-                <img class="intégrité" src="" alt="image valeur intégrité">
-                <p>Nous agissons avec honnêteté et transparence, assurant une base de confiance entre nos employés, partenaires et clients.</p>
+        <div class="col">
+            <div class="card h-100 text-center shadow">
+                <i class="fas fa-handshake fa-3x"></i>
+                <div class="card-body">
+                    <h2 class="card-title">Intégrité</h2>
+                    <p class="card-text">Nous agissons avec honnêteté et transparence, assurant une base de confiance entre nos employés, partenaires et clients.</p>
+                </div>
             </div>
         </div>
         <!-- Valeur 4 : Respect -->
-        <div class="col-md-4">
-            <div class="value-item">
-                <h2>Respect</h2>
-                <img class="respect" src="" alt="image valeur respect">
-                <p>Nous valorisons la diversité et nous engageons à traiter chaque individu avec respect et équité.</p>
+        <div class="col">
+            <div class="card h-100 text-center shadow">
+                <i class="fas fa-heart fa-3x"></i>
+                <div class="card-body">
+                    <h2 class="card-title">Respect</h2>
+                    <p class="card-text">Nous valorisons la diversité et nous engageons à traiter chaque individu avec respect et équité.</p>
+                </div>
             </div>
         </div>
         <!-- Valeur 5 : Responsabilité -->
-        <div class="col-md-4">
-            <div class="value-item">
-                <h2>Responsabilité</h2>
-                <img class="responsabité" src="" alt="image valeur responsabilité">
-                <p>Nous prenons à cœur notre rôle dans le succès des organisations et nous nous engageons à délivrer des résultats mesurables.</p>
+        <div class="col">
+            <div class="card h-100 text-center shadow">
+                <i class="fas fa-user-shield fa-3x"></i>
+                <div class="card-body">
+                    <h2 class="card-title">Responsabilité</h2>
+                    <p class="card-text">Nous prenons à cœur notre rôle dans le succès des organisations et nous nous engageons à délivrer des résultats mesurables.</p>
+                </div>
             </div>
         </div>
-         <!-- Bouton pour réserver une démo -->
-        <div>
-            <button onclick="location.href='{{ path('demo_request') }}'" class="btn btn-primary">Réservez une démo</button>
-			<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
+        <!-- Valeur 6 : Adaptabilité -->
+        <div class="col">
+        <div class="card h-100 text-center shadow">
+            <i class="fas fa-sync-alt fa-3x"></i> <!-- Icône pour l'adaptabilité -->
+            <div class="card-body">
+                <h2 class="card-title">Adaptabilité</h2>
+                <p class="card-text">Nous embrassons le changement et innovons continuellement pour répondre aux défis dynamiques du monde des affaires et de la gestion des ressources humaines.</p>
+            </div>
         </div>
+</div>
+    </div>
+
+    <!-- Bouton pour réserver une démo -->
+    <div class="text-center mt-5">
+        <a href="{{ path('demo_request') }}" class="btn btn-primary btn-lg">Réservez une démo</a>
+        <a href="{{ path('opera_video') }}" class="btn btn-secondary btn-lg">Découvrez OPERA à travers une vidéo</a>
     </div>
 </div>
 {% endblock %}

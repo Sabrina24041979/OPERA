@@ -2,9 +2,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Liste des Ressources{% endblock %}
-{% block stylesheets %}
+{% block stylesheets %}{% endblock %}
 
-{% block body %}
+{% block body %}{% endblock %}
 {% block javascripts %}
     <h1>Je liste les ressources disponibles</h1>
     <table>
@@ -35,8 +35,8 @@
     </table>
 
     <h2>Je crée une nouvelle ressource</h2>
-    {{ form_start(form) }}
+    {# {{ form_start(form) }}
         {{ form_widget(form) }}
         <button type="submit">Ajouter</button>
-    {{ form_end(form) }}
+    {{ form_end(form) }} #}
 {% endblock %}

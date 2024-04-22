@@ -3,32 +3,32 @@
 {% block title %}Notre Solution{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container mt-5">
     <section>
-        <h1>Transformez votre culture de management</h1>
-        <p>Découvrez OPERA, la solution tout-en-un conçue pour révolutionner les pratiques managériales au sein de votre organisation. Avec OPERA, engagez-vous dans une transformation profonde de vos méthodes de gestion, en favorisant une approche plus dynamique, collaborative et efficace.</p>
+        <h1 class="display-4 text-center">Transformez votre culture de management</h1>
+        <p class="lead text-center">Découvrez OPERA, la solution tout-en-un conçue pour révolutionner les pratiques managériales au sein de votre organisation.</p>
 
-        <!-- Détails sur pourquoi choisir OPERA -->
-        <div>
-            <h2>Pourquoi choisir OPERA ?</h2>
-            <ul>
-                <li><strong>Centralisation des Outils :</strong> Regroupez toutes vos nécessités managériales en une seule plateforme intuitive.</li>
-                <li><strong>Amélioration de la Communication :</strong> Facilitez les échanges entre managers et équipes grâce à des outils de communication intégrés.</li>
-                <li><strong>Analyse et Rapports Avancés :</strong> Profitez de tableaux de bord détaillés pour suivre les performances en temps réel.</li>
-                <li><strong>Engagement des Employés :</strong> Renforcez l'engagement de vos équipes grâce à des mécanismes de reconnaissance et de récompense.</li>
-            </ul>
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <img src="{{ asset('images/solution_feature.jpg') }}" alt="Fonctionnalités d'OPERA" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h2>Pourquoi choisir OPERA ?</h2>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-tools mr-2"></i><strong>Centralisation des Outils :</strong> Regroupez toutes vos nécessités managériales en une seule plateforme intuitive.</li>
+                    <li><i class="fas fa-comments mr-2"></i><strong>Amélioration de la Communication :</strong> Facilitez les échanges entre managers et équipes grâce à des outils de communication intégrés.</li>
+                    <li><i class="fas fa-chart-line mr-2"></i><strong>Analyse et Rapports Avancés :</strong> Profitez de tableaux de bord détaillés pour suivre les performances en temps réel.</li>
+                    <li><i class="fas fa-heartbeat mr-2"></i><strong>Engagement des Employés :</strong> Renforcez l'engagement de vos équipes grâce à des mécanismes de reconnaissance et de récompense.</li>
+                </ul>
+            </div>
         </div>
 
-        <p>Votre gestion transformée</p>
-        <p>Avec OPERA, dépassez les méthodes traditionnelles et adoptez une gestion qui reflète les valeurs de modernité, de flexibilité et d'efficacité. Que ce soit pour un petit groupe ou une entreprise à grande échelle, OPERA est prêt à s'adapter et à évoluer selon vos besoins.</p>
-
-        <p>Prêt à redéfinir votre gestion ?</p>
-        <p>Rejoignez les nombreux leaders qui ont choisi OPERA pour piloter leur transformation managériale. Réservez une démo dès aujourd'hui et commencez votre parcours vers une gestion réinventée!</p>
-
-        <!-- Bouton pour réserver une démo -->
-        <div>
-            <button onclick="location.href='{{ path('demo_request') }}'" class="btn btn-primary">Réservez une démo</button>
-			<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
+        <div class="text-center my-5">
+            <p class="lead">Avec OPERA, dépassez les méthodes traditionnelles et adoptez une gestion qui reflète les valeurs de modernité, de flexibilité et d'efficacité. Que ce soit pour un petit groupe ou une entreprise à grande échelle, OPERA est prêt à s'adapter et à évoluer selon vos besoins.</p>
+            <p class="lead font-weight-bold">Prêt à redéfinir votre gestion ?</p>
+            <p>Rejoignez les nombreux leaders qui ont choisi OPERA pour piloter leur transformation managériale. Réservez une démo dès aujourd'hui et commencez votre parcours vers une gestion réinventée!</p>
+            <a href="{{ path('demo_request') }}" class="btn btn-primary btn-lg">Réservez une démo</a>
+            <a href="{{ path('opera_video') }}" class="btn btn-secondary btn-lg">Découvrez OPERA à travers une vidéo</a>
         </div>
     </section>
 </div>

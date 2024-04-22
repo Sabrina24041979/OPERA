@@ -1,5 +1,5 @@
-{% components/tasks_list.twig %}
-{% block stylesheets %}
+{# {% components/tasks_list.twig %} #}
+{% block stylesheets %}{% endblock %}
 
 <div class="tasks-list">
     <h2>Liste de Tâches</h2>
@@ -21,11 +21,11 @@
                 </li>
             {% endfor %}
         </ul>
-    {% block javascripts %}
     {% endif %}
 </div>
 
 <script>
+    {% block javascripts %}{% endblock %}
     // Je définis une fonction pour gérer l'action de compléter une tâche.
     function completeTask(taskId) {
         // Je fais une requête AJAX pour envoyer l'ID de la tâche à compléter au serveur.

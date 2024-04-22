@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}OPERA - Accueil
-{% endblock %}
+{% block title %}OPERA - Accueil{% endblock %}
 {% block stylesheets %}{% endblock %}
 
 {% block body %}
@@ -15,8 +14,8 @@
 				<button onclick="location.href='{{ path('demo_request') }}'">Réserver une démo</button>
 				<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
 			</div>
-			<div class="col-md-6">
-				<img src="manager_collaborateur.jpg" alt="Manager et collaborateur" class="img-fluid">
+			<div class="col-md-6">				
+				<img src="{{ asset('/image/manager_collaborateur.png') }}" alt="Manager et collaborateur" Class="img-fluid">
 			</div>
 		</section>
 
@@ -29,7 +28,7 @@
 				<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
 			</div>
 			<div class="col-md-6">
-				<img src="opera_screen.jpg" alt="copie écran OPERA" class="img-fluid">
+				<img src="{{ asset('/image/leadership.png') }}" alt="Leadership" Class="img-fluid">
 			</div>
 		</section>
 
@@ -47,7 +46,7 @@
 				<div
 					class="col-md-6">
 					<!-- Image symbolisant les outils pour managers -->
-					<img src="screen_objectifs.jpg" alt="Outils pour managers" class="img-fluid">
+					<img src="{{ asset('/image/objectifs.png') }}" alt="Objectifs" Class="img-fluid">
 				</div>
 			</div>
 		</section>
@@ -66,7 +65,7 @@
 				<div
 					class="col-md-6">
 					<!-- Image illustrant les performances des équipes -->
-					<img src="performances.jpg" alt="Performances des équipes" class="img-fluid">
+					<img src="{{ asset('/image/performances.png') }}" alt="Performances" Class="img-fluid">
 				</div>
 			</div>
 		</section>
@@ -85,7 +84,8 @@
 				<div
 					class="col-md-6">
 					<!-- Image des outils intégrés -->
-					<img src="outils_integres.jpg" alt="Outils intégrés" class="img-fluid">
+					<img src="{{ asset('/image/outlook.jpeg') }}" alt="Outlook" style="width: 100px;">
+					<img src="{{ asset('/image/calendar.jpeg') }}" alt="Calendar" style="width: 100px;">
 				</div>
 			</div>
 		</section>
@@ -182,20 +182,20 @@
 					</div>
 				</div>
 			</div>
-			<!-- Question 4 -->
-			<div class="accordion-item">
-				<h2 class="accordion-header" id="headingFour">
-					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-						Comment faire pour déployer OPERA dans mon entreprise?
-					</button>
-				</h2>
-				<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
-					<div class="accordion-body">
-						Le déploiement d'OPERA est simple et rapide grâce à notre assistance technique. Un consultant dédié vous guidera à travers chaque étape du processus pour assurer une transition en douceur et une adoption réussie par toutes les parties prenantes.
+				<!-- Question 4 -->
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="headingFour">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+							Comment faire pour déployer OPERA dans mon entreprise?
+						</button>
+					</h2>
+					<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+						<div class="accordion-body">
+							Le déploiement d'OPERA est simple et rapide grâce à notre assistance technique. Un consultant dédié vous guidera à travers chaque étape du processus pour assurer une transition en douceur et une adoption réussie par toutes les parties prenantes.
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</section>
 				
 		<!-- Section 6 : Témoignages Clients -->
@@ -204,7 +204,7 @@
 				<h2 class="text-center col-12">Témoignages inspirants</h2>
 				<!-- Témoignage 1 -->
 				<div class="col-md-4">
-					<img src="path_to_image/marie.jpg" alt="Marie Dupont" class="img-fluid">
+					<img src="{{ asset('/image/marie_dupont.png') }}" alt="Marie Dupont" Class="img-fluid">
 					<blockquote>
 						"Depuis que nous utilisons OPERA, la coordination entre nos équipes s'est nettement améliorée. Les outils d'analyse nous permettent de prendre des décisions éclairées."
 						<footer>- Marie Dupont, Directrice des Ressources Humaines</footer>
@@ -212,7 +212,7 @@
 				</div>
 				<!-- Témoignage 2 -->
 				<div class="col-md-4">
-					<img src="path_to_image/jean.jpg" alt="Jean Laval" class="img-fluid">
+					<img src="{{ asset('/image/jean_laval.png') }}" alt="Marie Dupont" Class="img-fluid">
 					<blockquote>
 						"OPERA a transformé notre manière de gérer le personnel. Les fonctionnalités de suivi des performances sont particulièrement utiles."
 						<footer>- Jean Laval, CEO de TechInnov</footer>
@@ -220,7 +220,7 @@
 				</div>
 				<!-- Témoignage 3 -->
 				<div class="col-md-4">
-					<img src="path_to_image/sophie.jpg" alt="Sophie Martin" class="img-fluid">
+					<img src="{{ asset('/image/sophie_martin.png') }}" alt="Marie Dupont" Class="img-fluid">
 					<blockquote>
 						"Le module de formation d'OPERA est fantastique. Il permet à nos managers de se former en continu sans intervention physique."
 						<footer>- Sophie Martin, Manager de projet</footer>

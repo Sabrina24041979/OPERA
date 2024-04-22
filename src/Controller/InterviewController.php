@@ -78,4 +78,6 @@ class InterviewController extends AbstractController
 
         return $this->redirectToRoute('app_interview_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
 }

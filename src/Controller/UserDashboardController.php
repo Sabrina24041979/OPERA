@@ -23,10 +23,14 @@ class UserDashboardController extends AbstractController
     #[Route("/dashboard/user", name: "dashboard_user")]
     public function index(): Response {
         $user = $this->getUser(); // Utilisation de getUser() de AbstractController
-        $tasks = $this->taskRepository->findBy(['user' => $user]);
+        // $tasks = $this->userRepository->findBy(['user' => $user]);
     
-        return $this->render('dashboard/index.html.twig', [
-            'tasks' => $tasks,
+        return $this->render('dashboard/dashboard_user.html.twig', [
+            'tasks' => [],
+            'notifications' => [],
+            'resource_links' => [],
+            'posts' => [],
+            'documents' => [],
         ]);
     }
     
