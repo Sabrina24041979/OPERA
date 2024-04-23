@@ -23,6 +23,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type:"string", length:180, unique:true)]
     #[Assert\NotBlank(message:"L'email ne peut pas être vide.")]
     #[Assert\Email(message:"Le format de l'adresse email n'est pas valide.")]
+    #[Assert\Length(
+        min: 8,
+        max: 4096,
+        minMessage: "Votre mot de passe doit contenir au moins 8 caractères",
+        maxMessage: "Votre mot de passe ne peut pas contenir plus de 4096 caractères"
+    )]
+    #[Assert\Regex(
+        pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+        message: "Le mot de passe doit contenir au moins un chiffre, une majuscule, une minuscule et un caractère spécial."
+    )]
     private string $email;
 
     #[ORM\Column(type:"json")]
@@ -43,6 +53,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type:"string", length:100, nullable:true)]
     private ?string $totpSecret = null;
+
+    #[ORM\Column(type: "datetime", nullable: true)]
+    private ?DateTimeInterface $lastLogin = null;
+
+    #[ORM\Column(type: "integer")]
+    private $loginAttempts = 0;
+
+    #[ORM\Column(type: "datetime", nullable: true)]
+    private ?DateTimeInterface $lockoutTime = null;
 
     public function __construct()
     {
@@ -167,6 +186,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $post->setUser(null);
             }
         }
+        return $this;
+    }
+
+    public function getLastLogin(): ?DateTimeInterface
+    {
+        return $this->lastLogin;
+    }
+
+    public function setLastLogin(DateTimeInterface $lastLogin): self
+    {
+        $this->lastLogin = $lastLogin;
+        return $this;
+    }
+
+    public function setLoginAttempts(int $loginAttempts): self
+{
+    $this->loginAttempts = $loginAttempts;
+    return $this;
+}
+
+    public function getLockoutTime(): ?DateTimeInterface
+    {
+        return $this->lockoutTime;
+    }
+
+    public function setLockoutTime(?DateTimeInterface $lockoutTime): self
+    {
+        $this->lockoutTime = $lockoutTime;
         return $this;
     }
 }

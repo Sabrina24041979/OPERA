@@ -6,7 +6,11 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\ORMException;
 
+/**
+ * UserRepository manages the data access layer for the User entity.
+ */
 class UserRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -15,10 +19,10 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * Récupérer tous les utilisateurs avec un filtrage et un tri optionnels.
+     * Retrieves all users with optional filtering and sorting.
      *
-     * @param array $criteria Critères pour filtrer les résultats.
-     * @param array|null $orderBy Critères pour trier les résultats.
+     * @param array $criteria Criteria to filter the results.
+     * @param array|null $orderBy Criteria to sort the results.
      * @return User[]
      */
     public function findAllUsers(array $criteria = [], array $orderBy = null): array
@@ -27,24 +31,29 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * Trouver des utilisateurs par un rôle spécifique.
+     * Finds users by a specific role.
      *
-     * @param string $role Le rôle à filtrer.
+     * @param string $role The role to filter by.
      * @return User[]
+     * @throws \RuntimeException When query execution fails.
      */
     public function findUsersByRole(string $role): array
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere(':role MEMBER OF u.roles')
-            ->setParameter('role', $role)
-            ->getQuery()
-            ->getResult();
+        try {
+            return $this->createQueryBuilder('u')
+                ->andWhere(':role MEMBER OF u.roles')
+                ->setParameter('role', $role)
+                ->getQuery()
+                ->getResult();
+        } catch (ORMException $e) {
+            throw new \RuntimeException("Unable to retrieve users by role", 0, $e);
+        }
     }
 
     /**
-     * Récupérer un utilisateur par son identifiant.
+     * Retrieves a user by their ID.
      *
-     * @param int $id L'identifiant de l'utilisateur.
+     * @param int $id The ID of the user.
      * @return User|null
      */
     public function findUserById(int $id): ?User
@@ -53,17 +62,22 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * Méthode personnalisée pour rechercher des utilisateurs ayant des noms spécifiques.
+     * Finds users with a name containing a specific string.
      *
-     * @param string $name Le nom à rechercher.
+     * @param string $name The name to search for.
      * @return User[]
+     * @throws \RuntimeException When query execution fails.
      */
     public function findUsersByName(string $name): array
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.name LIKE :name')
-            ->setParameter('name', '%' . $name . '%')
-            ->getQuery()
-            ->getResult();
+        try {
+            return $this->createQueryBuilder('u')
+                ->andWhere('u.name LIKE :name')
+                ->setParameter('name', '%' . $name . '%')
+                ->getQuery()
+                ->getResult();
+        } catch (ORMException $e) {
+            throw new \RuntimeException("Unable to retrieve users by name", 0, $e);
+        }
     }
 }

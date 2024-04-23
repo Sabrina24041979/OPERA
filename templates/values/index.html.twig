@@ -72,8 +72,8 @@
 
     <!-- Bouton pour réserver une démo -->
     <div class="text-center mt-5">
-        <a href="{{ path('demo_request') }}" class="btn btn-primary btn-lg">Réservez une démo</a>
-        <a href="{{ path('opera_video') }}" class="btn btn-secondary btn-lg">Découvrez OPERA à travers une vidéo</a>
+        <button onclick="location.href='{{ path('demo_request') }}'" class="btn btn-primary">Réserver une démo</button>
+		<button onclick="location.href='{{ path('opera_video') }}'" class="btn btn-secondary">Découvrez OPERA à travers une vidéo</button>
     </div>
 </div>
 {% endblock %}

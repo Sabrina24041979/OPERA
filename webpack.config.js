@@ -38,6 +38,7 @@ Encore
 
     .addEntry('notification', './assets/js/notification.js') // Ajoute notification.js comme une nouvelle entrée
     .addStyleEntry('notification-style', './assets/styles/notification.css') // Ajoute notification.css comme une entrée de style
+    .addStyleEntry('base-bo', './assets/styles/base_bo.css') // Ajoute notification.css comme une entrée de style
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
