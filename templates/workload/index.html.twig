@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Workload index{% endblock %}
+{% block title %}Index des charges de travail{% endblock %}
 
 {% block body %}
-    <h1>Workload index</h1>
-
+    <h1>Index des charges de travail</h1>
+    <a href="{{ path('app_workload_new') }}" class="btn btn-success">Créer une nouvelle charge de travail</a>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Workload_level</th>
+                <th>ID</th>
+                <th>Niveau de charge</th>
                 <th>Date</th>
-                <th>Comment</th>
+                <th>Commentaire</th>
                 <th>Description</th>
-                <th>Hours</th>
-                <th>actions</th>
+                <th>Heures</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,17 +27,19 @@
                 <td>{{ workload.description }}</td>
                 <td>{{ workload.hours }}</td>
                 <td>
-                    <a href="{{ path('app_workload_show', {'id': workload.id}) }}">show</a>
-                    <a href="{{ path('app_workload_edit', {'id': workload.id}) }}">edit</a>
+                    <a href="{{ path('app_workload_show', {'id': workload.id}) }}" class="btn btn-info">Voir</a>
+                    <a href="{{ path('app_workload_edit', {'id': workload.id}) }}" class="btn btn-primary">Éditer</a>
+                    <form method="post" action="{{ path('app_workload_delete', {'id': workload.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');" style="display: inline-block;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ workload.id) }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucune charge de travail trouvée.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_workload_new') }}">Create new</a>
 {% endblock %}

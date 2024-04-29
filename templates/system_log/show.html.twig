@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View Log{% endblock %}
+
+{% block body %}
+    <h1>View Log</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ log.id }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ log.message }}</td>
+            </tr>
+            <tr>
+                <th>Level</th>
+                <td>{{ log.level }}</td>
+            </tr>
+            <tr>
+                <th>Created At</th>
+                <td>{{ log.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('system_log_index') }}" class="btn btn-primary">Back to list</a>
+{% endblock %}

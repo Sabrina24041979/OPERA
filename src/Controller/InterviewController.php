@@ -14,11 +14,13 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/interview')]
 class InterviewController extends AbstractController
 {
-    #[Route('/', name: 'app_interview_index', methods: ['GET'])]
-    public function index(InterviewRepository $interviewRepository): Response
+    #[Route('/{id}', name: 'app_interview_manager_index', methods: ['GET'])]
+    public function index(int $id, InterviewRepository $interviewRepository): Response
     {
+        $interviews = $interviewRepository->findAllByManager($id);
+        // dd($interviews);
         return $this->render('interview/index.html.twig', [
-            'interviews' => $interviewRepository->findAll(),
+            'interviews' => $interviews,
         ]);
     }
 

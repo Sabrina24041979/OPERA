@@ -1,4 +1,4 @@
-// Styles spécifiques pour la page "Notre Histoire"
+// history.scss
 .history-page {
     background-color: #f0f0f0;
     padding: 20px;
@@ -10,11 +10,11 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 
         h1 {
-            color: #333;
+            color: $primary-color;
         }
 
         p {
-            color: #666;
+            color: $secondary-color;
             line-height: 1.6;
         }
     }

@@ -1,3 +1,36 @@
-{# templates/tasks/index.html.twig #}
+{% extends 'base.html.twig' %}
 
-{% include 'components/tasks_list.twig' %}
+{% block title %}Tasks{% endblock %}
+
+{% block body %}
+    <h1>Tasks</h1>
+    <a href="{{ path('task_new') }}" class="btn btn-success">Add New Task</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Assigned to</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.user.username }}</td>
+                <td>
+                    <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-info">View</a>
+                    <a href="{{ path('task_edit', {'id': task.id}) }}" class="btn btn-primary">Edit</a>
+                    {{ include('task/_delete_form.html.twig', {'task': task}) }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No tasks found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

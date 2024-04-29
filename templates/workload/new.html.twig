@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Workload{% endblock %}
+{% block title %}Créer une nouvelle charge de travail{% endblock %}
 
 {% block body %}
-    <h1>Create new Workload</h1>
-
-    {{ include('workload/_form.html.twig') }}
-
-    <a href="{{ path('app_workload_index') }}">back to list</a>
+    <h1>Créer une nouvelle charge de travail</h1>
+    {{ include('workload/_form.html.twig', {'button_label': 'Créer'}) }}
+    <a href="{{ path('app_workload_index') }}" class="btn btn-secondary">Retour à la liste</a>
 {% endblock %}

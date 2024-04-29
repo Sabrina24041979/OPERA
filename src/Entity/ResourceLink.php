@@ -13,7 +13,7 @@ class ResourceLink
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private $id;
+    private ?int $id;
 
     #[ORM\Column(type:"string", length:255)]
      /* Je stocke le titre de la ressource.*/

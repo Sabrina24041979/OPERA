@@ -3,32 +3,31 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use App\Form\ContactType;  // Assurez-vous de créer un formulaire Symfony ContactType approprié.
 
 class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'contact_us')]
-    public function contactPage(Request $request): Response
+    #[Route("/contact", name: "app_contact")]
+    public function contactPage(): Response
     {
-        $form = $this->createForm(ContactType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $contactData = $form->getData();
-            // Traiter les données ici, comme l'envoi d'un email
-
-            // Après traitement, rediriger vers une page de remerciement ou réafficher le formulaire avec un message de succès
-            $this->addFlash('success', 'Votre message a été envoyé avec succès!');
-            return $this->redirectToRoute('contact_us');
-        }
-
-        // Afficher le formulaire ou le réafficher avec des erreurs
+        // Assurez-vous que le fichier Twig 'contact.html.twig' existe dans le dossier 'templates/contact'
         return $this->render('contact/contact.html.twig', [
-            'form' => $form->createView(),
+            'controller_name' => 'ContactController',
         ]);
+    }
+
+    #[Route('/contact/submit', name: 'app_contact_submit', methods: ['POST'])]
+    public function handleSubmit(Request $request): Response
+    {
+        // Récupérez les données du formulaire ici et traitez-les
+        $name = $request->request->get('name');
+        $email = $request->request->get('email');
+        $message = $request->request->get('message');
+
+        // Logique pour envoyer un email ou sauvegarder les données
+
+        $this->addFlash('success', 'Votre message a été envoyé avec succès.');
+        return $this->redirectToRoute('app_contact');
     }
 }

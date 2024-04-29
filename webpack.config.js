@@ -40,6 +40,9 @@ Encore
     .addStyleEntry('notification-style', './assets/styles/notification.css') // Ajoute notification.css comme une entrée de style
     .addStyleEntry('base-bo', './assets/styles/base_bo.css') // Ajoute notification.css comme une entrée de style
 
+    .addStyleEntry('home-style', './assets/styles/home.scss')
+    .addEntry('home', './assets/home.js') // Assurez-vous que le chemin et le fichier existent
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 

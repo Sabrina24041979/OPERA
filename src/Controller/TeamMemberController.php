@@ -9,12 +9,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/team/member')]
 class TeamMemberController extends AbstractController
 {
-    #[Route('/', name: 'app_team_member_index', methods: ['GET'])]
+    #[Route('/', name: 'team_member_index', methods: ['GET'])]
     public function index(TeamMemberRepository $teamMemberRepository): Response
     {
         return $this->render('team_member/index.html.twig', [
@@ -22,7 +22,7 @@ class TeamMemberController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_team_member_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'team_member_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $teamMember = new TeamMember();
@@ -33,16 +33,16 @@ class TeamMemberController extends AbstractController
             $entityManager->persist($teamMember);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_team_member_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('team_member_index');
         }
 
         return $this->render('team_member/new.html.twig', [
             'team_member' => $teamMember,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/{id}', name: 'app_team_member_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'team_member_show', methods: ['GET'])]
     public function show(TeamMember $teamMember): Response
     {
         return $this->render('team_member/show.html.twig', [
@@ -50,7 +50,7 @@ class TeamMemberController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_team_member_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'team_member_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, TeamMember $teamMember, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(TeamMemberType::class, $teamMember);
@@ -59,16 +59,16 @@ class TeamMemberController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_team_member_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('team_member_index');
         }
 
         return $this->render('team_member/edit.html.twig', [
             'team_member' => $teamMember,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/{id}', name: 'app_team_member_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'team_member_delete', methods: ['POST'])]
     public function delete(Request $request, TeamMember $teamMember, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$teamMember->getId(), $request->request->get('_token'))) {
@@ -76,6 +76,6 @@ class TeamMemberController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_team_member_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('team_member_index');
     }
 }

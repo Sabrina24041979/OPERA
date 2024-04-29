@@ -3,16 +3,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
-			{% endblock %}
-		</title>
+			{% block title %}Panneau d'administration{% endblock %}</title>
 		{% block stylesheets %}
 			<!-- Intégration de Bootstrap -->
-			<link
-			rel="stylesheet" href="{{ asset('build/bootstrap.css') }}">
+			<link rel="stylesheet" href="{{ asset('build/bootstrap.css') }}">
 			<!-- Intégration de FontAwesome -->
-			<link
-			href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
+			<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
 			<!-- Styles gérés par Webpack Encore -->
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
@@ -43,7 +39,7 @@
 						<span class="nav_logo-name">OPERA</span>
 					</a>
 					<div class="nav_list">
-						{% if 'ROLE_ADMIN' in app.user.roles %}
+						 {% if 'ROLE_ADMIN' in app.user.roles %}
 							<a href="#" class="nav_link active">
 								<i class='bx bx-bar-chart-alt-2 nav_icon'></i>
 								<span class="nav_name">Statistiques</span>
@@ -77,8 +73,8 @@
 								<span class="nav_name">Configuration</span>
 							</a>
 						{% endif %}
-						{% if 'ROLE_MANAGER_L1' in app.user.roles %}
-							<a href="#" class="nav_link active">
+						 {% if 'ROLE_MANAGER' in app.user.roles %}
+						 	<a href="#" class="nav_link active">
 								<i class='bx bx-user nav_icon'></i>
 								<span class="nav_name">Gestion des users</span>
 							</a>
@@ -90,7 +86,7 @@
 								<i class='bx bx-calendar nav_icon'></i>
 								<span class="nav_name">Mon planning</span>
 							</a>
-							<a href="#" class="nav_link">
+							<a href="{{ path('app_interview_manager_index', {'id': app.user.id }) }}" class="nav_link">
 								<i class='bx bx-chat nav_icon'></i>
 								<span class="nav_name">Entretiens</span>
 							</a>
@@ -102,9 +98,9 @@
 								<i class='bx bx-task nav_icon'></i>
 								<span class="nav_name">Actions</span>
 							</a>
-							<a href="#" class="nav_link">
-								<i class='bx bx-folder-open nav_icon'></i>
-								<span class="nav_name">Sentiments</span>
+							<a href="{{ path('app_employee_sentiments_index') }}" class="nav_link">
+								<i class='bx bx-heart nav_icon'></i>
+								<span class="nav_name">Gestion des Sentiments</span>
 							</a>
 							<a href="#" class="nav_link">
 								<i class='bx bx-align-justify nav_icon'></i>
@@ -149,13 +145,16 @@
 								<span class="nav_name">Mes statistiques</span>
 							</a>
 						{% endif %}
-
-					</div>
+											</div>
 				</div>
-				<a href="#" class="nav_link">
+				<a href="{{ path('app_logout') }}" class="nav_link">
 					<i class='bx bx-log-out nav_icon'></i>
-					<span class="nav_name">SignOut</span>
+					<span class="nav_name">Déconnexion</span>
 				</a>
+				{# <a href="#" class="nav_link">
+					<i class='bx bx-log-out nav_icon'></i>
+					<span class="nav_name">Déconnexion</span>
+				</a> #}
 			</nav>
 		</div>
 		<!--Container Main start-->

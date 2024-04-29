@@ -1,4 +1,20 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ resource.id ? 'Edit Resource' : 'Create Resource' }}{% endblock %}
+
+{% block body %}
+    <h1>{{ resource.id ? 'Edit Resource' : 'Create Resource' }}{% endblock %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.file_path) }}
+        {{ form_row(form.created_at) }}
+        {{ form_row(form.updated_at) }}
+        {{ form_row(form.personal) }}
+        {{ form_row(form.category) }}
+        <button type="submit" class="btn btn-success">{{ 'Save' }}</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_resource_index') }}">Back to list</a>
+{% endblock %}

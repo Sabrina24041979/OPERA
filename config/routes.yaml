@@ -1,6 +1,7 @@
 dashboard_manager_l1:
     path: /manager/dashboard
     controller: App\Controller\ManagerL1Controller::index
+    methods: [GET]
 
 dashboard_user:
     path: /dashboard/user
@@ -8,26 +9,141 @@ dashboard_user:
     methods: [GET]
 
 app_notre_solution:
-    path: /notre-solution
+    path: /solutions
     controller: App\Controller\SolutionController::index
+    methods: [GET]
 
 app_history:
-    path: /notre-histoire
+    path: /histoire
     controller: App\Controller\HistoryController::index
+    methods: [GET]
 
 app_values:
     path: /valeurs
     controller: App\Controller\ValuesController::index
+    methods: [GET]
 
 app_login:
-    path: /login
+    path: /connexion
     controller: App\Controller\SecurityController::login
+    methods: [GET, POST]
 
 demo_request:
-    path: /demo-request
+    path: /demande-demo
     controller: App\Controller\DemoController::demoRequest
     methods: [GET]
 
 contact_us:
     path: /contact
     controller: App\Controller\ContactController::contactPage
+    methods: [GET]
+
+dashboard:
+    path: /dashboard
+    controller: App\Controller\DashboardController::index
+
+# Importez les routes de sécurité
+_security:
+    resource: 'routes/security_routes.yaml'
+    type: 'yaml'
+
+app_conditions_utilisation:
+    path: /conditions-utilisation
+    controller: App\Controller\LegalController::conditionsUtilisation
+
+app_politique_confidentialite:
+    path: /politique-confidentialite
+    controller: App\Controller\PolitiqueConfidentialiteController::index
+
+app_cookies:
+    path: /cookies
+    controller: App\Controller\CookiesController::index
+
+app_mentions_legales:
+    path: /mentions-legales
+    controller: App\Controller\LegalMentionsController::index
+
+# app_contact:
+#     path: /contact
+#     controller: App\Controller\ContactController::index
+
+app_forget_password:
+    path: /forget-password
+    controller: App\Controller\SecurityController::forgetPassword
+    methods: [GET, POST] 
+
+app_reset_password:
+    path: /reset-password/{token}
+    controller: App\Controller\SecurityController::resetPassword
+    methods: [GET, POST]
+
+app_contact:
+    path: /contact
+    controller: App\Controller\ContactController::contactPage
+
+# config/routes.yaml
+
+manager_level1_dashboard:
+    path: /manager/level1/dashboard
+    controller: App\Controller\ManagerLevel1Controller::dashboard
+    methods: [GET]
+
+manager_level1_create_profile:
+    path: /manager/level1/profile/create
+    controller: App\Controller\ManagerLevel1Controller::createProfile
+    methods: [GET, POST]
+
+manager_level1_edit_team:
+    path: /manager/level1/team/edit/{id}
+    controller: App\Controller\ManagerLevel1Controller::editTeam
+    methods: [GET, POST]
+
+manager_level1_create_goal:
+    path: /manager/level1/goal/create
+    controller: App\Controller\ManagerLevel1Controller::createGoal
+    methods: [GET, POST]
+
+manager_level1_edit_goal:
+    path: /manager/level1/goal/edit/{id}
+    controller: App\Controller\ManagerLevel1Controller::editGoal
+    methods: [GET, POST]
+
+manager_level1_create_action:
+    path: /manager/level1/action/create
+    controller: App\Controller\ManagerLevel1Controller::createAction
+    methods: [GET, POST]
+
+manager_level1_edit_action:
+    path: /manager/level1/action/edit/{id}
+    controller: App\Controller\ManagerLevel1Controller::editAction
+    methods: [GET, POST]
+
+manager_level1_create_feedback:
+    path: /manager/level1/feedback/create
+    controller: App\Controller\ManagerLevel1Controller::createFeedback
+    methods: [GET, POST]
+
+manager_level1_edit_feedback:
+    path: /manager/level1/feedback/edit/{id}
+    controller: App\Controller\ManagerLevel1Controller::editFeedback
+    methods: [GET, POST]
+
+manager_level1_create_sentiments:
+    path: /manager/level1/sentiments/create
+    controller: App\Controller\ManagerLevel1Controller::createSentiments
+    methods: [GET, POST]
+
+manager_level1_edit_sentiments:
+    path: /manager/level1/sentiments/edit/{id}
+    controller: App\Controller\ManagerLevel1Controller::editSentiments
+    methods: [GET, POST]
+
+manager_level1_create_workload:
+    path: /manager/level1/workload/create
+    controller: App\Controller\ManagerLevel1Controller::createWorkload
+    methods: [GET, POST]
+
+manager_level1_edit_workload:
+    path: /manager/level1/workload/edit/{id}
+    controller: App\Controller\ManagerLevel1Controller::editWorkload
+    methods: [GET, POST]

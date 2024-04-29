@@ -1,2 +1,19 @@
-@import 'styles/calendar';
-@import 'styles/task_list';
+// Import des variables globales et des styles de base
+@import 'variables';
+@import 'base';
+
+// Import des styles spécifiques aux composants
+@import 'calendar';
+@import 'task_list';
+@import 'dashboard';
+@import 'helpWidget';
+@import 'history';
+@import 'manager_level1';
+@import 'notification';
+@import 'resourceLink';
+@import 'sidebar';
+@import 'solution';
+@import 'values';
+
+// Import des styles Bootstrap pour garantir la cohérence
+@import '~bootstrap/scss/bootstrap';

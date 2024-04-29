@@ -1,4 +1,19 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.description, {
+        label: 'Description',
+        help: 'Décrivez en détail l\'objectif à atteindre.'
+    }) }}
+    {{ form_row(form.deadline, {
+        label: 'Date limite',
+        help: 'Spécifiez la date limite pour atteindre cet objectif.'
+    }) }}
+    {{ form_row(form.status, {
+        label: 'Statut',
+        help: 'Sélectionnez le statut actuel de l\'objectif.'
+    }) }}
+    {{ form_row(form.priority, {
+        label: 'Priorité',
+        help: 'Définissez la priorité de cet objectif.'
+    }) }}
+    // Autres champs si nécessaire
 {{ form_end(form) }}

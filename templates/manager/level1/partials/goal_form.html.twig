@@ -1,0 +1,36 @@
+{# Je définis le formulaire pour la création ou la modification d'un objectif #}
+<form action="{{ path('manager_goal_save') }}" method="post" class="form">
+    {# Je vérifie si l'objectif existe déjà pour adapter le formulaire en mode édition #}
+    {% if goal.id %}
+        <input type="hidden" name="id" value="{{ goal.id }}">
+    {% endif %}
+
+    {# Je crée un champ pour le titre de l'objectif #}
+    <div class="form-group">
+        <label for="title">Titre de l'objectif</label>
+        <input type="text" id="title" name="title" class="form-control" value="{{ goal.title }}" required>
+    </div>
+
+    {# Je crée un champ pour la description de l'objectif #}
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" class="form-control" required>{{ ogoal.description }}</textarea>
+    </div>
+
+    {# Je crée un champ pour la date de début et de fin #}
+    <div class="form-row">
+        <div class="col">
+            <label for="startDate">Date de début</label>
+            <input type="date" id="startDate" name="startDate" class="form-control" value="{{ goal.startDate|date('Y-m-d') }}" required>
+        </div>
+        <div class="col">
+            <label for="endDate">Date de fin</label>
+            <input type="date" id="endDate" name="endDate" class="form-control" value="{{ goal.endDate|date('Y-m-d') }}" required>
+        </div>
+    </div>
+
+    {# Je crée un bouton de soumission pour le formulaire #}
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+</form>

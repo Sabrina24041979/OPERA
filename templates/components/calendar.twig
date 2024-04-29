@@ -11,21 +11,22 @@
     <div id="calendar"></div>
 
     {# J'ajoute un script pour initialiser le calendrier avec des options de configuration de base. Ce script devrait être adapté en fonction de la bibliothèque de calendrier utilisée. #}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',  // Je définis la vue initiale sur mois.
-                locale: 'fr',  // Je configure le calendrier en français.
-                // Je définis les événements ici ou je les charge dynamiquement via une API.
-                events: [
-                    // Exemple d'événements à charger
-                    { title: 'Réunion', start: '2024-04-25' },
-                    { title: 'Entretien annuel', start: '2024-04-30' }
-                ]
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',  // Je définis la vue initiale sur mois.
+                    locale: 'fr',  // Je configure le calendrier en français.
+                    // Je définis les événements ici ou je les charge dynamiquement via une API.
+                    events: [
+                        // Exemple d'événements à charger
+                        { title: 'Réunion', start: '2024-04-25' },
+                        { title: 'Entretien annuel', start: '2024-04-30' }
+                    ]
+                });
+                calendar.render();  // Je rends le calendrier visible sur la page.
             });
-            calendar.render();  // Je rends le calendrier visible sur la page.
-        });
+        </script>
+    </div>
 {% block javascripts %}
-    </script>
-</div>
+{% endblock %}

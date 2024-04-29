@@ -4,9 +4,7 @@
 
 {% block body %}
 <h1>Liste des Utilisateurs</h1>
-
-{# Je vérifie s'il y a des utilisateurs à afficher #}
-{% if users is not empty %}
+<a href="{{ path('user_new') }}" class="btn btn-success">Créer un nouvel utilisateur</a>
 <table class="table">
     <thead>
         <tr>
@@ -17,23 +15,25 @@
         </tr>
     </thead>
     <tbody>
-        {# Je parcours chaque utilisateur pour créer une ligne dans le tableau #}
         {% for user in users %}
         <tr>
             <td>{{ user.id }}</td>
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
             <td>
-                {# Je crée des liens pour modifier et supprimer des utilisateurs #}
-                <a href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
-                <a href="{{ path('user_delete', {'id': user.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+                <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-info">Voir</a>
+                <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary">Éditer</a>
+                <form action="{{ path('user_delete', {'id': user.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');" style="display: inline-block;">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
             </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">Aucun utilisateur trouvé.</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-{% else %}
-    {# Je montre un message s'il n'y a pas d'utilisateurs #}
-    <p>Aucun utilisateur trouvé.</p>
-{% endif %}
 {% endblock %}

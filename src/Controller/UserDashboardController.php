@@ -13,7 +13,7 @@ class UserDashboardController extends AbstractController
     private $taskRepository;
     private $userRepository;
 
-    // Simplification du constructeur
+    // Simplification du constructeurrabat
     public function __construct(TaskRepository $taskRepository, UserRepository $userRepository)
     {
         $this->taskRepository = $taskRepository;

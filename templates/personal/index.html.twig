@@ -27,17 +27,17 @@
         {% for personal in personals %}
             <tr>
                 <td>{{ personal.id }}</td>
-                <td>{{ personal.username }}</td>
-                <td>{{ personal.email }}</td>
+                <td>{{ personal.username|e }}</td>
+                <td>{{ personal.email|e('email') }}</td>
                 <td>{{ personal.password }}</td>
-                <td>{{ personal.createdAt ? personal.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ personal.updatedAt ? personal.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ personal.entryDate ? personal.entryDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ personal.exitDate ? personal.exitDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ personal.matricule }}</td>
-                <td>{{ personal.role }}</td>
+                <td>{{ personal.createdAt ? personal.createdAt|date('Y-m-d H:i:s')|e : '' }}</td>
+                <td>{{ personal.updatedAt ? personal.updatedAt|date('Y-m-d H:i:s')|e : '' }}</td>
+                <td>{{ personal.entryDate ? personal.entryDate|date('Y-m-d H:i:s')|e : '' }}</td>
+                <td>{{ personal.exitDate ? personal.exitDate|date('Y-m-d H:i:s')|e : '' }}</td>
+                <td>{{ personal.matricule|e }}</td>
+                <td>{{ personal.role|join(', ')|e }}</td>
                 <td>{{ personal.managerId }}</td>
-                <td>{{ personal.department }}</td>
+                <td>{{ personal.department|e }}</td>
                 <td>
                     <a href="{{ path('app_personal_show', {'id': personal.id}) }}">show</a>
                     <a href="{{ path('app_personal_edit', {'id': personal.id}) }}">edit</a>

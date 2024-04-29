@@ -30,16 +30,22 @@ class Manager
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $department = null;
 
+    /**
+     * @var Collection<int, Personal>
+     */
     #[ORM\OneToMany(targetEntity: Personal::class, mappedBy: 'manager')]
-    private Collection $manager;
+    private Collection $personals;
 
-    #[ORM\OneToMany(mappedBy: 'manager', targetEntity: Team::class)]
-    private Collection $teams; // La nouvelle collection pour les équipes
+    /**
+     * @var Collection<int, Team>
+     */
+    #[ORM\OneToMany(targetEntity: Team::class, mappedBy: 'manager')]
+    private Collection $teams;
 
     public function __construct()
     {
-        $this->manager = new ArrayCollection();
-        $this->teams = new ArrayCollection(); // Initialiser la collection des équipes
+        $this->personals = new ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,43 +116,52 @@ class Manager
     /**
      * @return Collection<int, Personal>
      */
-    public function getManager(): Collection
+    public function getPersonals(): Collection
     {
-        return $this->manager;
+        return $this->personals;
     }
 
-    public function addManager(Personal $manager): static
+    public function addPersonal(Personal $personal): static
     {
-        if (!$this->manager->contains($manager)) {
-            $this->manager->add($manager);
-            $manager->setManager($this);
+        if (!$this->personals->contains($personal)) {
+            $this->personals->add($personal);
+            $personal->setManager($this);
         }
 
         return $this;
     }
 
-    public function removeManager(Personal $manager): static
+    public function removePersonal(Personal $personal): static
     {
-        if ($this->manager->removeElement($manager)) {
+        if ($this->personals->removeElement($personal)) {
             // set the owning side to null (unless already changed)
-            if ($manager->getManager() === $this) {
-                $manager->setManager(null);
+            if ($personal->getManager() === $this) {
+                $personal->setManager(null);
             }
         }
 
         return $this;
     }
 
-    public function addTeam(Team $team): self
+    /**
+     * @return Collection<int, Team>
+     */
+    public function getTeams(): Collection
+    {
+        return $this->teams;
+    }
+
+    public function addTeam(Team $team): static
     {
         if (!$this->teams->contains($team)) {
-            $this->teams[] = $team;
+            $this->teams->add($team);
             $team->setManager($this);
         }
+
         return $this;
     }
 
-    public function removeTeam(Team $team): self
+    public function removeTeam(Team $team): static
     {
         if ($this->teams->removeElement($team)) {
             // set the owning side to null (unless already changed)
@@ -154,6 +169,7 @@ class Manager
                 $team->setManager(null);
             }
         }
+
         return $this;
     }
 }

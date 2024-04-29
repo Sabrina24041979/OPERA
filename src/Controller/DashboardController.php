@@ -14,6 +14,9 @@ class DashboardController extends AbstractController
     #[Route('/dashboard', name: 'app_dashboard')]
     public function index(GoalRepository $goalRepository, FeedbackRepository $feedbackRepository, TeamRepository $teamRepository): Response
     {
+        // Vérifier si l'utilisateur a le rôle de Manager
+        $this->denyAccessUnlessGranted('ROLE_MANAGER');
+
         // Je récupère les objectifs depuis la base de données
         $objectifs = $goalRepository->findBy([], ['deadline' => 'ASC']);
 
@@ -25,12 +28,9 @@ class DashboardController extends AbstractController
 
         // Je retourne la vue du tableau de bord avec les données récupérées
         return $this->render('dashboard/dashboard.html.twig', [
-            //Les variables $objectifs, $feedbacks, et $equipes sont destinées à stocker les données récupérées des repositories correspondants. 
-            //Ces variables sont ensuite passées au template dashboard.html.twig pour afficher les données sur le tableau de bord.
             'objectifs' => $objectifs,
             'feedbacks' => $feedbacks,
             'equipes' => $equipes,
         ]);
     }
 }
-

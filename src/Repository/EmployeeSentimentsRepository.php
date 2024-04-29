@@ -5,10 +5,9 @@ namespace App\Repository;
 use App\Entity\EmployeeSentiments;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
- * @extends ServiceEntityRepository<EmployeeSentiments>
- *
  * @method EmployeeSentiments|null find($id, $lockMode = null, $lockVersion = null)
  * @method EmployeeSentiments|null findOneBy(array $criteria, array $orderBy = null)
  * @method EmployeeSentiments[]    findAll()
@@ -21,28 +20,56 @@ class EmployeeSentimentsRepository extends ServiceEntityRepository
         parent::__construct($registry, EmployeeSentiments::class);
     }
 
-//    /**
-//     * @return EmployeeSentiments[] Returns an array of EmployeeSentiments objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Je recherche les sentiments par catégorie.
+     */
+    public function findByCategory(string $category): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.category = :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?EmployeeSentiments
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Je recherche les sentiments par intensité.
+     */
+    public function findByIntensity(string $intensity): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.intensity = :intensity')
+            ->setParameter('intensity', $intensity)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Je recherche les sentiments dans une plage de dates.
+     */
+    public function findByDateRange(\DateTimeInterface $startDate, \DateTimeInterface $endDate): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date BETWEEN :start AND :end')
+            ->setParameter('start', $startDate)
+            ->setParameter('end', $endDate)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Je recherche les sentiments avec plusieurs critères: catégorie et intensité.
+     */
+    public function findByCategoryAndIntensity(string $category, string $intensity): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.category = :category')
+            ->andWhere('e.intensity = :intensity')
+            ->setParameters([
+                'category' => $category,
+                'intensity' => $intensity
+            ])
+            ->getQuery()
+            ->getResult();
+    }
 }

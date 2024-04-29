@@ -1,42 +1,41 @@
-{# J'étends le layout de base et je définis un titre pour l'index des équipes. #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Index des Équipes{% endblock %}
+{% block title %}Team Overview{% endblock %}
 
 {% block body %}
-    <h1>Index des Équipes</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom de l'équipe</th>
-                <th>Description</th>
-                <th>Date de création</th>
-                <th>Membres</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for team in teams %}
-            <tr>
-                <td>{{ team.id }}</td>
-                <td>{{ team.teamName }}</td>
-                <td>{{ team.description }}</td>
-                <td>{{ team.createdAt|date('Y-m-d') }}</td>
-                <td>{{ team.members|length }}</td>
-                <td>
-                    <a href="{{ path('app_team_show', {'id': team.id}) }}" class="btn btn-info">Voir</a>
-                    <a href="{{ path('app_team_edit', {'id': team.id}) }}" class="btn btn-primary">Éditer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">Aucune équipe trouvée</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_team_new') }}" class="btn btn-success">Créer une nouvelle équipe</a>
+<h1>Team Overview</h1>
+<a href="{{ path('team_new') }}" class="btn btn-success">Create New Team</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Team Name</th>
+            <th>Description</th>
+            <th>Date Created</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for team in teams %}
+        <tr>
+            <td>{{ team.id }}</td>
+            <td>{{ team.teamName }}</td>
+            <td>{{ team.description }}</td>
+            <td>{{ team.createdAt|date('Y-m-d') }}</td>
+            <td>
+                <a href="{{ path('team_show', {'id': team.id}) }}" class="btn btn-info">View</a>
+                <a href="{{ path('team_edit', {'id': team.id}) }}" class="btn btn-primary">Edit</a>
+                <form action="{{ path('team_delete', {'id': team.id}) }}" method="post" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this team?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ team.id) }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">No teams found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

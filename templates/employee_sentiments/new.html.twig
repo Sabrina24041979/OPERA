@@ -4,8 +4,12 @@
 
 {% block body %}
     <h1>Create new EmployeeSentiments</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
 
-    {{ include('employee_sentiments/_form.html.twig') }}
 
-    <a href="{{ path('app_employee_sentiments_index') }}">back to list</a>
+    {% include 'employee_sentiments/_form.html.twig' with {'form': form, 'button_label': 'Créer'} %}
+    <a href="{{ path('app_employee_sentiments_index') }}">Retour à la liste</a>
 {% endblock %}

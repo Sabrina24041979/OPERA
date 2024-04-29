@@ -6,13 +6,16 @@ use App\Repository\EmployeeSentimentsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+// Je définis la classe EmployeeSentiments comme une entité Doctrine.
 #[ORM\Entity(repositoryClass: EmployeeSentimentsRepository::class)]
 class EmployeeSentiments
 {
+    // Je déclare les propriétés de l'entité avec leurs types et contraintes.
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $sentiment_value = null;
@@ -29,9 +32,13 @@ class EmployeeSentiments
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $intensity = null;
 
+    // Je mets en place une relation ManyToOne avec l'entité Personal.
     #[ORM\ManyToOne(inversedBy: 'employeeSentiments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Personal $personal = null;
+
+    // Je définis les getters et setters pour chaque propriété.
+    // Ces méthodes permettent de manipuler les attributs de l'entité de manière contrôlée.
 
     public function getId(): ?int
     {
@@ -46,7 +53,6 @@ class EmployeeSentiments
     public function setSentimentValue(?string $sentiment_value): static
     {
         $this->sentiment_value = $sentiment_value;
-
         return $this;
     }
 
@@ -58,7 +64,6 @@ class EmployeeSentiments
     public function setDate(?\DateTimeInterface $date): static
     {
         $this->date = $date;
-
         return $this;
     }
 
@@ -70,7 +75,6 @@ class EmployeeSentiments
     public function setComment(?string $comment): static
     {
         $this->comment = $comment;
-
         return $this;
     }
 
@@ -82,7 +86,6 @@ class EmployeeSentiments
     public function setCategory(?string $category): static
     {
         $this->category = $category;
-
         return $this;
     }
 
@@ -94,7 +97,6 @@ class EmployeeSentiments
     public function setIntensity(?string $intensity): static
     {
         $this->intensity = $intensity;
-
         return $this;
     }
 
@@ -106,7 +108,6 @@ class EmployeeSentiments
     public function setPersonal(?Personal $personal): static
     {
         $this->personal = $personal;
-
         return $this;
     }
 }

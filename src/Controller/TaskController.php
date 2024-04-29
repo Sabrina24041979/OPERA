@@ -1,52 +1,43 @@
 <?php
 
-namespace App\Controller; // Assure-toi que l'espace de nommage est correct selon la structure de ton projet
+namespace App\Controller;
 
 use App\Entity\Task;
+use App\Form\TaskType;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/task')]
 class TaskController extends AbstractController
 {
-      
-    #[Route("/tasks", name: "task_complete")]
-     
+    #[Route('/', name: 'task_index', methods: ['GET'])]
     public function index(TaskRepository $taskRepository): Response
     {
-        // Je récupère toutes les tâches de la base de données
         $tasks = $taskRepository->findAll();
-        
-        // Je renvoie ces tâches au template pour affichage
-        return $this->render('tasks/index.html.twig', [
-            'tasks' => $tasks
-        ]);
+        return $this->render('task/index.html.twig', ['tasks' => $tasks]);
     }
 
-    //Je définis une route pour marquer une tâche comme complétée.
-     
-    #[Route("/tasks/{id}/complete", name: "task_complete", methods: ["POST"])]
-    public function complete(int $id, TaskRepository $taskRepository, EntityManagerInterface $entityManager): JsonResponse
+    #[Route('/new', name: 'task_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Je recherche la tâche par son ID
-        $task = $taskRepository->find($id);
-        
-        // Si la tâche n'existe pas, je renvoie un message d'erreur
-        if (!$task) {
-            return $this->json(['error' => 'Task not found'], 404);
+        $task = new Task();
+        $form = $this->createForm(TaskType::class, $task);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($task);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('task_index');
         }
 
-        // Je marque la tâche comme complétée
-        $task->setCompleted(true);
-        
-        // J'enregistre les changements dans la base de données
-        $entityManager->persist($task);
-        $entityManager->flush();
-
-        // Je renvoie un message de succès
-        return $this->json(['message' => 'Task completed successfully']);
+        return $this->render('task/new.html.twig', [
+            'task' => $task,
+            'form' => $form->createView(),
+        ]);
     }
 }

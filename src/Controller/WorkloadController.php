@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/workload')]
 class WorkloadController extends AbstractController
@@ -38,7 +38,7 @@ class WorkloadController extends AbstractController
 
         return $this->render('workload/new.html.twig', [
             'workload' => $workload,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -56,7 +56,7 @@ class WorkloadController extends AbstractController
         $form = $this->createForm(WorkloadType::class, $workload);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() and $form->isValid()) {
             $entityManager->flush();
 
             return $this->redirectToRoute('app_workload_index', [], Response::HTTP_SEE_OTHER);
@@ -64,14 +64,14 @@ class WorkloadController extends AbstractController
 
         return $this->render('workload/edit.html.twig', [
             'workload' => $workload,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_workload_delete', methods: ['POST'])]
     public function delete(Request $request, Workload $workload, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$workload->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $workload->getId(), $request->request->get('_token'))) {
             $entityManager->remove($workload);
             $entityManager->flush();
         }

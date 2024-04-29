@@ -1,4 +1,43 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Personal{% endblock %}
+
+{% block body %}
+    <h1>{{ form.vars.value.id ? 'Edit Personal' : 'Create new Personal' }}</h1>
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="form-group">
+            {{ form_label(form.username, 'Username', {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_widget(form.username, {'attr': {'class': 'form-control', 'required': 'required', 'maxlength': 150, 'aria-describedby': 'usernameHelp'}}) }}
+            <small id="usernameHelp" class="form-text text-muted">Your username must be unique.</small>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.email, 'Email', {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'required': 'required', 'type': 'email', 'aria-describedby': 'emailHelp'}}) }}
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.password, 'Password', {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_widget(form.password, {'attr': {'class': 'form-control', 'required': 'required', 'minlength': 8, 'aria-describedby': 'passwordHelp'}}) }}
+            <small id="passwordHelp" class="form-text text-muted">Your password must be at least 8 characters long.</small>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.department, 'Department', {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_widget(form.department, {'attr': {'class': 'form-control', 'aria-describedby': 'departmentHelp'}}) }}
+            <small id="departmentHelp" class="form-text text-muted">Choose your department.</small>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.manager, 'Manager', {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_widget(form.manager, {'attr': {'class': 'form-control', 'aria-describedby': 'managerHelp'}}) }}
+            <small id="managerHelp" class="form-text text-muted">Select your direct manager.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_personal_index') }}">Back to list</a>
+{% endblock %}

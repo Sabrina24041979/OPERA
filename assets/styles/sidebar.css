@@ -1,17 +1,28 @@
-header .navbar {
-    min-height: 100vh; /* Hauteur complète */
-    flex-direction: column; /* Éléments empilés verticalement */
+.navbar {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    min-height: 100vh;
+    background-color: secondary-color;
 }
-
-.navbar-nav {
-    width: 100%;
-}
+    
 
 .nav-link {
+    color: white;
     display: flex;
     align-items: center;
-}
+    padding: 10px;
 
-.nav-link i {
-    margin-right: 10px; /* Espacement entre l'icône et le texte */
-}
+    &:hover {
+        background-color: darken(secondary-color, 10%);
+    }
+
+    i {
+         margin-right: 10px;
+    }
+    }
+
+.active {
+    background-color: primary-color;
+    }
+

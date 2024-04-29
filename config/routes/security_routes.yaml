@@ -1,0 +1,8 @@
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+    methods: [GET, POST]  # Assurez-vous d'inclure POST si le formulaire de connexion est soumis via POST
+
+logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout

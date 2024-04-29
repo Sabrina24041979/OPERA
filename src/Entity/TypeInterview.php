@@ -12,16 +12,16 @@ class TypeInterview
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: "integer")]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(targetEntity: Interview::class, mappedBy: 'typeInterview')]
+    #[ORM\OneToMany(mappedBy: 'typeInterview', targetEntity: Interview::class)]
     private Collection $interviews;
 
     public function __construct()
@@ -39,10 +39,9 @@ class TypeInterview
         return $this->name;
     }
 
-    public function setName(?string $name): static
+    public function setName(?string $name): self
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -51,10 +50,9 @@ class TypeInterview
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -66,7 +64,7 @@ class TypeInterview
         return $this->interviews;
     }
 
-    public function addInterview(Interview $interview): static
+    public function addInterview(Interview $interview): self
     {
         if (!$this->interviews->contains($interview)) {
             $this->interviews->add($interview);
@@ -76,10 +74,9 @@ class TypeInterview
         return $this;
     }
 
-    public function removeInterview(Interview $interview): static
+    public function removeInterview(Interview $interview): self
     {
         if ($this->interviews->removeElement($interview)) {
-            // set the owning side to null (unless already changed)
             if ($interview->getTypeInterview() === $this) {
                 $interview->setTypeInterview(null);
             }

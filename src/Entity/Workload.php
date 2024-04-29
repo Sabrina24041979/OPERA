@@ -11,26 +11,26 @@ class Workload
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: "integer")]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $workload_level = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $comment = null;
 
-    #[ORM\ManyToOne(inversedBy: 'workloads')]
+    #[ORM\ManyToOne(targetEntity: Personal::class, inversedBy: 'workloads')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Personal $personal = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $hours = null;
 
     public function getId(): ?int
@@ -43,10 +43,9 @@ class Workload
         return $this->workload_level;
     }
 
-    public function setWorkloadLevel(?string $workload_level): static
+    public function setWorkloadLevel(?string $workload_level): self
     {
         $this->workload_level = $workload_level;
-
         return $this;
     }
 
@@ -55,10 +54,9 @@ class Workload
         return $this->date;
     }
 
-    public function setDate(?\DateTimeInterface $date): static
+    public function setDate(?\DateTimeInterface $date): self
     {
         $this->date = $date;
-
         return $this;
     }
 
@@ -67,10 +65,9 @@ class Workload
         return $this->comment;
     }
 
-    public function setComment(?string $comment): static
+    public function setComment(?string $comment): self
     {
         $this->comment = $comment;
-
         return $this;
     }
 
@@ -79,10 +76,9 @@ class Workload
         return $this->personal;
     }
 
-    public function setPersonal(?Personal $personal): static
+    public function setPersonal(?Personal $personal): self
     {
         $this->personal = $personal;
-
         return $this;
     }
 
@@ -91,10 +87,9 @@ class Workload
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -103,10 +98,9 @@ class Workload
         return $this->hours;
     }
 
-    public function setHours(string $hours): static
+    public function setHours(?string $hours): self
     {
         $this->hours = $hours;
-
         return $this;
     }
 }

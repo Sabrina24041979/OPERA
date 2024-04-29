@@ -1,14 +1,15 @@
+// notification.scss
 .notification {
     padding: 10px;
     border-bottom: 1px solid #ccc;
     background-color: #f9f9f9;
-}
 
-.notification.unread {
-    background-color: #e9ecef;
-}
+    &.unread {
+        background-color: $alert-info-bg;
+    }
 
-.notification.read {
-    text-decoration: line-through;
-    color: #6c757d;
+    &.read {
+        text-decoration: line-through;
+        color: $secondary-color;
+    }
 }

@@ -1,43 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Resource index{% endblock %}
+{% include 'components/resource_management_widget.twig' %}
+{% include 'components/nom_du_fichier.twig' %}
+
+{% block title %}Index des Ressources{% endblock %}
 
 {% block body %}
-    <h1>Resource index</h1>
+    <h1>Index des Ressources</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
+                <th>ID</th>
+                <th>Titre</th>
                 <th>Description</th>
-                <th>File_path</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
-                <th>actions</th>
+                <th>Chemin du fichier</th>
+                <th>Date de création</th>
+                <th>Date de mise à jour</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for resource in resources %}
             <tr>
                 <td>{{ resource.id }}</td>
-                <td>{{ resource.title }}</td>
-                <td>{{ resource.description }}</td>
-                <td>{{ resource.filePath }}</td>
-                <td>{{ resource.createdAt ? resource.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ resource.updatedAt ? resource.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ resource.title|e }}</td>
+                <td>{{ resource.description|e }}</td>
+                <td>{{ resource.file_path|e }}</td>
+                <td>{{ resource.created_at ? resource.created_at|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ resource.updated_at ? resource.updated_at|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_resource_show', {'id': resource.id}) }}">show</a>
-                    <a href="{{ path('app_resource_edit', {'id': resource.id}) }}">edit</a>
+                    <a href="{{ path('app_resource_show', {'id': resource.id}) }}" class="btn btn-info">Afficher</a>
+                    <a href="{{ path('app_resource_edit', {'id': resource.id}) }}" class="btn btn-primary">Éditer</a>
+                    {{ include('resource/_delete_form.html.twig', {'resource': resource}) }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_resource_new') }}">Create new</a>
+    <a href="{{ path('app_resource_new') }}" class="btn btn-success">Créer une nouvelle ressource</a>
 {% endblock %}

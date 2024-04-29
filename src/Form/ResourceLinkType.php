@@ -14,26 +14,35 @@ class ResourceLinkType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        // Je définis les champs du formulaire, qui correspondent aux attributs de l'entité ResourceLink
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Titre',
-                'attr' => ['placeholder' => 'Entrez le titre de la ressource']
+                'attr' => [
+                    'placeholder' => 'Entrez le titre de la ressource',
+                    'class' => 'form-control',
+                    'required' => true
+                ]
             ])
             ->add('url', UrlType::class, [
                 'label' => 'URL',
-                'attr' => ['placeholder' => 'Entrez l\'URL de la ressource']
+                'attr' => [
+                    'placeholder' => 'Entrez l\'URL de la ressource',
+                    'class' => 'form-control',
+                    'required' => true
+                ]
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'required' => false,
-                'attr' => ['placeholder' => 'Entrez une description pour la ressource']
+                'attr' => [
+                    'placeholder' => 'Entrez une description pour la ressource',
+                    'class' => 'form-control'
+                ]
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        // Je configure les options du formulaire pour qu'il travaille avec l'entité ResourceLink
         $resolver->setDefaults([
             'data_class' => ResourceLink::class,
         ]);

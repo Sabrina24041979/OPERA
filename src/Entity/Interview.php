@@ -3,8 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InterviewRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: InterviewRepository::class)]
 class Interview
@@ -14,10 +14,12 @@ class Interview
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: "datetime", nullable: true)]
+    #[Assert\DateTime]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank]
     private ?string $status = null;
 
     #[ORM\OneToOne(mappedBy: 'interview', cascade: ['persist', 'remove'])]
@@ -35,8 +37,8 @@ class Interview
     #[ORM\JoinColumn(nullable: false)]
     private ?TypeInterview $typeInterview = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Title = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $title = null;
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
@@ -119,12 +121,12 @@ class Interview
 
     public function getTitle(): ?string
     {
-        return $this->Title;
+        return $this->title;
     }
 
     public function setTitle(string $title): self
     {
-        $this->Title = $title;
+        $this->title = $title;
         return $this;
     }
 

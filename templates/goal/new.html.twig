@@ -4,6 +4,11 @@
 
 {% block body %}
     <h1>Create new Goal</h1>
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.description) }}
+        // Autres champs
+    {{ form_end(form) }}
 
     {{ include('goal/_form.html.twig') }}
 

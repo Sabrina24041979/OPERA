@@ -5,13 +5,25 @@
 {% block body %}
 <div class="container mt-4">
     <h1>Contactez-nous</h1>
-    <p>Nous serons ravis de répondre à vos questions ou de recevoir vos feedbacks.</p>
+    <p>Si vous avez des questions, n'hésitez pas à nous contacter en remplissant le formulaire ci-dessous.</p>
+    
+    <form method="post" action="{{ path('app_contact_submit') }}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
 
-    {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.message) }}
-        {{ form_row(form.send) }}
-    {{ form_end(form) }}
+        <div class="mb-3">
+            <label for="email" class="form-label">Adresse Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+    </form>
 </div>
 {% endblock %}

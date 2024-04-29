@@ -6,6 +6,7 @@ use App\Entity\Manager;
 use App\Entity\Personal;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class PersonalFixtures extends Fixture
 {
@@ -17,7 +18,7 @@ class PersonalFixtures extends Fixture
             $personal->setUsername('U2589' . $i);
             $personal->setEmail('email_' . $i . 'sabrina.montassar@yahoo.fr');
             $personal->setPassword('123456789' . $i); 
-            $personal->setRole('Responsable de Pôle'); 
+            $personal->addRole('ROLE_MANAGER'); 
             $personal->setDepartment('Equipe développement' . $i); 
             $personal->setMatricule('310256' . $i); 
             $personal->setEntryDate(new \DateTime('2023-06-01')); 

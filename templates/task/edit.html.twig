@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Task{% endblock %}
+
+{% block body %}
+    <h1>Edit Task</h1>
+    {{ include('task/_form.html.twig', {'button_label': 'Update'}) }}
+    <a href="{{ path('task_index') }}" class="btn btn-primary">Back to list</a>
+{% endblock %}

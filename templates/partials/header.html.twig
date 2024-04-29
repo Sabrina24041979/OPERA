@@ -1,29 +1,20 @@
-{# Je définis le bloc d'en-tête de mon site #}
 <header>
-    {# J'utilise une barre de navigation Bootstrap pour une meilleure apparence et réactivité #}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            {# J'insère le logo d'OPERA qui sert aussi de lien vers la page d'accueil #}
             <a class="navbar-brand" href="{{ path('home') }}">
                 <img src="{{ asset('/image/logo_OPERA.png') }}" alt="Logo OPERA" style="width: 100px;">
             </a>
-            {# Bouton pour le menu en version mobile #}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            {# Liens de la barre de navigation #}
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="notre-solution">Notre Solution</a></li>
-                    <li class="nav-item"><a class="nav-link" href="notre-histoire">Notre Histoire</a></li>
-                    <li class="nav-item"><a class="nav-link" href="valeurs">Nos Valeurs</a></li>
-                    {# Vous pouvez ajouter d'autres liens ici selon vos besoins #}
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_notre_solution') }}">Notre Solution</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_history') }}">Notre Histoire</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_values') }}">Nos Valeurs</a></li>
                 </ul>
-                {# Lien vers la page de connexion, visible sur toutes les pages #}
                 <a href="{{ path('app_login') }}" class="btn btn-primary">Connexion</a>
             </div>
         </div>
     </nav>
 </header>
-
-

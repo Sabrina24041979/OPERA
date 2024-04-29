@@ -15,21 +15,18 @@ class TeamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('team_id')
-            ->add('team_name')
+            ->add('teamName')
             ->add('description')
-            ->add('created_at')
-            ->add('member')
+            ->add('createdAt')
             ->add('manager', EntityType::class, [
                 'class' => Manager::class,
-'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
             ->add('members', EntityType::class, [
                 'class' => Personal::class,
-'choice_label' => 'id',
-'multiple' => true,
-            ])
-        ;
+                'choice_label' => 'name',
+                'multiple' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

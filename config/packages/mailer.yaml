@@ -1,3 +1,6 @@
 framework:
     mailer:
         dsn: '%env(MAILER_DSN)%'
+        #  dsn: 'smtp://username:password@host:port'
+        # dsn: 'smtp://sabrina.montassar:123456789@127.1.1.0:3306'
+        # Remplacez username, password, host, et port par vos propres détails

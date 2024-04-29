@@ -3,24 +3,50 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TaskRepository;
 
-#[ORM\Entity(repositoryClass: "App\Repository\TaskRepository")]
+/**
+ * Cette classe représente une tâche attribuée à un utilisateur dans l'application.
+ */
+#[ORM\Entity(repositoryClass: TaskRepository::class)]
 class Task
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
-    private $id;
+    private ?int $id = null;
+    
+    #[ORM\Column(type: "string", length: 255)]
+    private string $name;
 
-    #[ORM\Column(type: "string")]
-    private $name;
-
-    // Assurez-vous que cette relation est bien définie
     #[ORM\ManyToOne(targetEntity: "App\Entity\User", inversedBy: "tasks")]
     #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    private ?User $user = null;
 
-    // Getters et Setters pour $user
+    #[ORM\Column(type: "datetime_immutable", options: ["default" => "CURRENT_TIMESTAMP"])]
+    private \DateTimeInterface $createdAt;
+
+    public function __construct() {
+        // Initialise la date et l'heure de création à l'heure actuelle.
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -32,5 +58,14 @@ class Task
         return $this;
     }
 
-    // Autres getters et setters...
+    public function getCreatedAt(): \DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
 }

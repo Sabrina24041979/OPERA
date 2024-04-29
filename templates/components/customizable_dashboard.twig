@@ -1,0 +1,9 @@
+{# templates/components/customizable_dashboard.twig #}
+<div class="customizable-dashboard">
+    <h3>Mon Dashboard</h3>
+    <div>
+        {# Les widgets peuvent être ajoutés ici en fonction des préférences de l'utilisateur #}
+        {% include 'components/statistics_widget.twig' %}
+        {% include 'components/notifications_widget.twig' %}
+    </div>
+</div>

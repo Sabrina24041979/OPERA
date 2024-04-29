@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Reset Your Password</h1>
+<form method="post">
+    {# Formulaire de réinitialisation du mot de passe ici #}
+    <input type="password" name="new_password" required>
+    <button type="submit">Reset Password</button>
+</form>
+{% endblock %}

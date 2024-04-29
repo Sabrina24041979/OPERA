@@ -1,41 +1,54 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}Interview index{% endblock %}
+{% block title %}Index des Entretiens{% endblock %}
 
 {% block body %}
-    <h1>Interview index</h1>
+    <h1>Index des Entretiens</h1>
 
+    {# Affichage des messages flash #}
+    {% for flash_message in app.flashes('success') %}
+        <div class="alert alert-success">{{ flash_message }}</div>
+    {% endfor %}
+    {% for flash_message in app.flashes('error') %}
+        <div class="alert alert-danger">{{ flash_message }}</div>
+    {% endfor %}
+
+    {# Tableau listant les entretiens #}
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Date</th>
-                <th>Status</th>
-                <th>Title</th>
+                <th>Statut</th>
+                <th>Titre</th>
                 <th>Description</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for interview in interviews %}
-            <tr>
-                <td>{{ interview.id }}</td>
-                <td>{{ interview.date ? interview.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ interview.status }}</td>
-                <td>{{ interview.Title }}</td>
-                <td>{{ interview.description }}</td>
-                <td>
-                    <a href="{{ path('app_interview_show', {'id': interview.id}) }}">show</a>
-                    <a href="{{ path('app_interview_edit', {'id': interview.id}) }}">edit</a>
-                </td>
-            </tr>
+        {% if interviews|length > 0 %}
+            {% for interview in interviews %}
+                <tr>
+                    <td>{{ interview.id }}</td>
+                    <td>{{ interview.date ? interview.date|date('Y-m-d H:i:s') : 'Non définie' }}</td>
+                    <td>{{ interview.status }}</td>
+                    <td>{{ interview.title }}</td> {# Correction ici pour la casse de 'Title' #}
+                    <td>{{ interview.description }}</td>
+                    <td>
+                        <a href="{{ path('app_interview_show', {'id': interview.id}) }}" class="btn btn-info">Voir</a>
+                        <a href="{{ path('app_interview_edit', {'id': interview.id}) }}" class="btn btn-primary">Éditer</a>
+                        <a href="{{ path('app_interview_delete', {'id': interview.id}) }}" class="btn btn-primary">Supprimer</a>
+                        {# <a href="{{ path('app_interview_schedule', {'id': interview.id}) }}" class="btn btn-primary">Replanifier</a> #}
+                    </td>
+                </tr>
+            {% endfor %}
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Aucun enregistrement trouvé.</td>
             </tr>
-        {% endfor %}
+        {% endif %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_interview_new') }}">Create new</a>
+    <a href="{{ path('app_interview_new') }}" class="btn btn-success">Créer un nouvel entretien</a>
 {% endblock %}

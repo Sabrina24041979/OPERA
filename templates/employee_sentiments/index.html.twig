@@ -1,43 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}EmployeeSentiments index{% endblock %}
+{% block title %}Liste des Sentiments{% endblock %}
 
 {% block body %}
-    <h1>EmployeeSentiments index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Sentiment_value</th>
-                <th>Date</th>
-                <th>Comment</th>
-                <th>Category</th>
-                <th>Intensity</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for employee_sentiment in employee_sentiments %}
-            <tr>
-                <td>{{ employee_sentiment.id }}</td>
-                <td>{{ employee_sentiment.sentimentValue }}</td>
-                <td>{{ employee_sentiment.date ? employee_sentiment.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ employee_sentiment.comment }}</td>
-                <td>{{ employee_sentiment.category }}</td>
-                <td>{{ employee_sentiment.intensity }}</td>
-                <td>
-                    <a href="{{ path('app_employee_sentiments_show', {'id': employee_sentiment.id}) }}">show</a>
-                    <a href="{{ path('app_employee_sentiments_edit', {'id': employee_sentiment.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
+<h1>Liste des Sentiments</h1>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>Date</th>
+            <th>Sentiment</th>
+            <th>Commentaire</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sentiment in employee_sentiments %}
+        <tr>
+            <td>{{ sentiment.date|date('d/m/Y') }}</td>
+            <td>{{ sentiment.sentiment_value }}</td>
+            <td>{{ sentiment.comment }}</td>
+            <td>
+                <a href="{{ path('app_employee_sentiments_show', {'id': sentiment.id}) }}" class="btn btn-info">Voir</a>
+                <a href="{{ path('app_employee_sentiments_edit', {'id': sentiment.id}) }}" class="btn btn-primary">Éditer</a>
+                <form method="post" action="{{ path('app_employee_sentiments_delete', {'id': sentiment.id}) }}" onsubmit="return confirm('Confirmez-vous la suppression de cet élément ?');" style="display: inline-block;">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sentiment.id) }}">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_employee_sentiments_new') }}">Create new</a>
+    </tbody>
+</table>
 {% endblock %}

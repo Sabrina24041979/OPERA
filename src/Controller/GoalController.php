@@ -9,25 +9,29 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/goal')]
 class GoalController extends AbstractController
 {
-    // Méthode pour lister tous les objectifs
     #[Route('/', name: 'app_goal_index', methods: ['GET'])]
     public function index(GoalRepository $goalRepository): Response
     {
-        // Je récupère tous les objectifs grâce au repository et je les passe à la vue
+        // S'assurer que l'utilisateur a le droit de voir la liste des objectifs
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->render('goal/index.html.twig', [
             'goals' => $goalRepository->findAll(),
         ]);
     }
 
-    // Méthode pour créer un nouvel objectif
     #[Route('/new', name: 'app_goal_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // S'assurer que l'utilisateur a le droit de créer un objectif
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $goal = new Goal();
         $form = $this->createForm(GoalType::class, $goal);
         $form->handleRequest($request);
@@ -35,59 +39,65 @@ class GoalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($goal);
             $entityManager->flush();
+            $this->addFlash('success', 'Objectif créé avec succès.');
 
-            // Redirection vers la liste des objectifs après création
-            return $this->redirectToRoute('app_goal_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_goal_index');
         }
 
-        // Rendu du formulaire de création d'un objectif
         return $this->render('goal/new.html.twig', [
             'goal' => $goal,
-            'form' => $form->createView(), // Correction : utilisez createView() pour passer le formulaire à la vue
+            'form' => $form->createView(),
         ]);
     }
 
-    // Méthode pour afficher les détails d'un objectif
     #[Route('/{id}', name: 'app_goal_show', methods: ['GET'])]
     public function show(Goal $goal): Response
     {
-        // Affichage des détails d'un objectif spécifique
+        // Vérification des droits d'accès pour la consultation
+        $this->denyAccessUnlessGranted('view', $goal);
+
         return $this->render('goal/show.html.twig', [
             'goal' => $goal,
         ]);
     }
 
-    // Méthode pour éditer un objectif existant
     #[Route('/{id}/edit', name: 'app_goal_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Goal $goal, EntityManagerInterface $entityManager): Response
     {
+        // Vérification des droits d'accès pour l'édition
+        $this->denyAccessUnlessGranted('edit', $goal);
+
         $form = $this->createForm(GoalType::class, $goal);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('success', 'Objectif mis à jour avec succès.');
 
-            // Redirection vers la liste des objectifs après édition
-            return $this->redirectToRoute('app_goal_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_goal_index');
         }
 
-        // Rendu du formulaire d'édition d'un objectif
         return $this->render('goal/edit.html.twig', [
             'goal' => $goal,
             'form' => $form->createView(),
         ]);
     }
 
-    // Méthode pour supprimer un objectif
     #[Route('/{id}', name: 'app_goal_delete', methods: ['POST'])]
     public function delete(Request $request, Goal $goal, EntityManagerInterface $entityManager): Response
     {
+        // Vérification des droits d'accès pour la suppression
+        $this->denyAccessUnlessGranted('delete', $goal);
+
         if ($this->isCsrfTokenValid('delete'.$goal->getId(), $request->request->get('_token'))) {
             $entityManager->remove($goal);
             $entityManager->flush();
+            $this->addFlash('error', 'Objectif supprimé.');
+
+            return $this->redirectToRoute('app_goal_index');
         }
 
-        // Redirection vers la liste des objectifs après suppression
-        return $this->redirectToRoute('app_goal_index', [], Response::HTTP_SEE_OTHER);
+        // Si le token CSRF n'est pas valide, rediriger vers l'index
+        return $this->redirectToRoute('app_goal_index');
     }
 }

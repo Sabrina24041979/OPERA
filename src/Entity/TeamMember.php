@@ -84,9 +84,6 @@ class TeamMember
         return $this;
     }
 
-    /**
-     * @return Collection<int, Personal>
-     */
     public function getPersonal(): Collection
     {
         return $this->personal;
@@ -95,9 +92,8 @@ class TeamMember
     public function addPersonal(Personal $personal): static
     {
         if (!$this->personal->contains($personal)) {
-            $this->personal->add($personal);
+            $this->personal[] = $personal;
         }
-
         return $this;
     }
 

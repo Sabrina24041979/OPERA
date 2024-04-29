@@ -33,7 +33,7 @@ class Action
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $due_date = null;
 
-    #[ORM\ManyToOne(inversedBy: 'actions')]
+    #[ORM\ManyToOne(targetEntity: Goal::class, inversedBy: 'actions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Goal $goal = null;
 

@@ -4,22 +4,23 @@
 
 namespace App\Controller;
 
-use App\Entity\Personal;
 use App\Entity\Team;
-use App\Form\PersonalType;
 use App\Form\TeamType;
-use App\Repository\PersonalRepository;
+use App\Entity\Personal;
+use App\Form\PersonalType;
+use App\Service\ConfigService;
 use App\Repository\TeamRepository;
+use App\Repository\ConfigRepository;
+use App\Form\PersonalPermissionsType;
+use App\Repository\PersonalRepository;
+use App\Repository\EvaluationRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\PerformanceRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\PersonalPermissionsType;
-use App\Repository\ConfigRepository;
-use App\Service\ConfigService;
-use App\Repository\PerformanceRepository;
-use App\Repository\EvaluationRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\MakerBundle\Tests\tmp\current_project_xml\src\Repository\UserRepository;
 
 #[Route('/admin')]
 class AdminController extends AbstractController
@@ -32,17 +33,25 @@ class AdminController extends AbstractController
         $this->configService = $configService;
     }
 
-    #[Route('/personals', name: 'admin_personals_manage')]
-    public function managePersonals(PersonalRepository $personalRepository): Response
-    {
-        // Je récupère tous les personnels pour les afficher dans la vue d'administration
-        $personals = $personalRepository->findAll();
+    // #[Route('/personal/delete/{id}', name: 'admin_personal_delete', methods: ['POST'])]
+    // public function deletePersonal(Request $request, Personal $personal, EntityManagerInterface $entityManager): Response
+    // {
+    //     $this->denyAccessUnlessGranted('ROLE_ADMIN'); // Assurez-vous que seul un admin peut supprimer un personnel
+    //     if ($this->isCsrfTokenValid('delete'.$personal->getId(), $request->request->get('_token'))) {
+    //         $entityManager->remove($personal);
+    //         $entityManager->flush();
+    //         $this->addFlash('success', 'Personnel supprimé avec succès.');
+    //     }
 
-        return $this->render('admin/personals_manage.html.twig', [
-            'personals' => $personals,
-        ]);
+    //     return $this->redirectToRoute('admin_personals_manage');
+    // }
+
+    #[Route('/admin/user/management', name: 'admin_user_management', methods: ['GET'])]
+    public function manageUsers(UserRepository $userRepository): Response {
+        $users = $userRepository->findAll();
+        return $this->render('admin/manage_users.html.twig', ['users' => $users]);
     }
-
+    
     #[Route('/teams', name: 'admin_teams_overview')]
     public function overviewTeams(TeamRepository $teamRepository): Response
     {
@@ -202,6 +211,14 @@ class AdminController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/settings/save', name: 'admin_settings_save', methods: ['POST'])]
+    public function saveSettings(Request $request, ConfigService $configService): Response {
+        // Vérifier et enregistrer les paramètres ici
+        return $this->redirectToRoute('admin_settings');
+    }
+
+
+
     #[Route('/dashboard', name: 'admin_dashboard')]
     public function dashboard(PersonalRepository $personalRepository): Response
     {
@@ -240,35 +257,14 @@ class AdminController extends AbstractController
             'maintenanceMode' => $maintenanceMode,
             // Je peux ajouter d'autres paramètres de configuration ici.
         ];
-
+        
         // Je retourne la vue des paramètres de configuration, en passant les paramètres récupérés pour leur affichage et modification.
         return $this->render('admin/settings_manage.html.twig', [
             'settings' => $settings,
         ]);
     }
     
-    #[Route('/settings/save', name: 'admin_settings_save', methods: ['POST'])]
-    public function saveSettings(Request $request): Response
-    {
-        // Je récupère les données soumises par le formulaire de configuration grâce à l'objet Request.
-        $formData = $request->request->all();
-
-        // Je prévois une logique de validation pour les données soumises, pour m'assurer qu'elles sont valides et conformes à mes attentes.
-        // Par exemple, je vérifie que l'adresse e-mail de support est bien une adresse e-mail valide.
-        if (!filter_var($formData['emailSupport'], FILTER_VALIDATE_EMAIL)) {
-            // Si la validation échoue, je redirige vers la page de configuration avec un message d'erreur.
-            $this->addFlash('error', 'L\'adresse e-mail de support est invalide.');
-            return $this->redirectToRoute('admin_settings');
-        }
-
-        // J'utilise $this->configService pour accéder directement au service
-        $this->configService->set('emailSupport', $formData['emailSupport']);
-        $this->configService->set('maintenanceMode', $formData['maintenanceMode']);
-
-        // Après la sauvegarde, je redirige l'administrateur vers la page du tableau de bord avec un message de succès.
-        $this->addFlash('success', 'Les paramètres ont été sauvegardés avec succès.');
-        return $this->redirectToRoute('admin_dashboard');
-    }
+    
         // Je peux ajouter ici d'autres méthodes pour gérer les utilisateurs, les équipes, et d'autres fonctionnalités d'administration (A définir).
     #[Route('/performances', name: 'admin_performances', methods: ['GET'])]
         public function managePerformances(PerformanceRepository $performanceRepository): Response

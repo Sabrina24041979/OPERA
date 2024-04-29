@@ -1,33 +1,32 @@
-{# templates/manager/level1/resources.html.twig #}
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Ressources pour Managers{% endblock %}
 
 {% block body %}
-    {# Je crée un container pour la mise en page des ressources #}
-    <div class="container mt-4">
-        <h1 class="mb-4">Ressources pour la Montée en Compétence</h1>
-        
-        {# Je vérifie s'il y a des ressources à afficher #}
-        {% if resources is not empty %}
-            <div class="row">
-                {# Je boucle sur chaque ressource pour créer une carte pour chaque entrée #}
-                {% for resource in resources %}
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ resource.title }}</h5>
-                                <p class="card-text">{{ resource.description|truncate(150) }}</p>
-                                {# Je fournis un lien pour accéder aux détails de la ressource #}
-                                <a href="{{ path('manager_resource_detail', {'id': resource.id}) }}" class="btn btn-primary">En savoir plus</a>
-                            </div>
+<div class="container mt-4">
+    <h1 class="mb-4">Ressources pour la Montée en Compétence</h1>
+
+    {# Notification s'il n'y a pas de ressources #}
+    {% if resources|length == 0 %}
+        <div class="alert alert-info" role="alert">
+            Aucune ressource disponible pour le moment.
+        </div>
+    {% else %}
+        <div class="row">
+            {% for resource in resources %}
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ resource.title }}</h5>
+                            <p class="card-text">{{ resource.description|truncate(150, true) }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ path('manager_resource_detail', {'id': resource.id}) }}" class="btn btn-primary">En savoir plus</a>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <p>Aucune ressource disponible pour le moment.</p>
-        {% endif %}
-    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

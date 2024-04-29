@@ -3,10 +3,9 @@
 {% block title %}Aperçu des Équipes{% endblock %}
 
 {% block body %}
-<div class="container mt-4">
-    <h1>Je visualise l'état des équipes</h1>
-    {# Tableau des équipes avec détails et actions de gestion #}
-    <table class="table table-responsive">
+<div class="container">
+    <h1>Aperçu des Équipes</h1>
+    <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -16,10 +15,23 @@
             </tr>
         </thead>
         <tbody>
-            {# Boucle sur les équipes pour affichage #}
+            {% for team in teams %}
+            <tr>
+                <td>{{ team.id }}</td>
+                <td>{{ team.name }}</td>
+                <td>{{ team.members|length }}</td>
+                <td>
+                    <a href="{{ path('admin_team_edit', {'id': team.id}) }}" class="btn btn-primary">Éditer</a>
+                    <a href="{{ path('admin_team_delete', {'id': team.id}) }}" class="btn btn-danger" onclick="return confirm('Confirmez-vous la suppression de cette équipe ?');">Supprimer</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">Aucune équipe trouvée.</td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
-    {# Lien vers le formulaire d'ajout d'une nouvelle équipe #}
-    <a href="#" class="btn btn-primary">Créer une équipe</a>
+    <a href="{{ path('admin_team_new') }}" class="btn btn-success">Créer une nouvelle équipe</a>
 </div>
 {% endblock %}

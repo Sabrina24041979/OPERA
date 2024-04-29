@@ -6,12 +6,13 @@ use App\Repository\ResourceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: ResourceRepository::class)]
 class Resource
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: "integer")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -29,12 +30,11 @@ class Resource
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
 
-    // Modification pour utiliser une relation d'entité au lieu d'un ID entier
     #[ORM\ManyToOne(targetEntity: Personal::class)]
     #[ORM\JoinColumn(nullable: true)]
     private ?Personal $personal = null;
 
-    #[ORM\ManyToOne(inversedBy: 'resources')]
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'resources')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 

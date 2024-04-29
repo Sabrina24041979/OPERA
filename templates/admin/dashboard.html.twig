@@ -1,10 +1,14 @@
-{% extends "base_bo.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block title %}Tableau de Bord Administrateur{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Votre espace Administrateur</h1>
-    <p>Bienvenue, {{ app.user.username }} dans votre interface</p>    
-</div>
+    {# Inclure le widget ici, à l'intérieur du bloc 'body' #}
+    {% include 'components/statistics_widget.twig' %}
+
+    <div class="container">
+        <h1>Tableau de Bord Administrateur</h1>
+        <p>Bienvenue, {{ app.user.username }}. Voici votre tableau de bord administratif.</p>
+        {{ include('components/statistics_widget.twig') }}
+    </div>
 {% endblock %}

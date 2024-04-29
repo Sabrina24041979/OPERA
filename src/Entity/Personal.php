@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -50,9 +48,6 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
     #[ORM\Column(type: 'json')]
     private array $roles = [];
 
-    #[ORM\Column(nullable: true)]
-    private ?int $manager_id = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $department = null;
 
@@ -77,12 +72,11 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
     #[ORM\OneToOne(mappedBy: 'personal', cascade: ['persist', 'remove'])]
     private ?Profile $profile = null;
 
-    #[ORM\ManyToOne(inversedBy: 'manager')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Manager $manager = null;
+    #[ORM\ManyToMany(targetEntity: Team::class, inversedBy: "members")]
+    private Collection $teams;
 
-    #[ORM\ManyToMany(targetEntity: Team::class, mappedBy: "members")]
-    private Collection $teams; // Ajout de la collection pour les équipes
+    #[ORM\ManyToOne(inversedBy: 'personals')]
+    private ?Manager $manager = null;
 
     public function __construct()
     {
@@ -220,18 +214,6 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
             unset($this->roles[$key]);
             $this->roles = array_values($this->roles); // Je réindexe le tableau après suppression
         }
-
-        return $this;
-    }
-
-    public function getManagerId(): ?int
-    {
-        return $this->manager_id;
-    }
-
-    public function setManagerId(?int $manager_id): static
-    {
-        $this->manager_id = $manager_id;
 
         return $this;
     }
@@ -442,18 +424,6 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
         return $this;
     }
 
-    public function getManager(): ?Manager
-    {
-        return $this->manager;
-    }
-
-    public function setManager(?Manager $manager): static
-    {
-        $this->manager = $manager;
-
-        return $this;
-    }
-
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
@@ -487,6 +457,18 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
         if ($this->teams->removeElement($team)) {
             $team->removeMember($this); // Assurez-vous que la méthode removeMember est définie dans Team
         }
+
+        return $this;
+    }
+
+    public function getManager(): ?Manager
+    {
+        return $this->manager;
+    }
+
+    public function setManager(?Manager $manager): static
+    {
+        $this->manager = $manager;
 
         return $this;
     }

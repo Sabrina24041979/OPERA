@@ -42,10 +42,6 @@ class Profile
     #[ORM\JoinColumn(nullable: false)]
     private ?Personal $personal = null;
 
-    #[ORM\ManyToOne(targetEntity: Manager::class, inversedBy: "profiles")]
-    #[ORM\JoinColumn(nullable: false)]
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -131,20 +127,6 @@ class Profile
     public function setPersonal(?Personal $personal): self
     {
         $this->personal = $personal;
-
-        return $this;
-    }
-    
-    private $manager;
-
-    public function getManager(): ?Manager
-    {
-        return $this->manager;
-    }
-
-    public function setManager(?Manager $manager): self
-    {
-        $this->manager = $manager;
 
         return $this;
     }

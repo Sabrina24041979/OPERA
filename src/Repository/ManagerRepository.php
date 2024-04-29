@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Manager;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Personal;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class ManagerRepository extends ServiceEntityRepository
 {
@@ -13,13 +14,14 @@ class ManagerRepository extends ServiceEntityRepository
         parent::__construct($registry, Manager::class);
     }
 
-    public function countTeamMembers()
+    public function countTeamMembers(Personal $personal)
     {
         return $this->createQueryBuilder('m')
-            ->select('count(m.id)')  // Assurez-vous que 'id' est le champ correct pour compter les membres
+            ->select('count(p.id)')
+            ->join('m.personals', 'p')
+            ->where('m.id = :managerId')
+            ->setParameter('managerId', $personal->getManager()->getId())
             ->getQuery()
             ->getSingleScalarResult();
     }
-
-    
 }

@@ -1,13 +1,12 @@
-{# templates/components/resources_link.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Liste des Ressources{% endblock %}
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+{% endblock %}
 
-{% block body %}{% endblock %}
-{% block javascripts %}
-    <h1>Je liste les ressources disponibles</h1>
-    <table>
+{% block body %}
+    <h1>Liste des Ressources</h1>
+    <table class="table">
         <thead>
             <tr>
                 <th>Titre</th>
@@ -23,20 +22,15 @@
                 <td>{{ resource_link.description }}</td>
                 <td><a href="{{ resource_link.url }}">{{ resource_link.url }}</a></td>
                 <td>
-                    <a href="{{ path('resource_link_edit', {'id': resource_link.id}) }}">Modifier</a>
+                    <a href="{{ path('resource_link_edit', {'id': resource_link.id}) }}" class="btn btn-primary">Modifier</a>
                 </td>
             </tr>
         {% else %}
-            <tr>
-                <td colspan="4">Aucune ressource trouvée</td>
-            </tr>
+            <tr><td colspan="4">Aucune ressource trouvée</td></tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <h2>Je crée une nouvelle ressource</h2>
-    {# {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit">Ajouter</button>
-    {{ form_end(form) }} #}
+    {# Insertion de formulaire si nécessaire #}
+{% endblock %}
+{% block javascripts %}
 {% endblock %}

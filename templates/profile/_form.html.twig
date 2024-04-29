@@ -1,16 +1,37 @@
-{# J'étends le layout de base pour maintenir une cohérence visuelle à travers l'application. #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Éditer Profil{% endblock %}
+{% block title %}{{ profile.id ? 'Éditer Profil' : 'Créer Profil' }}{% endblock %}
 
 {% block body %}
-    <h1>Éditer Profil</h1>
+    <h1>{{ profile.id ? 'Éditer Profil' : 'Créer Profil' }}</h1>
 
-    {# J'inclus le formulaire d'édition de profil. #}
-    {{ include('profile/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    {{ form_start(form) }}
+        {{ form_row(form.username, {
+            'label': 'Nom d\'utilisateur',
+            'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nom d\'utilisateur', 'aria-label': 'Nom d\'utilisateur'}
+        }) }}
+        {{ form_row(form.firstname, {
+            'label': 'Prénom',
+            'attr': {'class': 'form-control', 'placeholder': 'Entrez votre prénom', 'aria-label': 'Prénom'}
+        }) }}
+        {{ form_row(form.lastname, {
+            'label': 'Nom',
+            'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nom', 'aria-label': 'Nom'}
+        }) }}
+        {{ form_row(form.position, {
+            'label': 'Position',
+            'attr': {'class': 'form-control', 'placeholder': 'Position dans l\'entreprise', 'aria-label': 'Position'}
+        }) }}
+        {{ form_row(form.birthdate, {
+            'label': 'Date de naissance',
+            'attr': {'class': 'form-control', 'aria-label': 'Date de naissance'}
+        }) }}
+        {{ form_row(form.profilePicture, {
+            'label': 'Photo de profil',
+            'attr': {'class': 'form-control', 'aria-label': 'Photo de profil'}
+        }) }}
+        <button type="submit" class="btn btn-success">{{ profile.id ? 'Mettre à jour' : 'Créer' }}</button>
+    {{ form_end(form) }}
 
     <a href="{{ path('app_profile_index') }}">Retour à la liste</a>
-
-    {# J'inclus le formulaire de suppression du profil. #}
-    {{ include('profile/_delete_form.html.twig') }}
 {% endblock %}

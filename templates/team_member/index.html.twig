@@ -1,43 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TeamMember index{% endblock %}
+{% block title %}Team Members{% endblock %}
 
 {% block body %}
-    <h1>TeamMember index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Role_in_team</th>
-                <th>Joined_at</th>
-                <th>Status</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for team_member in team_members %}
-            <tr>
-                <td>{{ team_member.id }}</td>
-                <td>{{ team_member.roleInTeam }}</td>
-                <td>{{ team_member.joinedAt ? team_member.joinedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ team_member.status }}</td>
-                <td>{{ team_member.Name }}</td>
-                <td>{{ team_member.description }}</td>
-                <td>
-                    <a href="{{ path('app_team_member_show', {'id': team_member.id}) }}">show</a>
-                    <a href="{{ path('app_team_member_edit', {'id': team_member.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_team_member_new') }}">Create new</a>
+<h1>Team Members</h1>
+<a href="{{ path('team_member_new') }}" class="btn btn-primary">Add New Team Member</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for member in team_members %}
+        <tr>
+            <td>{{ member.id }}</td>
+            <td>{{ member.name }}</td>
+            <td>{{ member.roleInTeam }}</td>
+            <td>{{ member.status }}</td>
+            <td>
+                <a href="{{ path('team_member_show', {'id': member.id}) }}" class="btn btn-info">View</a>
+                <a href="{{ path('team_member_edit', {'id': member.id}) }}" class="btn btn-success">Edit</a>
+                <form action="{{ path('team_member_delete', {'id': member.id}) }}" method="post" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ member.id) }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">No team members found.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -4,6 +4,11 @@
 
 {% block body %}
     <h1>Edit EmployeeSentiments</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
 
     {{ include('employee_sentiments/_form.html.twig', {'button_label': 'Update'}) }}
 

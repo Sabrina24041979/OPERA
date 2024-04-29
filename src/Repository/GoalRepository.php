@@ -21,28 +21,53 @@ class GoalRepository extends ServiceEntityRepository
         parent::__construct($registry, Goal::class);
     }
 
-//    /**
-//     * @return Goal[] Returns an array of Goal objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('g.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Je récupère les objectifs par catégorie.
+     */
+    public function findByCategory($categoryId)
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.category = :categoryId')
+            ->setParameter('categoryId', $categoryId)
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Goal
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Je récupère les objectifs par priorité.
+     */
+    public function findByPriority($priority)
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.priority = :priority')
+            ->setParameter('priority', $priority)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Je récupère les objectifs par statut.
+     */
+    public function findByStatus($status)
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.status = :status')
+            ->setParameter('status', $status)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Je récupère les objectifs récents créés après une date spécifique.
+     */
+    public function findRecentGoals(\DateTimeInterface $sinceDate)
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.createdAt >= :sinceDate')
+            ->setParameter('sinceDate', $sinceDate)
+            ->orderBy('g.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
+

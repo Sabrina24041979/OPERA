@@ -1,5 +1,5 @@
 <?php
-// src/Security/Authentication/AuthenticationSuccessHandler.php
+
 namespace App\Security\Authentication;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -25,8 +25,8 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
             case 'ROLE_ADMIN':
                 return new RedirectResponse($this->router->generate('admin_dashboard'));
             case 'ROLE_DIRECTOR':
-                return new RedirectResponse($this->router->generate('dashboard_manager_l2'));
-            case 'ROLE_MANAGER_L1':
+                return new RedirectResponse($this->router->generate('dashboard_director'));
+            case 'ROLE_MANAGER':
                 return new RedirectResponse($this->router->generate('dashboard_manager_l1'));
             case 'ROLE_USER':
             default:
