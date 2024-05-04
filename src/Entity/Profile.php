@@ -39,7 +39,7 @@ class Profile
 
     // Chaque profil est associé à un utilisateur. L'association est unidirectionnelle ici, depuis le profil vers l'utilisateur.
     #[ORM\OneToOne(inversedBy: 'profile', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Personal $personal = null;
 
     public function getId(): ?int

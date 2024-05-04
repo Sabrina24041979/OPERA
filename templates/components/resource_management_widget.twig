@@ -1,11 +1,10 @@
-{# templates/components/resource_management_widget.twig #}
 <div class="resource-management-widget">
-    <h3>Gestion des Ressources</h3>
+    <h3>Bibliothèque des Ressources</h3>
     <ul>
         {% for resource in resources %}
             <li>
                 {{ resource.title }}
-                <a href="{{ path('resource_edit', {'id': resource.id}) }}">Modifier</a>
+                <a href="{{ path('app_resource_index', {'id': app.user.id }) }}">Modifier</a>
             </li>
         {% else %}
             <li>Aucune ressource disponible.</li>

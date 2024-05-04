@@ -1,18 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}System Logs{% endblock %}
 
 {% block body %}
     <h1>System Logs</h1>
-    <a href="{{ path('system_log_new') }}" class="btn btn-success">Add New Log</a>
+    <a href="{{ path('system_log_new') }}" class="btn btn-success">Ajouter un nouveau Log</a>
     <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Message</th>
-                <th>Level</th>
-                <th>Created At</th>
-                <th>Actions</th>
+                <th>Niveau</th>
+                <th>Créé le </th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -23,14 +23,14 @@
                 <td>{{ log.level }}</td>
                 <td>{{ log.createdAt|date('Y-m-d H:i:s') }}</td>
                 <td>
-                    <a href="{{ path('system_log_show', {'id': log.id}) }}" class="btn btn-info">View</a>
-                    <a href="{{ path('system_log_edit', {'id': log.id}) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ path('system_log_show', {'id': log.id}) }}" class="btn btn-info">Voir</a>
+                    <a href="{{ path('system_log_edit', {'id': log.id}) }}" class="btn btn-primary">Editer</a>
                     {{ include('system_log/_delete_form.html.twig', {'log': log}) }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">No logs found</td>
+                <td colspan="5">Log non trouvé</td>
             </tr>
         {% endfor %}
         </tbody>

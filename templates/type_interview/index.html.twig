@@ -3,15 +3,15 @@
 {% block title %}TypeInterview index{% endblock %}
 
 {% block body %}
-    <h1>TypeInterview index</h1>
-    <a href="{{ path('app_type_interview_new') }}" class="btn btn-success">Create new TypeInterview</a>
+    <h1>Type d'entretien</h1>
+    <a href="{{ path('app_type_interview_new') }}" class="btn btn-success">Créer un nouvel entretien</a>
     <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Description</th>
-                <th>Actions</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -21,14 +21,15 @@
                 <td>{{ type_interview.name }}</td>
                 <td>{{ type_interview.description }}</td>
                 <td>
-                    <a href="{{ path('app_type_interview_show', {'id': type_interview.id}) }}" class="btn btn-info">Show</a>
-                    <a href="{{ path('app_type_interview_edit', {'id': type_interview.id}) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ path('app_type_interview_show', {'id': type_interview.id}) }}" class="btn btn-info">Voir</a>
+                    <a href="{{ path('app_type_interview_edit', {'id': type_interview.id}) }}" class="btn btn-primary">Editer</a>
+                    <a href="{{ path('app_type_interview_delete', {'id': type_interview.id}) }}" class="btn btn-primary">Supprimer</a>
                     {{ include('type_interview/_delete_form.html.twig', {'id': type_interview.id}) }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">No records found</td>
+                <td colspan="4">Aucun entretien trouvé</td>
             </tr>
         {% endfor %}
         </tbody>

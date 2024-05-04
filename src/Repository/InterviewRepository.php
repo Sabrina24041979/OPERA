@@ -32,4 +32,24 @@ class InterviewRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllByCollaborator(int $collaboratorId)
+    {
+        return $this->createQueryBuilder('i')
+            ->leftJoin('i.interviewee', 'collaborator')
+            // ->leftJoin('personal.manager', 'manager')
+            ->andWhere('collaborator.id = :collaboratorId')
+            ->setParameter('collaboratorId', $collaboratorId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllSortedByCollaborator()
+    {
+        return $this->createQueryBuilder('i')
+            ->leftJoin('i.interviewee', 'interviewee')
+            ->orderBy('interviewee.username', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

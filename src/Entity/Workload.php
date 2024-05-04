@@ -24,7 +24,7 @@ class Workload
     private ?string $comment = null;
 
     #[ORM\ManyToOne(targetEntity: Personal::class, inversedBy: 'workloads')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Personal $personal = null;
 
     #[ORM\Column(type: "string", length: 255, nullable: true)]

@@ -1,14 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Goal index{% endblock %}
 
 {% block body %}
-    <h1>Goal index</h1>
+    <h1>Liste des objectifs</h1>
+    <a href="{{ path('app_goal_new') }}" class="btn btn-success">Créer un nouvel objectif</a>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Collaborateur</th>
                 <th>Description</th>
                 <th>Deadline</th>
                 <th>Status</th>
@@ -21,7 +22,7 @@
         <tbody>
         {% for goal in goals %}
             <tr>
-                <td>{{ goal.id }}</td>
+                <td>{{ goal.personal.username }}</td>
                 <td>{{ goal.description }}</td>
                 <td>{{ goal.deadline ? goal.deadline|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ goal.status }}</td>
@@ -29,8 +30,8 @@
                 <td>{{ goal.createdAt ? goal.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ goal.updatedAt ? goal.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_goal_show', {'id': goal.id}) }}">show</a>
-                    <a href="{{ path('app_goal_edit', {'id': goal.id}) }}">edit</a>
+                    <a href="{{ path('app_goal_show', {'id': goal.id}) }}">Afficher</a>
+                    <a href="{{ path('app_goal_edit', {'id': goal.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -41,5 +42,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_goal_new') }}">Create new</a>
+    <a href="{{ path('app_goal_new') }}">Créer un nouvel objectif</a>
 {% endblock %}

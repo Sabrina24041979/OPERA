@@ -74,15 +74,15 @@
 							</a>
 						{% endif %}
 						 {% if 'ROLE_MANAGER' in app.user.roles %}
-						 	<a href="#" class="nav_link active">
+						 	<a href="{{ path('app_personal_index') }}" class="nav_link">
 								<i class='bx bx-user nav_icon'></i>
-								<span class="nav_name">Gestion des users</span>
+								<span class="nav_name">Gestion des utilisateurs</span>
 							</a>
-							<a href="#" class="nav_link">
+							<a href="{{ path('app_team_index') }}" class="nav_link">
 								<i class='bx bx-layer nav_icon'></i>
 								<span class="nav_name">Gestion des équipes</span>
 							</a>
-							<a href="#" class="nav_link">
+							<a href="{{ path('manager_planning') }}" class="nav_link">
 								<i class='bx bx-calendar nav_icon'></i>
 								<span class="nav_name">Mon planning</span>
 							</a>
@@ -90,23 +90,23 @@
 								<i class='bx bx-chat nav_icon'></i>
 								<span class="nav_name">Entretiens</span>
 							</a>
-							<a href="#" class="nav_link">
+							<a href="{{ path('app_goal_index', {'id': app.user.id }) }}" class="nav_link">
 								<i class='bx bx-bullseye nav_icon'></i>
 								<span class="nav_name">Objectifs</span>
 							</a>
-							<a href="#" class="nav_link">
+							<a href="{{ path('app_action_index', {'id': app.user.id }) }}" class="nav_link">
 								<i class='bx bx-task nav_icon'></i>
 								<span class="nav_name">Actions</span>
 							</a>
-							<a href="{{ path('app_employee_sentiments_index') }}" class="nav_link">
+							<a href="{{ path('app_employee_sentiments_index', {'id': app.user.id }) }}" class="nav_link">
 								<i class='bx bx-heart nav_icon'></i>
 								<span class="nav_name">Gestion des Sentiments</span>
 							</a>
-							<a href="#" class="nav_link">
+							<a href="{{ path('app_workload_index', {'id': app.user.id }) }}" class="nav_link">
 								<i class='bx bx-align-justify nav_icon'></i>
 								<span class="nav_name">Charge de travail</span>
 							</a>
-							<a href="#" class="nav_link">
+							<a href="{{ path('app_resource_index', {'id': app.user.id }) }}" class="nav_link">
 								<i class='bx bx-folder-open nav_icon'></i>
 								<span class="nav_name">Ressources</span>
 							</a>
@@ -116,15 +116,15 @@
 							</a>
 						{% endif %}
 						{% if 'ROLE_USER' in app.user.roles %}
-							<a href="#" class="nav_link active">
+							<a href="{{ path('app_interview_manager_index', {'id': app.user.id}) }}" class="nav_link active">
 								<i class='bx bx-chat nav_icon'></i>
 								<span class="nav_name">Mes entretiens</span>
 							</a>
-							<a href="#" class="nav_link">
-								<i class='bx bx-chat nav_icon'></i>
+							<a href="{{ path('app_goal_index', {'id': app.user.id }) }}" class="nav_link">
+								<i class='bx bx-bullseye nav_icon'></i>
 								<span class="nav_name">Mes objectifs</span>
 							</a>
-							<a href="#" class="nav_link">
+							<a href="{{ path('app_action_index', {'id': app.user.id }) }}" class="nav_link">
 								<i class='bx bx-task nav_icon'></i>
 								<span class="nav_name">Mes actions</span>
 							</a>
@@ -132,11 +132,11 @@
 								<i class='bx bx-layer nav_icon'></i>
 								<span class="nav_name">Mes feedback</span>
 							</a>
-							<a href="#" class="nav_link">
+							<a href="{{ path('app_employee_sentiments_index', {'id': app.user.id }) }}" class="nav_link">
 								<i class='bx bx-folder-open nav_icon'></i>
 								<span class="nav_name">Mes sentiments</span>
 							</a>
-							<a href="#" class="nav_link">
+							<a href="{{ path('app_workload_index', {'id': app.user.id }) }}" class="nav_link">
 								<i class='bx bx-align-justify nav_icon'></i>
 								<span class="nav_name">Ma charge de travail</span>
 							</a>

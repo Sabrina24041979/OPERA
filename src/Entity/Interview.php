@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InterviewRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -15,18 +17,18 @@ class Interview
     private ?int $id = null;
 
     #[ORM\Column(type: "datetime", nullable: true)]
-    #[Assert\DateTime]
+    // #[Assert\DateTime]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank]
+    // #[Assert\NotBlank]
     private ?string $status = null;
 
     #[ORM\OneToOne(mappedBy: 'interview', cascade: ['persist', 'remove'])]
     private ?Feedback $feedback = null;
 
     #[ORM\ManyToOne(targetEntity: Personal::class, inversedBy: "interviewsAsInterviewer")]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn()]
     private ?Personal $interviewer;
 
     #[ORM\ManyToOne(targetEntity: Personal::class, inversedBy: "interviewsAsInterviewee")]
@@ -40,8 +42,20 @@ class Interview
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
+
+    /**
+     * @var Collection<int, Goal>
+     */
+    #[ORM\OneToMany(targetEntity: Goal::class, mappedBy: 'interview')]
+    private Collection $goals;
+
+    public function __construct()
+    {
+        $this->goals = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -138,6 +152,48 @@ class Interview
     public function setDescription(string $description): self
     {
         $this->description = $description;
+        return $this;
+    }
+
+    // public function getGoal(): ?Collection
+    // {
+    //     return $this->goals;
+    // }
+
+    // public function setGoal(?string $goals): static
+    // {
+    //     $this->goals = $goals;
+
+    //     return $this;
+    // }
+
+    /**
+     * @return Collection<int, Goal>
+     */
+    public function getGoals(): Collection
+    {
+        return $this->goals;
+    }
+
+    public function addGoal(Goal $goal): static
+    {
+        if (!$this->goals->contains($goal)) {
+            $this->goals->add($goal);
+            $goal->setInterview($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGoal(Goal $goal): static
+    {
+        if ($this->goals->removeElement($goal)) {
+            // set the owning side to null (unless already changed)
+            if ($goal->getInterview() === $this) {
+                $goal->setInterview(null);
+            }
+        }
+
         return $this;
     }
 }

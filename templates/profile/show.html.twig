@@ -1,5 +1,5 @@
 {# J'étends le layout de base pour assurer une cohérence visuelle dans toute l'application. #}
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Détails du Profil{% endblock %}
 
@@ -42,7 +42,8 @@
     </table>
 
     {# J'offre des options pour revenir à la liste, éditer le profil ou le supprimer. #}
-    <a href="{{ path('app_profile_index') }}">Retour à la liste</a>
+    
     <a href="{{ path('app_profile_edit', {'id': profile.id}) }}">Éditer</a>
+    <a href="{{ path('app_profile_index') }}">Retour</a>
     {{ include('profile/_delete_form.html.twig') }}
 {% endblock %}

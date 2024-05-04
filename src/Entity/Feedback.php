@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\FeedbackRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: FeedbackRepository::class)]
 
@@ -27,6 +27,13 @@ class Feedback
 
     #[ORM\OneToOne(inversedBy: 'feedback', cascade: ['persist', 'remove'])]
     private ?Interview $interview = null;
+
+    #[ORM\ManyToOne(inversedBy: 'feedbacks')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Personal $personal = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $status = null;
 
     public function getId(): ?int
     {
@@ -77,6 +84,30 @@ class Feedback
     public function setInterview(?Interview $interview): static
     {
         $this->interview = $interview;
+
+        return $this;
+    }
+
+    public function getPersonal(): ?Personal
+    {
+        return $this->personal;
+    }
+
+    public function setPersonal(?Personal $personal): self
+    {
+        $this->personal = $personal;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

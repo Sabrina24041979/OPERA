@@ -20,6 +20,10 @@
         </tr>
     </tbody>
 </table>
-<a href="{{ path('user_index') }}" class="btn btn-primary">Retour à la liste</a>
+
+<a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-secondary">Voir</a>
 <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-secondary">Éditer</a>
+<a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-secondary">Supprimer</a>
+<a href="{{ path('user_index') }}" class="btn btn-primary">Retour</a>
 {% endblock %}
+

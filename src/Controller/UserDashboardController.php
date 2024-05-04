@@ -20,7 +20,7 @@ class UserDashboardController extends AbstractController
         $this->userRepository = $userRepository;
     }
 
-    #[Route("/dashboard/user", name: "dashboard_user")]
+    #[Route("/dashboard/user", name: "app_user_dashboard")]
     public function index(): Response {
         $user = $this->getUser(); // Utilisation de getUser() de AbstractController
         // $tasks = $this->userRepository->findBy(['user' => $user]);

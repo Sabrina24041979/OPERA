@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Index des charges de travail{% endblock %}
 
 {% block body %}
-    <h1>Index des charges de travail</h1>
+    <h1>Visualisation des charges de travail</h1>
     <a href="{{ path('app_workload_new') }}" class="btn btn-success">Créer une nouvelle charge de travail</a>
     <table class="table">
         <thead>
@@ -27,7 +27,7 @@
                 <td>{{ workload.description }}</td>
                 <td>{{ workload.hours }}</td>
                 <td>
-                    <a href="{{ path('app_workload_show', {'id': workload.id}) }}" class="btn btn-info">Voir</a>
+                    <a href="{{ path('app_workload_show', {'id': workload.id}) }}" class="btn btn-info">Affichier</a>
                     <a href="{{ path('app_workload_edit', {'id': workload.id}) }}" class="btn btn-primary">Éditer</a>
                     <form method="post" action="{{ path('app_workload_delete', {'id': workload.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');" style="display: inline-block;">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ workload.id) }}">

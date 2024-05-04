@@ -1,12 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% include 'components/resource_management_widget.twig' %}
-{% include 'components/nom_du_fichier.twig' %}
 
-{% block title %}Index des Ressources{% endblock %}
+
+{% block title %}Bibliothèque des Ressources{% endblock %}
 
 {% block body %}
-    <h1>Index des Ressources</h1>
+{% include 'components/resource_management_widget.twig' %}
+    <h1>Bibliothèque des Ressources</h1>
 
     <table class="table">
         <thead>
@@ -26,9 +26,9 @@
                 <td>{{ resource.id }}</td>
                 <td>{{ resource.title|e }}</td>
                 <td>{{ resource.description|e }}</td>
-                <td>{{ resource.file_path|e }}</td>
-                <td>{{ resource.created_at ? resource.created_at|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ resource.updated_at ? resource.updated_at|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ resource.filePath|e }}</td>
+                <td>{{ resource.createdAt ? resource.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ resource.updatedAt ? resource.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_resource_show', {'id': resource.id}) }}" class="btn btn-info">Afficher</a>
                     <a href="{{ path('app_resource_edit', {'id': resource.id}) }}" class="btn btn-primary">Éditer</a>
@@ -37,11 +37,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">Aucun enregistrement trouvé</td>
+                <td colspan="7">Aucune ressource trouvée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_resource_new') }}" class="btn btn-success">Créer une nouvelle ressource</a>
+    <a href="{{ path('app_resource_new') }}" class="btn btn-success">Ajouter une nouvelle ressource</a>
 {% endblock %}

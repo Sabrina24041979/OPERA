@@ -1,13 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}Edit Goal{% endblock %}
+{% block title %}Modifier un objectif{% endblock %}
 
 {% block body %}
-    <h1>Edit Goal</h1>
+    <h1>Modifier un objectif</h1>
 
-    {{ include('goal/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('goal/_form.html.twig') }}
 
-    <a href="{{ path('app_goal_index') }}">back to list</a>
+    <div class="d-flex justify-content-end">
+		 <a href="{{ path('app_interview_manager_index', {'id': app.user.id}) }}" class="btn btn-success">Retour</a>
+	</div>
 
     {{ include('goal/_delete_form.html.twig') }}
 {% endblock %}

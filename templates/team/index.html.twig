@@ -1,17 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Team Overview{% endblock %}
 
 {% block body %}
-<h1>Team Overview</h1>
-<a href="{{ path('team_new') }}" class="btn btn-success">Create New Team</a>
+<h1>Liste des équipes</h1>
+<a href="{{ path('team_new') }}" class="btn btn-success">Créer une nouvelle équipe</a>
 <table class="table">
     <thead>
         <tr>
             <th>ID</th>
-            <th>Team Name</th>
+            <th>Nom de l'équipe</th>
             <th>Description</th>
-            <th>Date Created</th>
+            <th>Date de création</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -23,17 +23,17 @@
             <td>{{ team.description }}</td>
             <td>{{ team.createdAt|date('Y-m-d') }}</td>
             <td>
-                <a href="{{ path('team_show', {'id': team.id}) }}" class="btn btn-info">View</a>
-                <a href="{{ path('team_edit', {'id': team.id}) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ path('team_show', {'id': team.id}) }}" class="btn btn-info">Voir</a>
+                <a href="{{ path('team_edit', {'id': team.id}) }}" class="btn btn-primary">Editer</a>
                 <form action="{{ path('team_delete', {'id': team.id}) }}" method="post" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this team?');">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ team.id) }}">
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
                 </form>
             </td>
         </tr>
     {% else %}
         <tr>
-            <td colspan="5">No teams found</td>
+            <td colspan="5">NAucune équipe n'a été trouvé</td>
         </tr>
     {% endfor %}
     </tbody>

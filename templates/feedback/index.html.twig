@@ -1,31 +1,35 @@
 {# J'étends le layout de base pour conserver la structure globale de l'application. Je liste tous les feedbacks disponibles avec leurs informations pertinentes et je fournis des liens pour visualiser, modifier ou supprimer chaque feedback. #}
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Index des Feedbacks{% endblock %}
 
 {% block body %}
     <h1>Liste des Feedbacks</h1>
 
+    <a href="{{ path('app_feedback_new') }}" class="btn btn-success">Créer un nouveau feedback</a>
+
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Texte du Feedback</th>
+                
+                <th>Compte-rendu du Feedback</th>
                 <th>Date</th>
                 <th>Type</th>
+                {# <th>Collaborateur</th> #}
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for feedback in feedback %}
             <tr>
-                <td>{{ feedback.id }}</td>
+                
                 <td>{{ feedback.feedbackText }}</td>
                 <td>{{ feedback.date ? feedback.date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ feedback.type }}</td>
+                {# <td>{{ feedback.personal.username }}</td> #}
                 <td>
-                    <a href="{{ path('app_feedback_show', {'id': feedback.id}) }}" class="btn btn-info">Voir</a>
-                    <a href="{{ path('app_feedback_edit', {'id': feedback.id}) }}" class="btn btn-primary">Éditer</a>
+                    <a href="{{ path('app_feedback_show', {'id': feedback.id}) }}" class="btn btn-info">Afficher</a>
+                    <a href="{{ path('app_feedback_edit', {'id': feedback.id}) }}" class="btn btn-primary">Modifier</a>
                     {{ include('feedback/_delete_form.html.twig') }}
                 </td>
             </tr>
@@ -37,5 +41,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_feedback_new') }}" class="btn btn-success">Créer un nouveau feedback</a>
+    
 {% endblock %}

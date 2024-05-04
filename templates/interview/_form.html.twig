@@ -1,4 +1,55 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{# {{ form_start(form) }}
+    {{ form_row (form.date) }}
+    <br>
+    {{ form_row(form.typeInterview) }}
+    <br>
+    {{ form_row(form.interviewee) }}
+    <br>
+    {{ form_row(form._token) }}
+    <br>
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    <br>  
 {{ form_end(form) }}
+
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }} #}
+
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.date, {
+                'label': 'Date de l\'entretien',
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.typeInterview, {
+                'label': 'Type d\'entretien',
+                'attr': {'class': 'form-select'}
+            }) }}
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            {{ form_row(form.interviewee, {
+                'label': 'Interviewé',
+                'attr': {'class': 'form-select'}
+            }) }}
+        </div>
+    </div>
+
+    {{ form_row(form._token) }}
+
+    <div class="row mt-4">
+        <div class="col-md-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> {{ button_label|default('Enregistrer') }}
+            </button>
+        </div>
+    </div>
+</div>
+
+{{ form_end(form) }}
+

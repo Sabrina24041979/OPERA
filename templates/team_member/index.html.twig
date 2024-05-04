@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Team Members{% endblock %}
 
 {% block body %}
-<h1>Team Members</h1>
-<a href="{{ path('team_member_new') }}" class="btn btn-primary">Add New Team Member</a>
+<h1>Liste des membres par équipe</h1>
+<a href="{{ path('team_member_new') }}" class="btn btn-primary">ajouter un membre</a>
 <table class="table">
     <thead>
         <tr>
@@ -23,17 +23,17 @@
             <td>{{ member.roleInTeam }}</td>
             <td>{{ member.status }}</td>
             <td>
-                <a href="{{ path('team_member_show', {'id': member.id}) }}" class="btn btn-info">View</a>
-                <a href="{{ path('team_member_edit', {'id': member.id}) }}" class="btn btn-success">Edit</a>
+                <a href="{{ path('team_member_show', {'id': member.id}) }}" class="btn btn-info">Voir</a>
+                <a href="{{ path('team_member_edit', {'id': member.id}) }}" class="btn btn-success">Editer</a>
                 <form action="{{ path('team_member_delete', {'id': member.id}) }}" method="post" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ member.id) }}">
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
                 </form>
             </td>
         </tr>
     {% else %}
         <tr>
-            <td colspan="5">No team members found.</td>
+            <td colspan="5">Aucun membre trouvé</td>
         </tr>
     {% endfor %}
     </tbody>

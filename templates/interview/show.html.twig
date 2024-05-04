@@ -1,38 +1,87 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}Interview{% endblock %}
+{% block title %}Modification d'Entretien
+{% endblock %}
 
 {% block body %}
-    <h1>Interview</h1>
+	<h1>Visualisation des Entretiens</h1>
+	{# <div>
+			        <a href="{{ path('app_interview_index', {'sort': 'collaborateur'}) }}" class="btn btn-link">Trier par Collaborateur</a>
+			    </div> #}
+	<div class="d-flex justify-content-end">
+		<a href="{{ path('app_interview_manager_index', {'id': app.user.id}) }}" class="btn btn-success">Retour</a>
+	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Date</th>
+				{# <th><a href="{{ path('app_interview_show', {'sort': 'collaborateur'}) }}">Collaborateur</a></th> #}
+				<th>Collaborateur</th>
+				<th>Statut</th>
+				<th>Type</th>
+				{# <th>Actions</th> #}
+			</tr>
+		</thead>
+		<tbody>
+			{# {% if interviews|length > 0 %}#}
+			{# {% for interview in interviews %} #}
+				<tr>
+					<td>
+				{{ interview.date ? interview.date|date('Y-m-d H:i:s') : '' }}
+				</td>
+					<td>
+				{{ interview.interviewee.username}}
+				</td>
+					<td>
+				{{ interview.status }}
+				</td>
+					<td>
+				{{ interview.typeInterview.name }}
+			</td>
+		</tr>
+			{# {% else %}
+									                <tr>
+									                    <td colspan="4">Aucun entretien trouvé.</td>
+									                </tr>
+									            {% endfor %} #}
+		</tbody>
+	</table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Objectifs</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<!-- Bouton pour créer un objectif -->
+					<a href="{{ path('app_goal_new', {'interviewId': interview.id}) }}" class="btn btn-primary">Créer un objectif</a>
+				</td>
+				<td>
+					<!-- Bouton pour ajouter une action -->
+					<a href="{{ path('app_action_new', {'interviewId': interview.id}) }}" class="btn btn-primary">Ajouter une action</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ interview.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ interview.date ? interview.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ interview.status }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ interview.Title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ interview.description }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<div>
 
-    <a href="{{ path('app_interview_index') }}">back to list</a>
+		<p>Feedback</p>
 
-    <a href="{{ path('app_interview_edit', {'id': interview.id}) }}">edit</a>
-
-    {{ include('interview/_delete_form.html.twig') }}
+		{% if interview.feedback %}
+			<div>
+				<p>{{ interview.feedback.getFeedbackText() }}</p>
+			</div>
+			<div>
+				<a href="{{ path ('app_feedback_edit')}}" class="btn btn-primary">Modifier</a>
+			</div>
+		{% else %}
+			<div>
+				<a href="{{ path('app_feedback_new', {'interviewId': interview.id}) }}" class="btn btn-primary">Ajouter un compte-rendu</a>
+			</div>
+		{% endif %}
+	</div>
 {% endblock %}

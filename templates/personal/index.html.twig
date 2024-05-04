@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Personal index{% endblock %}
 
 {% block body %}
-    <h1>Personal index</h1>
+    <h1>Liste des salariés</h1>
 
     <table class="table">
         <thead>
@@ -11,7 +11,6 @@
                 <th>Id</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Password</th>
                 <th>Created_at</th>
                 <th>Updated_at</th>
                 <th>Entry_date</th>
@@ -28,28 +27,28 @@
             <tr>
                 <td>{{ personal.id }}</td>
                 <td>{{ personal.username|e }}</td>
-                <td>{{ personal.email|e('email') }}</td>
-                <td>{{ personal.password }}</td>
+                <td>{{ personal.email|e }}</td>
                 <td>{{ personal.createdAt ? personal.createdAt|date('Y-m-d H:i:s')|e : '' }}</td>
                 <td>{{ personal.updatedAt ? personal.updatedAt|date('Y-m-d H:i:s')|e : '' }}</td>
                 <td>{{ personal.entryDate ? personal.entryDate|date('Y-m-d H:i:s')|e : '' }}</td>
                 <td>{{ personal.exitDate ? personal.exitDate|date('Y-m-d H:i:s')|e : '' }}</td>
                 <td>{{ personal.matricule|e }}</td>
-                <td>{{ personal.role|join(', ')|e }}</td>
-                <td>{{ personal.managerId }}</td>
+                <td>{{ personal.roles|join(', ')|e }}</td>
+                <td>{{ personal.manager.id}}</td>
                 <td>{{ personal.department|e }}</td>
                 <td>
-                    <a href="{{ path('app_personal_show', {'id': personal.id}) }}">show</a>
-                    <a href="{{ path('app_personal_edit', {'id': personal.id}) }}">edit</a>
+                    <a href="{{ path('app_personal_show', {'id': personal.id}) }}">Voir</a>
+                    <a href="{{ path('app_personal_edit', {'id': personal.id}) }}">Editer</a>
+                    <a href="{{ path('app_personal_delete', {'id': personal.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="13">no records found</td>
+                <td colspan="13">Aucun utilisateur trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_personal_new') }}">Create new</a>
+    <a href="{{ path('app_personal_new') }}">Ajouter un utilisateur</a>
 {% endblock %}

@@ -1,4 +1,12 @@
 {{ form_start(form) }}
+    {{ form_row(form.date) }}
+    {{ form_row(form.Sentiment) }}
+    {{ form_row(form.Commentaoreinterviewee) }}
+     <button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form, {render_rest: false}) }}
+
+
+{# {{ form_start(form, {'action': path('app_employee_sentiments_new'), 'method': 'POST'}) }}
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{{ form_end(form) }} #}

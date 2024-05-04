@@ -1,0 +1,31 @@
+{% extends 'base_bo.html.twig' %}
+
+{% block title %}Objectifs du Manager{% endblock %}
+
+{% block body %}
+    <h1>Objectifs du Manager</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Objectif</th>
+                <th>Description</th>
+                <!-- autres colonnes si nécessaire -->
+            </tr>
+        </thead>
+        <tbody>
+        {% for goal in goals %}
+            <tr>
+                <td>{{ goal.id }}</td>
+                <td>{{ goal.name }}</td>
+                <td>{{ goal.description }}</td>
+                <!-- autres détails si nécessaire -->
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun objectif trouvé.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

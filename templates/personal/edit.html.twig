@@ -1,13 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Edit Personal{% endblock %}
 
 {% block body %}
-    <h1>Edit Personal</h1>
+    <h1>Modifier un salarié/h1>
 
     {{ include('personal/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_personal_index') }}">back to list</a>
+    <a href="{{ path('app_personal_index') }}">Retour</a>
 
     {{ include('personal/_delete_form.html.twig') }}
 {% endblock %}

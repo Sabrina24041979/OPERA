@@ -1,6 +1,6 @@
 <form method="post" action="{{ path('app_personal_delete', {'id': personal.id}) }}" onsubmit="return confirmDeletion();">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ personal.id) }}">
-    <button class="btn btn-danger" type="submit">Delete</button>
+    <button class="btn btn-danger" type="submit">Supprimer</button>
 </form>
 
 <script>

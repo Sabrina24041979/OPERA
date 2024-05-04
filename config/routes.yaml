@@ -81,8 +81,6 @@ app_contact:
     path: /contact
     controller: App\Controller\ContactController::contactPage
 
-# config/routes.yaml
-
 manager_level1_dashboard:
     path: /manager/level1/dashboard
     controller: App\Controller\ManagerLevel1Controller::dashboard
@@ -147,3 +145,78 @@ manager_level1_edit_workload:
     path: /manager/level1/workload/edit/{id}
     controller: App\Controller\ManagerLevel1Controller::editWorkload
     methods: [GET, POST]
+
+app_interview_index:
+    path: /interview
+    controller: App\Controller\InterviewController::index
+
+app_personal_index:
+    path: /personal
+    controller: App\Controller\PersonalController::index
+
+app_team_index:
+    path: /teams
+    controller: App\Controller\TeamController::index
+    methods: [GET]
+
+app_goal_index:
+    path: /goal
+    controller: App\Controller\GoalController::index
+    methods: [GET]
+
+app_action_index:
+    path: /action
+    controller: App\Controller\ActionController::index
+    methods: [GET]
+
+app_workload_index:
+    path: /workload
+    controller: App\Controller\WorkloadController::index
+    methods: [GET]
+
+app_resource_index:
+    path: /resource
+    controller: App\Controller\ResourceController::index
+    methods: [GET]
+
+app_resource_edit:
+    path: /resource
+    controller: App\Controller\ResourceController::edit
+    methods: [GET]
+
+manager_goals:
+    path: /manager/goals
+    controller: App\Controller\GoalController::listForManager
+    methods: [GET]
+
+manager_users:
+    path: /manager/users
+    controller: App\Controller\UserManagementController::index
+    methods: [GET]
+
+manager_teams:
+    path: /manager/teams
+    controller: App\Controller\TeamManagementController::index
+    methods: [GET]
+
+manager_personals:
+    path: /manager/personals
+    controller: App\Controller\PersonalManagementController::index
+    methods: [GET]
+
+manager_planning:
+    path: /manager/planning
+    controller: App\Controller\InterviewController::planning
+    methods: [GET]
+
+app_interview_listAll:
+    path: /interview
+    controller: App\Controller\InterviewController::listAll
+
+# app_feedback_new:
+#     path: /feedback
+#     controller: App\Controller\FeedbackController::new
+
+app_feedback_edit:
+    path: /feedback
+    controller: App\Controller\FeedbackController::edit

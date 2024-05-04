@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Liste des Sentiments{% endblock %}
 
@@ -31,4 +31,5 @@
         {% endfor %}
     </tbody>
 </table>
+<a href="{{ path('app_employee_sentiments_new') }}" class="btn btn-success">Déclarer un sentiment</a>
 {% endblock %}

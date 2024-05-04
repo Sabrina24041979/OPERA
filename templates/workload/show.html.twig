@@ -32,6 +32,7 @@
             </tr>
         </tbody>
     </table>
-    <a href="{{ path('app_workload_index') }}" class="btn btn-primary">Retour à la liste</a>
+   
     <a href="{{ path('app_workload_edit', {'id': workload.id}) }}" class="btn btn-secondary">Éditer</a>
+    <a href="{{ path('app_workload_index') }}" class="btn btn-primary">Retour</a>
 {% endblock %}

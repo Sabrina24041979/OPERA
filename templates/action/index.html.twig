@@ -1,47 +1,52 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Action index{% endblock %}
 
 {% block body %}
-    <h1>Action index</h1>
+    <h1>Liste des actions</h1>
+
+    <div class="d-flex justify-content-end">
+		<a href="{{ path('app_action_new') }}" class="btn btn-success">Créer une nouvelle action</a>
+	</div>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Description</th>
-                <th>Priority</th>
-                <th>Status</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
-                <th>Due_date</th>
-                <th>Name</th>
+                <th>Collaborateur</th>
+                <th>Action</th>
+                <th>Priorité</th>
+                <th>Statut</th>
+                <th>Créée le </th>
+                <th>Mise à jour le </th>
+                <th>Dead-Line</th>                
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
+        {% if actions|length > 0 %}
         {% for action in actions %}
             <tr>
-                <td>{{ action.id }}</td>
+                <td>{{ action.goal.personal.username }}</td>
                 <td>{{ action.description }}</td>
                 <td>{{ action.priority }}</td>
                 <td>{{ action.status }}</td>
-                <td>{{ action.createdAt ? action.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ action.updatedAt ? action.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ action.dueDate ? action.dueDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ action.name }}</td>
+                <td>{{ action.createdAt ? action.createdAt|date('Y-m-d ') : '' }}</td>
+                <td>{{ action.updatedAt ? action.updatedAt|date('Y-m-d ') : '' }}</td>
+                <td>{{ action.dueDate ? action.dueDate|date('Y-m-d ') : '' }}</td>
+                
                 <td>
-                    <a href="{{ path('app_action_show', {'id': action.id}) }}">show</a>
-                    <a href="{{ path('app_action_edit', {'id': action.id}) }}">edit</a>
+                    <a href="{{ path('app_action_show', {'id': action.id}) }}" class="btn btn-info">Afficher</a>
+                    <a href="{{ path('app_action_edit', {'id': action.id}) }}" class="btn btn-primary">Modifier</a>
+                    {{ include ('action/_delete_form.html.twig')}}
                 </td>
             </tr>
+            {% endfor %}
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">Aucun élément trouvé</td>
             </tr>
-        {% endfor %}
+        {% endif %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_action_new') }}">Create new</a>
+   
 {% endblock %}

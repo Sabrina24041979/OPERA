@@ -40,6 +40,7 @@ security:
         - { path: ^/manager, roles: ROLE_MANAGER }
         - { path: ^/director, roles: ROLE_DIRECTOR }
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/manager/goals, roles: ROLE_MANAGER }
 # Configuration spécifique pour l'environnement de test
 when@test:
     security:

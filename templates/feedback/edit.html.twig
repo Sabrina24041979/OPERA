@@ -1,17 +1,17 @@
 {# J'étends le layout de base pour maintenir la cohérence et l'uniformité de l'interface utilisateur dans toute l'application. #}
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {# Je définis le titre de la page pour refléter l'action d'édition d'un feedback spécifique. #}
 {% block title %}Éditer Feedback{% endblock %}
 
 {% block body %}
-    <h1>Éditer Feedback</h1>
+    <h1>Modifier un Feedback</h1>
 
     {# J'inclus le formulaire de feedback, en passant le label du bouton comme 'Mettre à jour' pour indiquer clairement l'action. #}
     {{ include('feedback/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
     {# Je fournis un lien pour revenir à l'index des feedbacks, offrant à l'utilisateur un moyen facile de naviguer. #}
-    <a href="{{ path('app_feedback_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    <a href="{{ path('app_feedback_index') }}" class="btn btn-secondary">Retour</a>
 
     {# J'inclus le formulaire de suppression pour permettre à l'utilisateur de supprimer le feedback s'il le souhaite, tout en demandant une confirmation pour éviter les suppressions accidentelles. #}
     {{ include('feedback/_delete_form.html.twig') }}

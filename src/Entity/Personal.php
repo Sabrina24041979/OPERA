@@ -78,6 +78,9 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
     #[ORM\ManyToOne(inversedBy: 'personals')]
     private ?Manager $manager = null;
 
+    // #[ORM\Column(type:"string", length:255, nullable:true)]
+    // private $position;
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
@@ -97,7 +100,7 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
     // Méthodes requises par l'interface UserInterface
     public function getUsername(): ?string {
         // Je choisis d'utiliser l'email comme "username" pour l'authentification
-        return $this->email;
+        return $this->username;
     }
 
     public function setUsername(?string $username): static
@@ -106,6 +109,20 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
 
         return $this;
     }
+    // private $name;
+
+    // // Assurez-vous que le getter existe
+    // public function getName(): ?string
+    // {
+    //     return $this->name;
+    // }
+
+    // // Setter optionnel si vous avez besoin de modifier cette propriété
+    // public function setName(string $name): self
+    // {
+    //     $this->name = $name;
+    //     return $this;
+    // }
 
     public function getEmail(): ?string
     {
@@ -118,6 +135,17 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
 
         return $this;
     }
+
+    // public function getPosition(): ?string
+    // {
+    //     return $this->position;
+    // }
+
+    // public function setPosition(?string $position): self
+    // {
+    //     $this->position = $position;
+    //     return $this;
+    // }
 
     public function getPassword(): ?string {
         // Je retourne simplement le mot de passe hashé

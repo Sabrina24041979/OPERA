@@ -21,8 +21,8 @@ class Manager
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $position = null;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $position = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $matricule = null;
@@ -77,17 +77,17 @@ class Manager
         return $this;
     }
 
-    public function getPosition(): ?string
-    {
-        return $this->position;
-    }
+    // public function getPosition(): ?string
+    // {
+    //     return $this->position;
+    // }
 
-    public function setPosition(string $position): static
-    {
-        $this->position = $position;
+    // public function setPosition(string $position): static
+    // {
+    //     $this->position = $position;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getMatricule(): ?string
     {

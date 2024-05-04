@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Personal{% endblock %}
 
@@ -20,23 +20,23 @@
                 <td>{{ personal.email }}</td>
             </tr>
             <tr>
-                <th>Password</th>
+                <th>Mot de passe</th>
                 <td>{{ personal.password }}</td>
             </tr>
             <tr>
-                <th>Created_at</th>
+                <th>Date de création</th>
                 <td>{{ personal.createdAt ? personal.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Updated_at</th>
+                <th>Date de modification</th>
                 <td>{{ personal.updatedAt ? personal.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Entry_date</th>
+                <th>Date d'entrée</th>
                 <td>{{ personal.entryDate ? personal.entryDate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Exit_date</th>
+                <th>Date de sortie</th>
                 <td>{{ personal.exitDate ? personal.exitDate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
@@ -48,19 +48,21 @@
                 <td>{{ personal.role }}</td>
             </tr>
             <tr>
-                <th>Manager_id</th>
+                <th>Manager</th>
                 <td>{{ personal.managerId }}</td>
             </tr>
             <tr>
-                <th>Department</th>
+                <th>Service</th>
                 <td>{{ personal.department }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_personal_index') }}">back to list</a>
-
-    <a href="{{ path('app_personal_edit', {'id': personal.id}) }}">edit</a>
+    
+    <a href="{{ path('app_personal_show', {'id': personal.id}) }}">Voir</a>
+    <a href="{{ path('app_personal_edit', {'id': personal.id}) }}">Éditer</a>
+    <a href="{{ path('app_personal_delete', {'id': personal.id}) }}">Supprimer</a>
+    <a href="{{ path('app_personal_index') }}">Retour</a>
 
     {{ include('personal/_delete_form.html.twig') }}
 {% endblock %}

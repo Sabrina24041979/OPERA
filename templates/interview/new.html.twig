@@ -1,11 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}New Interview{% endblock %}
+{% block title %}Nouvel Entretien{% endblock %}
 
 {% block body %}
-    <h1>Create new Interview</h1>
+    <h1>Planifier un nouvel entretien</h1>
 
+    {# Inclusion du formulaire #}
     {{ include('interview/_form.html.twig') }}
 
-    <a href="{{ path('app_interview_index') }}">back to list</a>
+    {# Lien pour retourner à la liste des entretiens #}
+     <div class="d-flex justify-content-end">
+		 <a href="{{ path('app_interview_manager_index', {'id': app.user.id}) }}" class="btn btn-success">Retour</a>
+	</div>
 {% endblock %}
