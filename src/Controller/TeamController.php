@@ -6,10 +6,11 @@ use App\Entity\Team;
 use App\Form\TeamType;
 use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/team')]
 class TeamController extends AbstractController
@@ -32,11 +33,12 @@ class TeamController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($team);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Équipe créée avec succès!');
             return $this->redirectToRoute('app_team_index');
         }
 
-        return $this->render('app_team/new.html.twig', [
-            'team' => $team,
+        return $this->render('team/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -57,7 +59,8 @@ class TeamController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            return $this->redirectToRoute('app_team_index');
+
+            return $this->redirectToRoute('app_team_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('team/edit.html.twig', [
@@ -67,13 +70,16 @@ class TeamController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_team_delete', methods: ['POST'])]
-    public function delete(Request $request, Team $team, EntityManagerInterface $entityManager): Response
+    public function delete(Security $security,Request $request, Team $team, EntityManagerInterface $entityManager): Response
     {
+        $user=$security->getUser();
+        $idManager=$user->getId();
         if ($this->isCsrfTokenValid('delete'.$team->getId(), $request->request->get('_token'))) {
             $entityManager->remove($team);
             $entityManager->flush();
+            $this->addFlash('error', 'Équipe supprimée.');
         }
 
-        return $this->redirectToRoute('app_team_index');
+        return $this->redirectToRoute('app_team_index',['id' => $idManager]);
     }
 }

@@ -10,6 +10,7 @@ use App\Entity\Personal;
 use App\Form\PersonalType;
 use App\Service\ConfigService;
 use App\Repository\TeamRepository;
+use App\Repository\UserRepository;
 use App\Repository\ConfigRepository;
 use App\Form\PersonalPermissionsType;
 use App\Repository\PersonalRepository;
@@ -20,7 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\MakerBundle\Tests\tmp\current_project_xml\src\Repository\UserRepository;
 
 #[Route('/admin')]
 class AdminController extends AbstractController

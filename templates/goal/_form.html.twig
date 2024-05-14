@@ -1,27 +1,3 @@
-{# {{ form_start(form) }}
-    {{ form_row(form.description, {
-        label: 'Objectif',
-            }) }}
-    {{ form_row(form.deadline, {
-        label: 'Dead-Line',
-    }) }}
-    {{ form_row(form.status, {
-        label: 'Statut',
-    }) }}
-    {{ form_row(form.priority, {
-        label: 'Priorité',
-    }) }}
-    {{ form_row(form.personal, {
-        label: 'Collaborateur',
-    }) }}
-    {{ form_row(form.category, {
-        label: 'Catégories',
-    }) }}
-     {{ form_row(form._token) }}
-    <button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
-    
-{{ form_end(form) }} #}
-
 {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
 
 <div class="container mt-4">

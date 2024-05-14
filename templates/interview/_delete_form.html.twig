@@ -1,4 +1,6 @@
-<form method="post" action="{{ path('app_interview_delete', {'id': interview.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet entretien ?');">
+<form method="post" action="{{ path('app_interview_delete', {'id': interview.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet entretien ?');" class="d-inline">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ interview.id) }}">
-    <button class="btn btn-danger">Supprimer</button>
+    <button type="submit" class="btn btn-danger btn-sm" title="Entretien supprimé">
+        <i class="fas fa-trash-alt"></i>
+    </button>
 </form>

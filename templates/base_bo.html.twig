@@ -98,6 +98,10 @@
 								<i class='bx bx-task nav_icon'></i>
 								<span class="nav_name">Actions</span>
 							</a>
+							<a href="{{ path('app_feedback_index', {'id': app.user.id }) }}" class="nav_link">
+								<i class='bx bx-pen nav_icon'></i>
+								<span class="nav_name">Feedbacks</span>
+							</a>
 							<a href="{{ path('app_employee_sentiments_index', {'id': app.user.id }) }}" class="nav_link">
 								<i class='bx bx-heart nav_icon'></i>
 								<span class="nav_name">Gestion des Sentiments</span>
@@ -128,8 +132,8 @@
 								<i class='bx bx-task nav_icon'></i>
 								<span class="nav_name">Mes actions</span>
 							</a>
-							<a href="#" class="nav_link">
-								<i class='bx bx-layer nav_icon'></i>
+							<a href="{{ path('app_feedback_index', {'id': app.user.id }) }}" class="nav_link">
+								<i class='bx bx-pen nav_icon'></i>
 								<span class="nav_name">Mes feedback</span>
 							</a>
 							<a href="{{ path('app_employee_sentiments_index', {'id': app.user.id }) }}" class="nav_link">
@@ -145,7 +149,7 @@
 								<span class="nav_name">Mes statistiques</span>
 							</a>
 						{% endif %}
-											</div>
+				</div>
 				</div>
 				<a href="{{ path('app_logout') }}" class="nav_link">
 					<i class='bx bx-log-out nav_icon'></i>

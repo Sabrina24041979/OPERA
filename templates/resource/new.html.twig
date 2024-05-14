@@ -1,11 +1,13 @@
 {% extends 'base_bo.html.twig' %}
 
-{% block title %}New Resource{% endblock %}
+{% block title %}Nouvelle Ressource{% endblock %}
 
 {% block body %}
-    <h1>Create new Resource</h1>
+    <h1>Créer une nouvelle ressource</h1>
 
     {{ include('resource/_form.html.twig') }}
 
-    <a href="{{ path('app_resource_index') }}">back to list</a>
+    <div class="d-flex justify-content-end">
+    <a href="{{ path('app_resource_index') }}, {'id': app.user.id}) }}" class="btn btn-success">Retour</a>
+    </div>
 {% endblock %}

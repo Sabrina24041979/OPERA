@@ -3,20 +3,24 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\PasswordResetRequestFormType;
+use App\Entity\Personal;
+use App\Form\EmailCheckType;
 use App\Form\PasswordResetType;
+use App\Form\ChangePasswordType;
+use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\PasswordResetRequestFormType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
@@ -31,9 +35,82 @@ class SecurityController extends AbstractController
             'error' => $error,
         ]);
     }
+    //
+    #[Route('/email-check', name: 'check_email_submit', methods: ['GET', 'POST'])]
+    public function checkEmail(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, MailerInterface $mailer): Response
+    {
+        $form = $this->createForm(EmailCheckType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $email = $form->get('email')->getData();
+            $user = $userRepository->findOneByEmail($email);
+
+            if ($user) {
+                $resetToken = uniqid('rst_', true); // Générer un token sécurisé
+                $user->setResetToken($resetToken);
+                $entityManager->flush();
+
+                $resetUrl = $this->generateUrl('app_password_reset', ['token' => $resetToken], UrlGeneratorInterface::ABSOLUTE_URL);
+                $email = (new Email())
+                    ->from('noreply@example.com')
+                    ->to($user->getEmail())
+                    ->subject('Réinitialisation de votre mot de passe')
+                    ->html("Pour réinitialiser votre mot de passe, veuillez cliquer sur ce lien: <a href='$resetUrl'>$resetUrl</a>");
+
+                $mailer->send($email);
+
+                $this->addFlash('success', 'Un email de réinitialisation a été envoyé à votre adresse.');
+                return $this->redirectToRoute('app_login');
+            } else {
+                $this->addFlash('error', 'Aucun compte trouvé avec cet e-mail.');
+            }
+        }
+
+        return $this->render('security/check_email.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/change-password', name: 'change_password_submit', methods: ['POST'])]
+    public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
+    {
+        // Réception du token de réinitialisation et du nouveau mot de passe via POST        
+        $resetToken = $request->query->get('token');
+        // Recherche de l'utilisateur par le token de réinitialisation
+        $user = $userRepository->findOneBy(['resetToken' => $resetToken]);
+
+        
+        
+
+        if (!$user) {
+            // Gestion d'erreur si le token n'est pas valide
+            throw new AccessDeniedException('Ce lien de réinitialisation de mot de passe n\’est plus valide ou a expiré..');
+        }
+
+        $form = $this->createForm(ChangePasswordType::class);
+        $form->handleRequest($request);  
+        // Vérification que le token correspond à celui de l'utilisateur et hashage du nouveau mot de passe
+         if ($form->isSubmitted() && $form->isValid()) {
+            $newPassword = $form->get('newPassword')->getData();
+            $user->setPassword($passwordHasher->hashPassword($user, $newPassword));
+            $user->setResetToken(null);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre mot de passe a été mis à jour.');
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('security/change_password.html.twig', [
+            'resetToken' => $resetToken,
+            'form' => $form->createView(),
+        ]);
+    }
+  
+    //
 
     #[Route("/logout", name: "app_logout", methods: ["GET"])]
-    public function logout()
+    public function logout():void
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }

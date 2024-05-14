@@ -5,6 +5,10 @@
 
 {% block body %}
     <h1>Détail de l'Équipe</h1>
+    <div class="d-flex justify-content-end">
+        <a href="{{ path('app_team_index', {'id': app.user.id}) }}" class="btn btn-success" title="Retour à la liste">
+            <i class="fas fa-arrow-left"></i> Retour</a>
+    </div>
 
     <table class="table">
         <tbody>
@@ -38,7 +42,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_team_index') }}" class="btn btn-primary">Retour à la liste</a>
     <a href="{{ path('app_team_edit', {'id': team.id}) }}" class="btn btn-secondary">Modifier</a>
 
     {# J'inclus le formulaire de suppression pour permettre la suppression de l'équipe. #}

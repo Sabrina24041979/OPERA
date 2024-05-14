@@ -2,57 +2,64 @@
 
 {% block title %}Liste des Entretiens{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock %}
+
 {% block body %}
-	<h1>Liste des Entretiens</h1>
+    <div class="container mt-4">
+        <h1 class="mb-4">Liste des Entretiens</h1>
 
-	{# Affichage des messages flash #}
-	{% for flash_message in app.flashes('success') %}
-		<div class="alert alert-success">{{ flash_message }}</div>
-	{% endfor %}
-	{% for flash_message in app.flashes('error') %}
-		<div class="alert alert-danger">{{ flash_message }}</div>
-	{% endfor %}
+        {# Affichage des messages flash #}
+        <div class="flash-messages">
+            {% for flash_message in app.flashes('success') %}
+                <div class="alert alert-success">{{ flash_message }}</div>
+            {% endfor %}
+            {% for flash_message in app.flashes('error') %}
+                <div class="alert alert-danger">{{ flash_message }}</div>
+            {% endfor %}
+        </div>
 
-	{# Tableau listant les entretiens #}
-	<div class="d-flex justify-content-end">
-		<a href="{{ path('app_interview_new') }}" class="btn btn-success">Créer un nouvel entretien</a>
-	</div>
+        {# Bouton pour créer un nouvel entretien #}
+        <div class="text-end mb-3">
+            <a href="{{ path('app_interview_new') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Créer un nouvel entretien</a>
+        </div>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Date</th>
-				<th>Collaborateur</th>
-				<th>Type</th>
-				<th>Statut</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% if interviews|length > 0 %}
-				{% for interview in interviews %}
-					<tr>
-						<td>{{ interview.date ? interview.date|date('Y-m-d H:i:s') : 'Non définie' }}</td>
-						<td>{{ interview.interviewee.username }}</td>
-						<td>{{ interview.typeInterview.name }}</td>
-						<td>{{ interview.status }}</td>
-						<td>
-							<a href="{{ path('app_interview_show', {'id': interview.id}) }}" class="btn btn-info">Afficher</a>
-							<a href="{{ path('app_interview_edit', {'id': interview.id}) }}" class="btn btn-primary">Modifier</a>
-							{# <form action="{{ path('app_interview_delete', {'id': interview.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet entretien ?');">
-								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ interview.id) }}">
-								<button type="submit" class="btn btn-danger">Supprimer</button>
-							</form> #}
-							{{ include ('interview/_delete_form.html.twig')}}
-						</td>
-					</tr>
-				{% endfor %}
-			{% else %}
-				<tr>
-					<td colspan="6">Aucun enregistrement trouvé.</td>
-				</tr>
-			{% endif %}
-		</tbody>
-	</table>
-
+        {# Tableau des entretiens #}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Date</th>
+                        <th>Collaborateur</th>
+                        <th>Type</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if interviews|length > 0 %}
+                        {% for interview in interviews %}
+                            <tr>
+                                <td>{{ interview.date ? interview.date|date('Y-m-d H:i:s') : 'Non définie' }}</td>
+                                <td>{{ interview.interviewee.username }}</td>
+                                <td>{{ interview.typeInterview.name }}</td>
+                                <td>{{ interview.status }}</td>
+                                <td>
+                                    <a href="{{ path('app_interview_show', {'id': interview.id}) }}" class="btn btn-info btn-sm" title="Afficher"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ path('app_interview_edit', {'id': interview.id}) }}" class="btn btn-primary btn-sm" title="Modifier"><i class="fas fa-edit"></i></a>
+                                    {{ include('interview/_delete_form.html.twig', { id: interview.id }) }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center">Aucun enregistrement trouvé.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block title %}{{ resource.id ? 'Edit Resource' : 'Create Resource' }}{% endblock %}
 
 {% block body %}
-    <h1>{{ resource.id ? 'Edit Resource' : 'Create Resource' }}{% endblock %}
+    <h1>{{ resource.id ? 'Edit Resource' : 'Créer une Ressource' }}
 
     {{ form_start(form) }}
         {{ form_row(form.title) }}
@@ -13,8 +13,8 @@
         {{ form_row(form.updated_at) }}
         {{ form_row(form.personal) }}
         {{ form_row(form.category) }}
-        <button type="submit" class="btn btn-success">{{ 'Save' }}</button>
+        <button type="submit" class="btn btn-success">{{ 'Enregistrer' }}</button>
     {{ form_end(form) }}
 
-    <a href="{{ path('app_resource_index') }}">Back to list</a>
+    <a href="{{ path('app_resource_index') }}">Retour</a>
 {% endblock %}

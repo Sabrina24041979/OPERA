@@ -35,7 +35,7 @@ class Resource
     private ?Personal $personal = null;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'resources')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Category $category = null;
 
 

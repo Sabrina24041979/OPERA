@@ -12,7 +12,6 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-
 #[IsGranted('ROLE_MANAGER')]
 class ManagerL1Controller extends AbstractController
 {

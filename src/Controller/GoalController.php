@@ -28,6 +28,23 @@ class GoalController extends AbstractController
         ]);
     }
 
+    #[Route('/manager/{id}', name: 'app_goal_manager_index', methods: ['GET'], requirements: ['id' => '\d+'])]
+    public function listByManager(int $id, GoalRepository $goalRepository): Response 
+    {
+        $goals=[];
+        if ($this->isGranted('ROLE_MANAGER')){
+            $interviews = $goalRepository->findAllByManager($id);
+        }
+        if ($this->isGranted('ROLE_USER')){
+            $interviews = $goalRepository->findAllByCollaborator($id);
+        }
+
+        return $this->render('goal/index.html.twig', [
+            'goals' => $goals,
+        ]);
+    }
+
+
     #[Route('/new', name: 'app_goal_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {             
@@ -99,7 +116,7 @@ class GoalController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$goal->getId(), $request->request->get('_token'))) {
             $entityManager->remove($goal);
             $entityManager->flush();
-            $this->addFlash('error', 'Action supprimée.');           
+            $this->addFlash('error', 'Objectif supprimé.');           
         }
 
         // Si le token CSRF n'est pas valide, rediriger vers l'index

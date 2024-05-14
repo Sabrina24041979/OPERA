@@ -42,6 +42,7 @@ Encore
 
     .addStyleEntry('home-style', './assets/styles/home.scss')
     .addEntry('home', './assets/home.js') // Assurez-vous que le chemin et le fichier existent
+    .addStyleEntry('home', './assets/styles/home.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

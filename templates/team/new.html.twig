@@ -9,5 +9,7 @@
     {# J'inclus le formulaire d'équipe pour la création. #}
     {{ include('team/_form.html.twig') }}
 
-    <a href="{{ path('app_team_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    <div class="d-flex justify-content-end">
+    <a href="{{ path('app_team_index') }}, {'id': app.user.id}) }}" class="btn btn-success">Retour</a>
+    </div>
 {% endblock %}

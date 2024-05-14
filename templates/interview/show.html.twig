@@ -1,87 +1,70 @@
 {% extends 'base_bo.html.twig' %}
 
-{% block title %}Modification d'Entretien
-{% endblock %}
+{% block title %}Visualisation des Entretiens{% endblock %}
 
 {% block body %}
-	<h1>Visualisation des Entretiens</h1>
-	{# <div>
-			        <a href="{{ path('app_interview_index', {'sort': 'collaborateur'}) }}" class="btn btn-link">Trier par Collaborateur</a>
-			    </div> #}
-	<div class="d-flex justify-content-end">
-		<a href="{{ path('app_interview_manager_index', {'id': app.user.id}) }}" class="btn btn-success">Retour</a>
-	</div>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Date</th>
-				{# <th><a href="{{ path('app_interview_show', {'sort': 'collaborateur'}) }}">Collaborateur</a></th> #}
-				<th>Collaborateur</th>
-				<th>Statut</th>
-				<th>Type</th>
-				{# <th>Actions</th> #}
-			</tr>
-		</thead>
-		<tbody>
-			{# {% if interviews|length > 0 %}#}
-			{# {% for interview in interviews %} #}
-				<tr>
-					<td>
-				{{ interview.date ? interview.date|date('Y-m-d H:i:s') : '' }}
-				</td>
-					<td>
-				{{ interview.interviewee.username}}
-				</td>
-					<td>
-				{{ interview.status }}
-				</td>
-					<td>
-				{{ interview.typeInterview.name }}
-			</td>
-		</tr>
-			{# {% else %}
-									                <tr>
-									                    <td colspan="4">Aucun entretien trouvé.</td>
-									                </tr>
-									            {% endfor %} #}
-		</tbody>
-	</table>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Objectifs</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<!-- Bouton pour créer un objectif -->
-					<a href="{{ path('app_goal_new', {'interviewId': interview.id}) }}" class="btn btn-primary">Créer un objectif</a>
-				</td>
-				<td>
-					<!-- Bouton pour ajouter une action -->
-					<a href="{{ path('app_action_new', {'interviewId': interview.id}) }}" class="btn btn-primary">Ajouter une action</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+    <h1>Visualisation des Entretiens</h1>
+    <div class="d-flex justify-content-end">
+        <a href="{{ path('app_interview_manager_index', {'id': app.user.id}) }}" class="btn btn-success" title="Retour à la liste">
+            <i class="fas fa-arrow-left"></i> Retour</a>
+    </div>
 
-	<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Collaborateur</th>
+                <th>Statut</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ interview.date ? interview.date|date('Y-m-d H:i:s') : 'Non définie' }}</td>
+                <td>{{ interview.interviewee.username }}</td>
+                <td>{{ interview.status }}</td>
+                <td>{{ interview.typeInterview.name }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-		<p>Feedback</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Objectifs</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <a href="{{ path('app_goal_new', {'interviewId': interview.id}) }}" class="btn btn-primary" title="Créer un nouvel objectif">
+                        <i class="fas fa-plus-circle"></i> Créer un objectif</a>
+                </td>
+                <td>
+                    <a href="{{ path('app_action_new', {'interviewId': interview.id}) }}" class="btn btn-primary" title="Ajouter une action">
+                        <i class="fas fa-plus-square"></i> Ajouter une action</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-		{% if interview.feedback %}
-			<div>
-				<p>{{ interview.feedback.getFeedbackText() }}</p>
-			</div>
-			<div>
-				<a href="{{ path ('app_feedback_edit')}}" class="btn btn-primary">Modifier</a>
-			</div>
-		{% else %}
-			<div>
-				<a href="{{ path('app_feedback_new', {'interviewId': interview.id}) }}" class="btn btn-primary">Ajouter un compte-rendu</a>
-			</div>
-		{% endif %}
-	</div>
+    <div>
+        <p>Feedback</p>
+        {% if interview.feedback %}
+            <div>
+                <p>{{ interview.feedback.getFeedbackText() }}</p>
+            </div>
+            <div>
+                <a href="{{ path ('app_feedback_edit')}}" class="btn btn-primary" title="Modifier le feedback">
+                    <i class="fas fa-edit"></i> Modifier
+                </a>
+            </div>
+        {% else %}
+            <div>
+                <a href="{{ path('app_feedback_new', {'interviewId': interview.id}) }}" class="btn btn-primary" title="Ajouter un compte-rendu">
+                    <i class="fas fa-plus"></i> Ajouter un compte-rendu</a>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

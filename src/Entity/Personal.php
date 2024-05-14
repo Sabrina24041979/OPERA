@@ -78,6 +78,9 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
     #[ORM\ManyToOne(inversedBy: 'personals')]
     private ?Manager $manager = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $name = null;
+
     // #[ORM\Column(type:"string", length:255, nullable:true)]
     // private $position;
 
@@ -497,6 +500,18 @@ class Personal implements PasswordAuthenticatedUserInterface, UserInterface
     public function setManager(?Manager $manager): static
     {
         $this->manager = $manager;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }

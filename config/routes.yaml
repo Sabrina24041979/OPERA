@@ -182,7 +182,7 @@ app_resource_index:
 app_resource_edit:
     path: /resource
     controller: App\Controller\ResourceController::edit
-    methods: [GET]
+    
 
 manager_goals:
     path: /manager/goals
@@ -220,3 +220,15 @@ app_interview_listAll:
 app_feedback_edit:
     path: /feedback
     controller: App\Controller\FeedbackController::edit
+
+# app_resource_new:
+#     path: /resource
+#     controller: App\Controller\ResourceController::new
+
+check_email_submit:
+    path: /email-check
+    controller: App\Controller\SecurityController::check_email
+
+change_password_submit:
+    path: /change-password
+    controller: App\Controller\SecurityController::change_password

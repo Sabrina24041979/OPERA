@@ -42,6 +42,9 @@ class Manager
     #[ORM\OneToMany(targetEntity: Team::class, mappedBy: 'manager')]
     private Collection $teams;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $name = null;
+
     public function __construct()
     {
         $this->personals = new ArrayCollection();
@@ -169,6 +172,18 @@ class Manager
                 $team->setManager(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }

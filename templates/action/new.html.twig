@@ -5,9 +5,14 @@
 {% block body %}
     <h1>Ajouter une action</h1>
 
-    <div class="d-flex justify-content-end">
-		 <a href="{{ path('app_interview_show', {'id': app.request.query.get('interviewId')}) }}" class="btn btn-success">Retour</a>
-	</div>
+     <div class="d-flex justify-content-end">
+        {% set interviewId = app.request.query.get('interviewId') %}
+        {% if interviewId %}
+            <a href="{{ path('app_interview_show', {'id': interviewId}) }}" class="btn btn-success">Retour</a>
+        {% else %}
+            <a href="{{ path('app_interview_index') }}" class="btn btn-success">Retour</a>
+        {% endif %}
+    </div>
 
     {# Inclusion du formulaire #}
     {{ include('action/_form.html.twig') }}

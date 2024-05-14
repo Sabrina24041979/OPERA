@@ -1,17 +1,19 @@
 {% extends 'base_bo.html.twig' %}
 
-
-
 {% block title %}Bibliothèque des Ressources{% endblock %}
 
 {% block body %}
-{% include 'components/resource_management_widget.twig' %}
+{# {% include 'components/resource_management_widget.twig' %} #}
     <h1>Bibliothèque des Ressources</h1>
 
-    <table class="table">
-        <thead>
+    <div class="text-end mb-3">
+            <a href="{{ path('app_resource_new') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Créer une nouvelle ressource</a>
+    </div>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead class="table-dark">
             <tr>
-                <th>ID</th>
                 <th>Titre</th>
                 <th>Description</th>
                 <th>Chemin du fichier</th>
@@ -23,15 +25,15 @@
         <tbody>
         {% for resource in resources %}
             <tr>
-                <td>{{ resource.id }}</td>
+               
                 <td>{{ resource.title|e }}</td>
                 <td>{{ resource.description|e }}</td>
                 <td>{{ resource.filePath|e }}</td>
-                <td>{{ resource.createdAt ? resource.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ resource.updatedAt ? resource.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ resource.createdAt ? resource.createdAt|date('Y-m-d ') : '' }}</td>
+                <td>{{ resource.updatedAt ? resource.updatedAt|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_resource_show', {'id': resource.id}) }}" class="btn btn-info">Afficher</a>
-                    <a href="{{ path('app_resource_edit', {'id': resource.id}) }}" class="btn btn-primary">Éditer</a>
+                    <a href="{{ path('app_resource_show', {'id': resource.id}) }}" class="btn btn-info btn-sm" title="Afficher"><i class="fas fa-eye"></i></a>
+                    <a href="{{ path('app_resource_edit', {'id': resource.id}) }}" class="btn btn-primary btn-sm" title="Modifier"><i class="fas fa-edit"></i></a>
                     {{ include('resource/_delete_form.html.twig', {'resource': resource}) }}
                 </td>
             </tr>
@@ -42,6 +44,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_resource_new') }}" class="btn btn-success">Ajouter une nouvelle ressource</a>
+</div>
 {% endblock %}

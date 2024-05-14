@@ -1,15 +1,21 @@
 {% extends 'base_bo.html.twig' %}
 
-{% block title %}Modifier un objectif{% endblock %}
+{% block title %}Modifier un Objectif{% endblock %}
 
 {% block body %}
-    <h1>Modifier un objectif</h1>
+<div class="container mt-4">
+    <h1 class="mb-4">Modifier un Objectif</h1>
 
     {{ include('goal/_form.html.twig') }}
 
-    <div class="d-flex justify-content-end">
-		 <a href="{{ path('app_interview_manager_index', {'id': app.user.id}) }}" class="btn btn-success">Retour</a>
-	</div>
-
-    {{ include('goal/_delete_form.html.twig') }}
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <a href="{{ path('app_goal_index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Retour</a>
+        {{ include('goal/_delete_form.html.twig', {
+            'button_class': 'btn btn-danger',
+            'button_icon': 'fas fa-trash-alt',
+            'button_label': 'Supprimer cet objectif'
+        }) }}
+    </div>
+</div>
 {% endblock %}

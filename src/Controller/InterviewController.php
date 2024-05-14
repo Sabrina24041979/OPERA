@@ -17,9 +17,10 @@ class InterviewController extends AbstractController
 {
     // Route pour afficher tous les entretiens
     #[Route("/", name: "app_interview_index", methods: ["GET"])]
-    public function listAll(InterviewRepository $interviewRepository): Response
+    public function index(InterviewRepository $interviewRepository): Response
     {
         $interviews = $interviewRepository->findAll();
+        
         return $this->render('interview/index.html.twig', [
             'interviews' => $interviews,
         ]);
@@ -104,7 +105,7 @@ class InterviewController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$interview->getId(), $request->request->get('_token'))) {
             $entityManager->remove($interview);
             $entityManager->flush();
-            $this->addFlash('error', 'Objectif supprimé.');
+            $this->addFlash('error', 'Entretien supprimé.');
         }
 
         return $this->redirectToRoute('app_interview_manager_index', ['id' => $idManager]);

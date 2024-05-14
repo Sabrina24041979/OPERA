@@ -1,18 +1,3 @@
-{# {{ form_start(form) }}
-    {{ form_row (form.date) }}
-    <br>
-    {{ form_row(form.typeInterview) }}
-    <br>
-    {{ form_row(form.interviewee) }}
-    <br>
-    {{ form_row(form._token) }}
-    <br>
-    <button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
-    <br>  
-{{ form_end(form) }}
-
-{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }} #}
-
 {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
 
 <div class="container mt-3">
@@ -20,7 +5,7 @@
         <div class="col-md-6">
             {{ form_row(form.date, {
                 'label': 'Date de l\'entretien',
-                'attr': {'class': 'form-control'}
+                'attr': {'class': 'form-control', 'placeholder': 'Sélectionnez la date'}
             }) }}
         </div>
         <div class="col-md-6">
@@ -44,12 +29,13 @@
 
     <div class="row mt-4">
         <div class="col-md-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary">
-                <i class="bi bi-save"></i> {{ button_label|default('Enregistrer') }}
+            <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Cliquez pour enregistrer l'entretien">
+                <i class="fas fa-save"></i> {{ button_label|default('Enregistrer') }}
             </button>
         </div>
     </div>
 </div>
 
 {{ form_end(form) }}
+
 

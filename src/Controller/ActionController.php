@@ -23,15 +23,6 @@ class ActionController extends AbstractController
         ]);
     }
 
-    // #[Route('/', name: 'app_action_index', methods: ['GET'])]
-    // public function listAll(ActionRepository $actionRepository): Response
-    // {
-    //         $actions = $actionRepository->findAll();
-    //     return $this->render('action/index.html.twig', [
-    //         'actions' => $actions,
-    //     ]);
-    // }
-
     // Route pour afficher les entretiens par manager (ajustement du nom de méthode)
     #[Route('/manager/{id}', name: 'app_action_manager_index', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function listByManager(int $id, ActionRepository $actionRepository): Response 
@@ -44,7 +35,7 @@ class ActionController extends AbstractController
             $interviews = $actionRepository->findAllByCollaborator($id);
         }
 
-        return $this->render('actioni/index.html.twig', [
+        return $this->render('action/index.html.twig', [
             'actions' => $actions,
         ]);
     }

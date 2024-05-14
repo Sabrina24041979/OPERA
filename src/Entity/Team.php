@@ -33,8 +33,9 @@ class Team
     #[ORM\ManyToMany(targetEntity: Personal::class, mappedBy: 'teams')]
     private Collection $members;
 
-    #[ORM\ManyToOne(inversedBy: 'teams')]
-    private ?Manager $manager = null;
+    #[ORM\ManyToOne(targetEntity:Manager::class)]
+    #[ORM\JoinColumn(nullable:true)]
+    private ?Manager $manager ;
 
     public function __construct()
     {
@@ -127,12 +128,12 @@ class Team
         return $this->members;
     }
 
-    public function getManager(): ?Manager
+     public function getManager(): ?Manager
     {
         return $this->manager;
     }
 
-    public function setManager(?Manager $manager): static
+    public function setManager(?Manager $manager): self
     {
         $this->manager = $manager;
 
