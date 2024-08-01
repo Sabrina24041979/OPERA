@@ -1,42 +1,52 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}Resource{% endblock %}
+{% block title %}Visualisation des Ressources
+{% endblock %}
 
 {% block body %}
-    <h1>Resource</h1>
+	{% if is_granted("BLOCKED") %}
+		<p id="paragraphBlockedAccount">Votre compte est bloqué</p>
+	{% else %}
+		{% block content %}
+			<h1>Visualisation des Ressources</h1>
+			<div class="d-flex justify-content-end">
+				<a href="{{ path('app_resource_index', {'id': app.user.id}) }}" class="btn btn-success" title="Retour à la liste">
+					<i class="fas fa-arrow-left"></i>
+					Retour</a>
+			</div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ resource.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ resource.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ resource.description }}</td>
-            </tr>
-            <tr>
-                <th>File_path</th>
-                <td>{{ resource.filePath }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ resource.createdAt ? resource.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Updated_at</th>
-                <td>{{ resource.updatedAt ? resource.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>Id</th>
+						<td>{{ resource.id }}</td>
+					</tr>
+					<tr>
+						<th>Title</th>
+						<td>{{ resource.title }}</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>{{ resource.description }}</td>
+					</tr>
+					<tr>
+						<th>File_path</th>
+						<td>{{ resource.filePath }}</td>
+					</tr>
+					<tr>
+						<th>Created_at</th>
+						<td>{{ resource.createdAt ? resource.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					</tr>
+					<tr>
+						<th>Updated_at</th>
+						<td>{{ resource.updatedAt ? resource.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					</tr>
+				</tbody>
+			</table>
 
-    <a href="{{ path('app_resource_index') }}">back to list</a>
+			<a href="{{ path('app_resource_edit', {'id': resource.id}) }}">Modifier</a>
 
-    <a href="{{ path('app_resource_edit', {'id': resource.id}) }}">edit</a>
-
-    {{ include('resource/_delete_form.html.twig') }}
+			{{ include('resource/_delete_form.html.twig') }}
+		{% endblock %}
+	{% endif %}
 {% endblock %}

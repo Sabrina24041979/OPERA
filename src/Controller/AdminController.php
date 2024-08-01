@@ -10,6 +10,7 @@ use App\Entity\Personal;
 use App\Form\PersonalType;
 use App\Service\ConfigService;
 use App\Repository\TeamRepository;
+use App\Repository\UserRepository;
 use App\Repository\ConfigRepository;
 use App\Form\PersonalPermissionsType;
 use App\Repository\PersonalRepository;
@@ -20,7 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\MakerBundle\Tests\tmp\current_project_xml\src\Repository\UserRepository;
 
 #[Route('/admin')]
 class AdminController extends AbstractController
@@ -47,11 +47,12 @@ class AdminController extends AbstractController
     // }
 
     #[Route('/admin/user/management', name: 'admin_user_management', methods: ['GET'])]
-    public function manageUsers(UserRepository $userRepository): Response {
+    public function manageUsers(UserRepository $userRepository): Response
+    {
         $users = $userRepository->findAll();
         return $this->render('admin/manage_users.html.twig', ['users' => $users]);
     }
-    
+
     #[Route('/teams', name: 'admin_teams_overview')]
     public function overviewTeams(TeamRepository $teamRepository): Response
     {
@@ -69,10 +70,15 @@ class AdminController extends AbstractController
     public function newPersonal(Request $request, EntityManagerInterface $entityManager): Response
     {
         $personal = new Personal();
+
+
         $form = $this->createForm(PersonalType::class, $personal);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Entrer les informations recuillis dans l'objet personal
+            // Envoyer en BDD
+
             $entityManager->persist($personal);
             $entityManager->flush();
 
@@ -85,7 +91,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-        // Méthode pour éditer un personnel
+    // Méthode pour éditer un personnel
     #[Route('/personal/edit/{id}', name: 'admin_personal_edit', methods: ['GET', 'POST'])]
     public function editPersonal(Request $request, Personal $personal, EntityManagerInterface $entityManager): Response
     {
@@ -108,7 +114,7 @@ class AdminController extends AbstractController
     #[Route('/personal/delete/{id}', name: 'admin_personal_delete', methods: ['POST'])]
     public function deletePersonal(Request $request, Personal $personal, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$personal->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $personal->getId(), $request->request->get('_token'))) {
             $entityManager->remove($personal);
             $entityManager->flush();
         }
@@ -161,7 +167,7 @@ class AdminController extends AbstractController
     #[Route('/team/delete/{id}', name: 'admin_team_delete', methods: ['POST'])]
     public function deleteTeam(Request $request, Team $team, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$team->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $team->getId(), $request->request->get('_token'))) {
             $entityManager->remove($team);
             $entityManager->flush();
         }
@@ -212,7 +218,8 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/settings/save', name: 'admin_settings_save', methods: ['POST'])]
-    public function saveSettings(Request $request, ConfigService $configService): Response {
+    public function saveSettings(Request $request, ConfigService $configService): Response
+    {
         // Vérifier et enregistrer les paramètres ici
         return $this->redirectToRoute('admin_settings');
     }
@@ -222,21 +229,21 @@ class AdminController extends AbstractController
     #[Route('/dashboard', name: 'admin_dashboard')]
     public function dashboard(PersonalRepository $personalRepository): Response
     {
-    
+
         // Je récupère les données nécessaires.
         // Imaginons que je souhaite obtenir le nombre total d'utilisateurs et le nombre de nouveaux utilisateurs de cette semaine :
         $totalPersonals = [];
         $newPersonalsThisWeek = [];
-    
+
         // De même, je peux récupérer d'autres données nécessaires, comme des alertes, des statistiques sur d'autres entités, etc.
-    
+
         // Je prépare un tableau avec toutes les données que je souhaite passer à la vue.
         $dashboardData = [
             'totalPersonals' => $totalPersonals,
             'newPersonalsThisWeek' => $newPersonalsThisWeek,
             // Je peux ajouter d'autres données nécessaires ici.
         ];
-    
+
         // Je retourne la vue du tableau de bord, en passant les données préparées.
         return $this->render('admin/dashboard.html.twig', $dashboardData);
     }
@@ -257,34 +264,32 @@ class AdminController extends AbstractController
             'maintenanceMode' => $maintenanceMode,
             // Je peux ajouter d'autres paramètres de configuration ici.
         ];
-        
+
         // Je retourne la vue des paramètres de configuration, en passant les paramètres récupérés pour leur affichage et modification.
         return $this->render('admin/settings_manage.html.twig', [
             'settings' => $settings,
         ]);
     }
-    
-    
-        // Je peux ajouter ici d'autres méthodes pour gérer les utilisateurs, les équipes, et d'autres fonctionnalités d'administration (A définir).
+
+
+    // Je peux ajouter ici d'autres méthodes pour gérer les utilisateurs, les équipes, et d'autres fonctionnalités d'administration (A définir).
     #[Route('/performances', name: 'admin_performances', methods: ['GET'])]
-        public function managePerformances(PerformanceRepository $performanceRepository): Response
-        {
-            $performances = $performanceRepository->findAll(); // Récupère toutes les performances
-        
-            return $this->render('admin/performances_manage.html.twig', [
-                'performances' => $performances,
-            ]);
-        }
-        
-        #[Route('/evaluations', name: 'admin_evaluations', methods: ['GET'])]
-        public function manageEvaluations(EvaluationRepository $evaluationRepository): Response
-        {
-            $evaluations = $evaluationRepository->findAll(); // Récupère toutes les évaluations
-        
-            return $this->render('admin/evaluations_manage.html.twig', [
-                'evaluations' => $evaluations,
-            ]);
-        }
-        
+    public function managePerformances(PerformanceRepository $performanceRepository): Response
+    {
+        $performances = $performanceRepository->findAll(); // Récupère toutes les performances
+
+        return $this->render('admin/performances_manage.html.twig', [
+            'performances' => $performances,
+        ]);
     }
 
+    #[Route('/evaluations', name: 'admin_evaluations', methods: ['GET'])]
+    public function manageEvaluations(EvaluationRepository $evaluationRepository): Response
+    {
+        $evaluations = $evaluationRepository->findAll(); // Récupère toutes les évaluations
+
+        return $this->render('admin/evaluations_manage.html.twig', [
+            'evaluations' => $evaluations,
+        ]);
+    }
+}

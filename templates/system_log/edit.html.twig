@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Edit Log{% endblock %}
 
 {% block body %}
     <h1>Edit Log</h1>
     {{ include('system_log/_form.html.twig', {'button_label': 'Update'}) }}
-    <a href="{{ path('system_log_index') }}" class="btn btn-primary">Back to list</a>
+    <a href="{{ path('system_log_index') }}" class="btn btn-primary">Retour à la liste</a>
     {{ include('system_log/_delete_form.html.twig', {'log': log}) }}
 {% endblock %}

@@ -2,29 +2,43 @@
 {% extends 'base_bo.html.twig' %}
 
 {# Je définis le titre de la page #}
-{% block title %}Tableau de Bord{% endblock %}
+{% block title %}Tableau de Bord
+{% endblock %}
 
 {# Je définis le contenu principal de la page #}
 {% block body %}
-    <div class="container mt-4">
-        <h1 class="text-center">Tableau de Bord</h1>
+	<style>
+		.messageResetPassword {
+			position: relative;
+			top: 40%;
+			left: 25%;
+		}
+	</style>
+	{% if is_granted("BLOCKED") %}
+		<p id="paragraphBlockedAccount">Votre compte est bloqué</p>
+	{% else %}
+		{% block content %}
+			<div class="container mt-4">
+				<h1 class="text-center">Tableau de Bord</h1>
 
-        {# Section Objectifs #}
-        <section class="my-5">
-            <h2>Objectifs</h2>
-            {# Contenu dynamique des objectifs #}
-        </section>
+				{# Section Objectifs #}
+				<section class="my-5">
+					<h2>Objectifs</h2>
+					{# Contenu dynamique des objectifs #}
+				</section>
 
-        {# Section Feedbacks #}
-        <section class="my-5">
-            <h2>Feedbacks</h2>
-            {# Contenu dynamique des feedbacks #}
-        </section>
+				{# Section Feedbacks #}
+				<section class="my-5">
+					<h2>Feedbacks</h2>
+					{# Contenu dynamique des feedbacks #}
+				</section>
 
-        {# Section État des Équipes #}
-        <section class="my-5">
-            <h2>État des Équipes</h2>
-            {# Contenu dynamique sur l'état des équipes #}
-        </section>
-    </div>
+				{# Section État des Équipes #}
+				<section class="my-5">
+					<h2>État des Équipes</h2>
+					{# Contenu dynamique sur l'état des équipes #}
+				</section>
+			</div>
+		{% endblock %}
+	{% endif %}
 {% endblock %}

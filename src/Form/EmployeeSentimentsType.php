@@ -7,11 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\Personal;
 
 class EmployeeSentimentsType extends AbstractType
 {
@@ -21,9 +18,9 @@ class EmployeeSentimentsType extends AbstractType
             ->add('sentiment_value', ChoiceType::class, [
                 'choices' => [
                     'Heureux' => 'happy',
+                    'Neutre' => 'neutral',
                     'Triste' => 'sad',
-                    'En colère' => 'angry',
-                    'Neutre' => 'neutral'
+
                 ],
                 'label' => 'Sentiment',
                 'placeholder' => 'Sélectionnez un sentiment',
@@ -43,31 +40,6 @@ class EmployeeSentimentsType extends AbstractType
                     'rows' => 4
                 ],
                 'help' => 'Commentaire supplémentaire pour détailler le sentiment.'
-            ])
-            ->add('category', TextType::class, [
-                'required' => false,
-                'label' => 'Catégorie',
-                'attr' => [
-                    'placeholder' => 'Catégorie du sentiment (si applicable)'
-                ],
-                'help' => 'Catégorie pour classifier le sentiment.'
-            ])
-            ->add('intensity', ChoiceType::class, [
-                'choices' => [
-                    'Faible' => 'low',
-                    'Moyenne' => 'medium',
-                    'Forte' => 'high'
-                ],
-                'label' => 'Intensité',
-                'placeholder' => 'Sélectionnez l’intensité du sentiment',
-                'help' => 'Indiquez l’intensité du sentiment exprimé.'
-            ])
-            ->add('personal', EntityType::class, [
-                'class' => Personal::class,
-                'choice_label' => 'name',
-                'label' => 'Personne associée',
-                'placeholder' => 'Sélectionnez une personne',
-                'help' => 'La personne à qui le sentiment est associé.'
             ]);
     }
 

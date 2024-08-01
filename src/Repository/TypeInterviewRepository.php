@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\TypeInterview;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * @extends ServiceEntityRepository<TypeInterview>
@@ -21,28 +22,35 @@ class TypeInterviewRepository extends ServiceEntityRepository
         parent::__construct($registry, TypeInterview::class);
     }
 
-//    /**
-//     * @return TypeInterview[] Returns an array of TypeInterview objects
-//     */
-   public function findByExampleField($value): array
-   {
-       return $this->createQueryBuilder('t')
-           ->andWhere('t.exampleField = :val')
-           ->setParameter('val', $value)
-           ->orderBy('t.id', 'ASC')
-           ->setMaxResults(10)
-           ->getQuery()
-           ->getResult()
-       ;
-   }
+    //    /**
+    //     * @return TypeInterview[] Returns an array of TypeInterview objects
+    //     */
+    public function findByExampleField($value): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('t.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
 
-   public function findOneBySomeField($value): ?TypeInterview
-   {
-       return $this->createQueryBuilder('t')
-           ->andWhere('t.exampleField = :val')
-           ->setParameter('val', $value)
-           ->getQuery()
-           ->getOneOrNullResult()
-       ;
-   }
+    public function findOneBySomeField($value): ?TypeInterview
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findAutomaticInterview(Bool $isAutomatic): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.isAutomatic = :isAutomatic')
+            ->setParameter('isAutomatic', $isAutomatic)
+            ->getQuery()
+            ->getResult();
+    }
 }

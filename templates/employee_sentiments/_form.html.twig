@@ -1,4 +1,31 @@
 {{ form_start(form) }}
+
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-md-6">
+			{{ form_row(form.date, { 'attr': { 'class': 'form-control'}}) }}
+		</div>
+		<div class="col-md-6">
+			{{ form_row(form.sentiment_value, { 'attr': { 'class': 'form-select'}}) }}
+		</div>
+	</div>
+</div>
+
+<div class="row mt-3">
+	<div class="col-md-12">
+		{{ form_row(form.comment, { 'attr': { 'class': 'form-control'}}) }}
+	</div>
+</div>
+
+<div class="mt-4">
+	<div class="col-md-12 d-flex justify-content-end">
+		<button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+	</div>
+</div>
+{{ form_end(form) }}
+
+
+{# {{ form_start(form, {'action': path('app_employee_sentiments_new'), 'method': 'POST'}) }}
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{{ form_end(form) }} #}

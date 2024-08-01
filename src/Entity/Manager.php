@@ -21,8 +21,8 @@ class Manager
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $position = null;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $position = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $matricule = null;
@@ -42,6 +42,9 @@ class Manager
     #[ORM\OneToMany(targetEntity: Team::class, mappedBy: 'manager')]
     private Collection $teams;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $name = null;
+
     public function __construct()
     {
         $this->personals = new ArrayCollection();
@@ -58,7 +61,7 @@ class Manager
         return $this->fullname;
     }
 
-    public function setFullname(string $fullname): static
+    public function setFullname(?string $fullname): static
     {
         $this->fullname = $fullname;
 
@@ -70,21 +73,9 @@ class Manager
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(?string $email): static
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPosition(): ?string
-    {
-        return $this->position;
-    }
-
-    public function setPosition(string $position): static
-    {
-        $this->position = $position;
 
         return $this;
     }
@@ -94,7 +85,7 @@ class Manager
         return $this->matricule;
     }
 
-    public function setMatricule(string $matricule): static
+    public function setMatricule(?string $matricule): static
     {
         $this->matricule = $matricule;
 
@@ -106,7 +97,7 @@ class Manager
         return $this->department;
     }
 
-    public function setDepartment(string $department): static
+    public function setDepartment(?string $department): static
     {
         $this->department = $department;
 
@@ -169,6 +160,18 @@ class Manager
                 $team->setManager(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }

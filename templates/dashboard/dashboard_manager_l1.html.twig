@@ -4,13 +4,21 @@
 {% block title %}Tableau de Bord Manager Niveau 1{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Votre espace manager</h1>
-    <p>Bienvenue, {{ app.user.username }}! dans votre interface</p>
+    {% if is_granted("BLOCKED") %}
+        <p id="paragraphBlockedAccount">Votre compte est bloqué</p>
+    {% else %}
+        {% block content %}
 
-    <section>
-        <h2>Synthèse de votre Équipe</h2>
-        <p>Vous supervisez actuellement {{ team_members_count }} personnes dans votre équipe.</p>
-    </section>
-</div>
+            <div class="container">
+                <h1>Votre espace manager</h1>
+                <p>Bienvenue, {{ app.user.username }} dans votre interface</p>
+
+                <section>
+                    <h2>Synthèse de votre Équipe</h2>
+                    <p>Vous supervisez actuellement {{ team_members_count }} personne(s) dans votre équipe.</p>
+                </section>
+            </div>
+        {% endblock %}
+    {% endif %}
 {% endblock %}
+

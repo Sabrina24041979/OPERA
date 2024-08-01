@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SystemLogRepository;
 
@@ -32,9 +33,10 @@ class SystemLog
         return $this->message;
     }
 
-    public function setMessage(?string $message): self
+    public function setMessage(string $message): static
     {
         $this->message = $message;
+
         return $this;
     }
 
@@ -43,9 +45,10 @@ class SystemLog
         return $this->level;
     }
 
-    public function setLevel(?string $level): self
+    public function setLevel(string $level): static
     {
         $this->level = $level;
+
         return $this;
     }
 
@@ -54,9 +57,10 @@ class SystemLog
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 }

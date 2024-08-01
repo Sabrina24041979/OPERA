@@ -1,5 +1,5 @@
 {# Je crée un formulaire pour supprimer une équipe, avec une demande de confirmation. #}
 <form method="post" action="{{ path('app_team_delete', {'id': team.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette équipe ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ team.id) }}">
-    <button class="btn btn-danger">Supprimer</button>
+    <button type="submit" class="btn btn-danger btn-sm" title="Équipe supprimée"><i class="fas fa-trash-alt"></i></button>
 </form>

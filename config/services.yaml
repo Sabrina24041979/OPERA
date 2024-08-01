@@ -11,29 +11,36 @@ services:
     _defaults:
         autowire: true      # Injecte automatiquement les dépendances dans vos services.
         autoconfigure: true # Enregistre automatiquement vos services comme commandes, abonnés aux événements, etc.
+    App\EventListener\PersonalCreatedListener:
+        tags:
+            - { name: 'kernel.event_subscriber' }    
 
-    # Rend les classes dans src/ disponibles pour être utilisées comme services
-    # cela crée un service par classe dont l'identifiant est le nom de classe complet
+  # Rend les classes dans src/ disponibles pour être utilisées comme services
+  # cela crée un service par classe dont l'identifiant est le nom de classe complet
     App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}' # Exclut certains répertoires
+      resource: "../src/*"
+      exclude: "../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}" # Exclut certains répertoires
 
-    # Configuration spécifique pour les contrôleurs pour permettre l'injection de dépendances via les arguments de service
+  # Configuration spécifique pour les contrôleurs pour permettre l'injection de dépendances via les arguments de service
     App\Controller\:
-        resource: '../src/Controller'
-        tags: ['controller.service_arguments']
-     
-    # Définition manuelle de services spécifiques si nécessaire
-    App\Service\ConfigService:
-        # Injecte explicitement des références à d'autres services
-        arguments:
-            $configRepository: '@App\Repository\ConfigRepository'
-            $entityManager: '@doctrine.orm.entity_manager'
+      resource: "../src/Controller"
+      tags: ["controller.service_arguments"]
 
-    # Enregistrement des dépôts comme services si nécessaire
+  # Définition manuelle de services spécifiques si nécessaire
+    App\Service\ConfigService:
+    # Injecte explicitement des références à d'autres services
+      arguments:
+        $configRepository: '@App\Repository\ConfigRepository'
+        $entityManager: "@doctrine.orm.entity_manager"
+
+  # Enregistrement des dépôts comme services si nécessaire
     App\Repository\ConfigRepository:
-        # Si vous avez besoin d'arguments spécifiques ou d'appels de méthodes, définissez-les ici
+    # Si vous avez besoin d'arguments spécifiques ou d'appels de méthodes, définissez-les ici
 
     App\Security\SentimentVoter:
-        tags:
-            - { name: 'security.voter' }
+      tags:
+        - { name: "security.voter" }
+
+    App\Security\Voter\PersonalVoter:
+      tags:
+        - { name: security.voter }

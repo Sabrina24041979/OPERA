@@ -37,8 +37,8 @@ class Action
     #[ORM\JoinColumn(nullable: false)]
     private ?Goal $goal = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $username = null;
 
     public function getId(): ?int
     {
@@ -50,7 +50,7 @@ class Action
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -62,7 +62,7 @@ class Action
         return $this->priority;
     }
 
-    public function setPriority(?string $priority): self
+    public function setPriority(?string $priority): static
     {
         $this->priority = $priority;
 
@@ -129,14 +129,14 @@ class Action
         return $this;
     }
 
-    public function getName(): ?string
+    public function getUsername(): ?string
     {
-        return $this->name;
+        return $this->username;
     }
 
-    public function setName(string $name): static
+    public function setUsername(?string $username): static
     {
-        $this->name = $name;
+        $this->username = $username;
 
         return $this;
     }

@@ -1,6 +1,7 @@
 {# Je crée un formulaire de suppression pour chaque feedback afin de permettre une gestion aisée. Ce formulaire envoie une requête POST à l'action de suppression du contrôleur avec un token CSRF pour la sécurité. #}
 <form method="post" action="{{ path('app_feedback_delete', {'id': feedback.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ feedback.id) }}">
-    <button class="btn btn-danger">Supprimer</button>
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ feedback.id) }}">
+	<button class="btn btn-danger btn-sm">
+		<i class="fas fa-trash-alt"></i>
+	</button>
 </form>
-

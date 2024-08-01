@@ -12,4 +12,14 @@ class WorkloadRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Workload::class);
     }
+
+    public function findAllByManager(int $employeeId)
+    {
+        return $this->createQueryBuilder('w')
+            ->leftJoin('w.personal', 'employee')
+            ->andWhere('employee.id = :employeeId')
+            ->setParameter('employeeId', $employeeId)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -39,7 +39,7 @@ class Profile
 
     // Chaque profil est associé à un utilisateur. L'association est unidirectionnelle ici, depuis le profil vers l'utilisateur.
     #[ORM\OneToOne(inversedBy: 'profile', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Personal $personal = null;
 
     public function getId(): ?int
@@ -52,7 +52,7 @@ class Profile
         return $this->username;
     }
 
-    public function setUsername(?string $username): self
+    public function setUsername(?string $username): static
     {
         $this->username = $username;
 
@@ -64,7 +64,7 @@ class Profile
         return $this->firstname;
     }
 
-    public function setFirstname(?string $firstname): self
+    public function setFirstname(?string $firstname): static
     {
         $this->firstname = $firstname;
 
@@ -76,7 +76,7 @@ class Profile
         return $this->lastname;
     }
 
-    public function setLastname(?string $lastname): self
+    public function setLastname(?string $lastname): static
     {
         $this->lastname = $lastname;
 
@@ -88,7 +88,7 @@ class Profile
         return $this->position;
     }
 
-    public function setPosition(?string $position): self
+    public function setPosition(?string $position): static
     {
         $this->position = $position;
 
@@ -100,7 +100,7 @@ class Profile
         return $this->birthdate;
     }
 
-    public function setBirthdate(?\DateTimeInterface $birthdate): self
+    public function setBirthdate(\DateTimeInterface $birthdate): static
     {
         $this->birthdate = $birthdate;
 
@@ -112,7 +112,7 @@ class Profile
         return $this->profilePicture;
     }
 
-    public function setProfilePicture(?string $profilePicture): self
+    public function setProfilePicture(?string $profilePicture): static
     {
         $this->profilePicture = $profilePicture;
 
@@ -124,7 +124,7 @@ class Profile
         return $this->personal;
     }
 
-    public function setPersonal(?Personal $personal): self
+    public function setPersonal(?Personal $personal): static
     {
         $this->personal = $personal;
 

@@ -14,7 +14,7 @@ class CategoryFixtures extends Fixture
         // Création des catégories
         for ($i = 1; $i <= 5; $i++) {
             $category = new Category();
-            $category->setName('Fondamentaux du management ' . $i);
+            $category->setName('Gestion de projet ' . $i);
             $category->setDescription('Description de la Categorie ' . $i);
             $category->setCreatedAt(new \DateTimeImmutable('now'));
             $category->setUpdatedAt(new \DateTimeImmutable('now'));

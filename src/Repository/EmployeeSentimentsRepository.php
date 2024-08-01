@@ -20,6 +20,16 @@ class EmployeeSentimentsRepository extends ServiceEntityRepository
         parent::__construct($registry, EmployeeSentiments::class);
     }
 
+    public function findAllByManager(int $employeeId)
+    {
+        return $this->createQueryBuilder('e')
+            ->leftJoin('e.personal', 'employee')
+            ->andWhere('employee.id = :employeeId')
+            ->setParameter('employeeId', $employeeId)
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * Je recherche les sentiments par catégorie.
      */
@@ -65,10 +75,8 @@ class EmployeeSentimentsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('e')
             ->andWhere('e.category = :category')
             ->andWhere('e.intensity = :intensity')
-            ->setParameters([
-                'category' => $category,
-                'intensity' => $intensity
-            ])
+            ->setParameter('category', $category)
+            ->setParameter('intensity', $intensity)
             ->getQuery()
             ->getResult();
     }

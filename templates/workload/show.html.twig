@@ -1,37 +1,39 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}Détails de la charge de travail{% endblock %}
+{% block title %}Détails de la charge de travail
+{% endblock %}
 
 {% block body %}
-    <h1>Détails de la charge de travail</h1>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>ID</th>
-                <td>{{ workload.id }}</td>
-            </tr>
-            <tr>
-                <th>Niveau de charge</th>
-                <td>{{ workload.workloadLevel }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ workload.date ? workload.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Commentaire</th>
-                <td>{{ workload.comment }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ workload.description }}</td>
-            </tr>
-            <tr>
-                <th>Heures</th>
-                <td>{{ workload.hours }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="{{ path('app_workload_index') }}" class="btn btn-primary">Retour à la liste</a>
-    <a href="{{ path('app_workload_edit', {'id': workload.id}) }}" class="btn btn-secondary">Éditer</a>
+	<h1>Détails de la charge de travail</h1>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>ID</th>
+				<td>{{ workload.id }}</td>
+			</tr>
+			<tr>
+				<th>Niveau de charge</th>
+				<td>{{ workload.workloadLevel }}</td>
+			</tr>
+			<tr>
+				<th>Date</th>
+				<td>{{ workload.date ? workload.date|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Commentaire</th>
+				<td>{{ workload.comment }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td>{{ workload.description }}</td>
+			</tr>
+			<tr>
+				<th>Heures</th>
+				<td>{{ workload.hours }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_workload_edit', {'id': workload.id}) }}" class="btn btn-primary">Éditer</a>
+	<a href="{{ path('app_workload_index') }}" class="btn btn-secondary">Retour</a>
 {% endblock %}

@@ -1,64 +1,63 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
-    password_hashers:
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
-    providers:
-        # Suppression du fournisseur en mémoire non utilisé
-        app_user_provider:
-            entity:
-                class: App\Entity\Personal  # Vérifiez que cette entité existe et est correctement mappée
-                property: email  # L'identifiant de connexion sera l'email de l'utilisateur
-    # Configuration des firewalls
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            lazy: true
-            provider: app_user_provider  # Utilisation du fournisseur configuré plus haut. J' utilise 'app_user_provider' car j'utilise une base de données.
-            form_login:
-                login_path: app_login  # Chemin d'accès à la page de connexion
-                check_path: app_login  # Chemin utilisé pour la vérification des identifiants
-                success_handler: App\Security\Authentication\AuthenticationSuccessHandler
-            logout:
-                path: app_logout  # Chemin pour la déconnexion
-                target: home  # Route vers laquelle rediriger après déconnexion
+  # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+  password_hashers:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
+  # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+  providers:
+    # Suppression du fournisseur en mémoire non utilisé
+    app_user_provider:
+      entity:
+        class: App\Entity\Personal # Vérifiez que cette entité existe et est correctement mappée
+        property: email # L'identifiant de connexion sera l'email de l'utilisateur
+  # Configuration des firewalls
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      lazy: true
+      provider: app_user_provider # Utilisation du fournisseur configuré plus haut. J' utilise 'app_user_provider' car j'utilise une base de données.
+      form_login:
+        login_path: app_login # Chemin d'accès à la page de connexion
+        check_path: app_login # Chemin utilisé pour la vérification des identifiants
+        success_handler: App\Security\Authentication\AuthenticationSuccessHandler
+      logout:
+        path: app_logout # Chemin pour la déconnexion
+        target: home # Route vers laquelle rediriger après déconnexion
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
+      # activate different ways to authenticate
+      # https://symfony.com/doc/current/security.html#the-firewall
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+      # https://symfony.com/doc/current/security/impersonating_user.html
+      # switch_user: true
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
-    
-    # Configuration du contrôle d'accès
-    access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/manager, roles: ROLE_MANAGER }
-        - { path: ^/director, roles: ROLE_DIRECTOR }
-        - { path: ^/profile, roles: ROLE_USER }
+  # Easy way to control access for large sections of your site
+  # Note: Only the *first* access control that matches will be used
+
+  # Configuration du contrôle d'accès
+  access_control:
+    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/manager, roles: ROLE_MANAGER }
+    - { path: ^/director, roles: ROLE_DIRECTOR }
+    - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/manager/goals, roles: ROLE_MANAGER }
 # Configuration spécifique pour l'environnement de test
 when@test:
-    security:
-        password_hashers:
-            # By default, password hashers are resource intensive and take time. This is
-            # important to generate secure password hashes. In tests however, secure hashes
-            # are not important, waste resources and increase test times. The following
-            # reduces the work factor to the lowest possible values.
-            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
-                algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
-        role_hierarchy:
-            ROLE_USER: ROLE_USER
-            ROLE_MANAGER: ROLE_MANAGER
-            ROLE_DIRECTOR: ROLE_DIRECTOR
-            ROLE_ADMIN: ROLE_ADMIN
-        access_control:
-            - { path: ^/tasks, roles: ROLE_USER }
-
-
+  security:
+    password_hashers:
+      # By default, password hashers are resource intensive and take time. This is
+      # important to generate secure password hashes. In tests however, secure hashes
+      # are not important, waste resources and increase test times. The following
+      # reduces the work factor to the lowest possible values.
+      Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+        algorithm: auto
+        cost: 4 # Lowest possible value for bcrypt
+        time_cost: 3 # Lowest possible value for argon
+        memory_cost: 10 # Lowest possible value for argon
+    role_hierarchy:
+      ROLE_USER: ROLE_USER
+      ROLE_MANAGER: ROLE_MANAGER
+      ROLE_DIRECTOR: ROLE_DIRECTOR
+      ROLE_ADMIN: ROLE_ADMIN
+    access_control:
+      - { path: ^/tasks, roles: ROLE_USER }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PasswordResetRequestRepository;
 
@@ -34,9 +35,10 @@ class PasswordResetRequest
         return $this->token;
     }
 
-    public function setToken(string $token): self
+    public function setToken(string $token): static
     {
         $this->token = $token;
+
         return $this;
     }
 
@@ -45,20 +47,22 @@ class PasswordResetRequest
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?User $user): static
     {
         $this->user = $user;
+
         return $this;
     }
 
-    public function getExpiresAt(): ?DateTimeInterface
+    public function getExpiresAt(): ?\DateTimeInterface
     {
         return $this->expiresAt;
     }
 
-    public function setExpiresAt(DateTimeInterface $expiresAt): self
+    public function setExpiresAt(\DateTimeInterface $expiresAt): static
     {
         $this->expiresAt = $expiresAt;
+
         return $this;
     }
 

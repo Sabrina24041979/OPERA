@@ -1,5 +1,55 @@
-{# J'affiche le formulaire d'équipe, utilisé à la fois pour la création et la modification d'une équipe. #}
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
-{{ form_end(form) }}
+{% extends 'base_bo.html.twig' %}
+
+{% block title %}Édition de l'équipe{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    
+    {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+    
+    <div class="mb-3">
+        {{ form_row(form.teamName, {
+            'label': 'Nom de l\'équipe',
+            'attr': {'class': 'form-control', 'placeholder': 'Entrez le nom de l\'équipe'}
+        }) }}
+    </div>
+    
+    <div class="mb-3">
+        {{ form_row(form.manager, {
+            'label': 'Manager de l\'équipe',
+            'attr': {'class': 'form-select'}
+        }) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_row(form.description, {
+            'label': 'Description',
+            'attr': {'class': 'form-control', 'placeholder': 'Description de l\'équipe'}
+        }) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_row(form.createdAt, {
+            'label': 'Créée le ',
+            'attr': {'class': 'form-control', 'placeholder': 'Sélectionnez la date'}
+        }) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_row(form.members, {
+            'label': 'Membres de l\'équipe ',
+            'attr': {'class': 'form-select'}
+        }) }}
+    </div>
+
+    {{ form_rest(form) }}
+    
+    <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> {{ button_label|default('Enregistrer') }}
+        </button>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}

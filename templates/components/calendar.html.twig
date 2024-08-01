@@ -1,0 +1,72 @@
+{# templates/components/calendar.twig #}
+{# J'intègre ce composant de calendrier dans les pages nécessitant un suivi d'événements ou de tâches. #}
+
+
+	<div
+	class="calendar-container"> {# J'affiche le titre du calendrier #}
+	<h1>Calendrier</h1>
+
+	<div>
+		<ul
+			class="listCaption">
+			{# {{ dump(typeInterview) }} #}
+			{% for type in typeInterview %}
+				<li>
+					<div class="colorCaption" style="background-color:{{type.backgroundColor}}"></div>
+					{{type.name}}</li>
+			{% endfor %}
+		</ul>
+		<span>
+			<strong>Cliquer sur l'entretien pour plus de détails</strong>
+		</span>
+	</div>
+
+
+	{# Ici, je mets en place le calendrier interactif. Dans un projet réel, cela pourrait être dynamique avec JavaScript ou une bibliothèque de calendrier comme FullCalendar. #}
+	<div id="calendar"></div>
+
+	<!-- Modale pour afficher les détails de l'interview -->
+	<div class="modal fade" id="interviewModal" tabindex="-1" role="dialog" aria-labelledby="interviewModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="interviewModalLabel">Détails de l'interview</h5>
+					<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div
+					class="modal-body">
+					<!-- Contenu de la modale -->
+					<div id="interviewDetails">
+						<div class="mb-3">
+							<strong>Titre:</strong>
+							<span id="interviewTitle"></span>
+						</div>
+						<div class="mb-3">
+							<strong>Avec:</strong>
+							<span id="interviewee"></span>
+						</div>
+						<div class="mb-3">
+							<strong>Prévu le:</strong>
+							<span id="interviewDate"></span>
+						</div>
+						<div class="mb-3">
+							<strong>Durée prévue:</strong>
+							<span id="interviewDuration"></span>
+						</div>
+						<div class="mb-3">
+							<strong>Statut:</strong>
+							<span id="interviewStatus"></span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn btn-secondary" id="editInterview">Modifier</a>
+
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

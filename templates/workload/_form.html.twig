@@ -1,4 +1,30 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+
+<div class="row mb-3">
+	<div class="col-md-6">
+		{{ form_row(form.date, {'attr': {'class': 'form-control'}}) }}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.workload_level, {'attr': {'class': 'form-select'}}) }}
+	</div>
+</div>
+
+<div class="mb-3">
+	{{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="row mb-3">
+	<div class="col-md-6">
+		{{ form_row(form.comment, {'attr': {'class': 'form-control'}}) }}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.hours, {'attr': {'class': 'form-control'}}) }}
+	</div>
+</div>
+
+<div class="mt-4">
+	<div class="col-md-12 d-flex justify-content-end">
+		<button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+	</div>
+</div>
 {{ form_end(form) }}

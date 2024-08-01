@@ -2,18 +2,33 @@
 
 namespace App\Controller;
 
+use DateInterval;
 use App\Entity\Personal;
+use App\Entity\Interview;
 use App\Form\PersonalType;
+use App\Event\PersonalCreatedEvent;
 use App\Repository\PersonalRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/personal')]
 class PersonalController extends AbstractController
 {
+   
+    private $em;
+    private $eventDispatcher;
+    
+    public function __construct(EntityManagerInterface $em, EventDispatcherInterface $eventDispatcher)
+    {
+        $this->em = $em;
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     #[Route('/', name: 'app_personal_index', methods: ['GET'])]
     public function index(PersonalRepository $personalRepository): Response
     {
@@ -23,15 +38,19 @@ class PersonalController extends AbstractController
     }
 
     #[Route('/new', name: 'app_personal_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request): Response
     {
         $personal = new Personal();
         $form = $this->createForm(PersonalType::class, $personal);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($personal);
-            $entityManager->flush();
+            $this->em->persist($personal);
+            $this->em->flush();
+
+
+            $event = new PersonalCreatedEvent($personal);
+            $this->eventDispatcher->dispatch($event, PersonalCreatedEvent::NAME);
 
             return $this->redirectToRoute('app_personal_index', [], Response::HTTP_SEE_OTHER);
         }

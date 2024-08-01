@@ -45,6 +45,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: "user", targetEntity: Task::class, cascade: ["persist", "remove"])]
     private Collection $tasks;
 
+    /**
+     * @var Collection<int, Post>
+     */
+    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'user')]
+    private Collection $posts;
+
     public function __construct()
     {
         // $this->posts = new ArrayCollection();
@@ -56,36 +62,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email): static
     {
         $this->email = $email;
+
         return $this;
     }
 
     public function getRoles(): array
     {
-        return array_unique(array_merge($this->roles, ['ROLE_USER']));
+        return $this->roles;
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(array $roles): static
     {
         $this->roles = $roles;
+
         return $this;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->password = $password;
+
         return $this;
     }
 
@@ -96,53 +105,75 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
-    public function addTask(Task $task): self
+    public function addTask(Task $task): static
     {
         if (!$this->tasks->contains($task)) {
-            $this->tasks[] = $task;
+            $this->tasks->add($task);
             $task->setUser($this);
         }
+
         return $this;
     }
 
-    public function removeTask(Task $task): self
+    public function removeTask(Task $task): static
     {
-        if ($this->tasks->removeElement($task) && $task->getUser() === $this) {
-            $task->setUser(null);
+        if ($this->tasks->removeElement($task)) {
+            // set the owning side to null (unless already changed)
+            if ($task->getUser() === $this) {
+                $task->setUser(null);
+            }
         }
+
         return $this;
     }
 
-    // public function getPosts(): Collection
-    // {
-    //     return $this->posts;
-    // }
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
 
-    // public function addPost(Post $post): self
-    // {
-    //     if (!$this->posts->contains($post)) {
-    //         $this->posts[] = $post;
-    //         post->setUser($this);
-    //     }
-    //     return $this;
-    // }
+    public function addPost(Post $post): static
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts->add($post);
+            $post->setUser($this);
+        }
 
-    // public function removePost(Post $post): self
-    // {
-    //     if ($this->posts->removeElement($post) && $post->getUser() === $this) {
-    //         $post->setUser(null);
-    //     }
-    //     return $this;
-    // }
+        return $this;
+    }
+
+    public function removePost(Post $post): static
+    {
+        if ($this->posts->removeElement($post)) {
+            // set the owning side to null (unless already changed)
+            if ($post->getUser() === $this) {
+                $post->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Task>
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
 }

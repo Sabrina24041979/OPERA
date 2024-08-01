@@ -1,0 +1,31 @@
+{# templates/manager/planning.html.twig #}
+{% extends 'base_bo.html.twig' %}
+
+{% block title %}Mon Planning
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('calendar') }}
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.print.min.css" rel="stylesheet" media="print">
+{% endblock %}
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('calendarjs') }}
+	<script>
+		// variable globale js qui sera recup dans calendar.js
+window.calendarEvents = {{ events|raw }};
+	</script>
+{% endblock %}
+
+{% block body %}
+	{% if is_granted("BLOCKED") %}
+		<p id="paragraphBlockedAccount">Votre compte est bloqué</p>
+	{% else %}
+		{% block content %}
+			{% include 'components/calendar.html.twig' %}
+		{% endblock %}
+	{% endif %}
+
+{% endblock %}

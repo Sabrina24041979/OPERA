@@ -6,19 +6,23 @@ use App\Entity\Workload;
 use App\Form\WorkloadType;
 use App\Repository\WorkloadRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/workload')]
+#[IsGranted('ROLE_MANAGER')]
 class WorkloadController extends AbstractController
 {
     #[Route('/', name: 'app_workload_index', methods: ['GET'])]
     public function index(WorkloadRepository $workloadRepository): Response
     {
+        $employeeId = $this->getUser()->getId();
+
         return $this->render('workload/index.html.twig', [
-            'workloads' => $workloadRepository->findAll(),
+            'workloads' => $workloadRepository->findAllByManager($employeeId),
         ]);
     }
 
@@ -30,6 +34,8 @@ class WorkloadController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $workload->setPersonal($this->getUser());
+
             $entityManager->persist($workload);
             $entityManager->flush();
 

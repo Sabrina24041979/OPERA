@@ -1,18 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}Edit EmployeeSentiments{% endblock %}
+{% block title %}Modifier Sentiment
+{% endblock %}
 
 {% block body %}
-    <h1>Edit EmployeeSentiments</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
+	<h1>Modification d'un sentiment</h1>
+	{# {{ form_start(form) }}
+						    {{ form_widget(form) }}
+						    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+						    {{ form_end(form) }} #}
 
 
-    {{ include('employee_sentiments/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('employee_sentiments/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_employee_sentiments_index') }}">back to list</a>
-
-    {{ include('employee_sentiments/_delete_form.html.twig') }}
+	<a href="{{ path('app_employee_sentiments_index') }}" class="btn btn-secondary">Retour à la liste</a>
 {% endblock %}

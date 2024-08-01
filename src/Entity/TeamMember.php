@@ -65,7 +65,7 @@ class TeamMember
         return $this->joined_at;
     }
 
-    public function setJoinedAt(\DateTimeInterface $joined_at): static
+    public function setJoinedAt(?\DateTimeInterface $joined_at): static
     {
         $this->joined_at = $joined_at;
 
@@ -84,6 +84,9 @@ class TeamMember
         return $this;
     }
 
+    /**
+     * @return Collection<int, Personal>
+     */
     public function getPersonal(): Collection
     {
         return $this->personal;
@@ -92,8 +95,9 @@ class TeamMember
     public function addPersonal(Personal $personal): static
     {
         if (!$this->personal->contains($personal)) {
-            $this->personal[] = $personal;
+            $this->personal->add($personal);
         }
+
         return $this;
     }
 

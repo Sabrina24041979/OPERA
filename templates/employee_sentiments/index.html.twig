@@ -1,34 +1,59 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}Liste des Sentiments{% endblock %}
+{% block title %}Liste des Sentiments
+{% endblock %}
 
 {% block body %}
-<h1>Liste des Sentiments</h1>
-<table class="table">
-    <thead class="thead-light">
-        <tr>
-            <th>Date</th>
-            <th>Sentiment</th>
-            <th>Commentaire</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for sentiment in employee_sentiments %}
-        <tr>
-            <td>{{ sentiment.date|date('d/m/Y') }}</td>
-            <td>{{ sentiment.sentiment_value }}</td>
-            <td>{{ sentiment.comment }}</td>
-            <td>
-                <a href="{{ path('app_employee_sentiments_show', {'id': sentiment.id}) }}" class="btn btn-info">Voir</a>
-                <a href="{{ path('app_employee_sentiments_edit', {'id': sentiment.id}) }}" class="btn btn-primary">Éditer</a>
-                <form method="post" action="{{ path('app_employee_sentiments_delete', {'id': sentiment.id}) }}" onsubmit="return confirm('Confirmez-vous la suppression de cet élément ?');" style="display: inline-block;">
-                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sentiment.id) }}">
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+	{% if is_granted("BLOCKED") %}
+		<p id="paragraphBlockedAccount">Votre compte est bloqué</p>
+	{% else %}
+		{% block content %}
+			<h1>Liste des Sentiments</h1>
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th>Date</th>
+						<th>Sentiment</th>
+						<th>Commentaire</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for sentiment in employee_sentiments %}
+
+						<tr>
+							<td>{{ sentiment.date|date('d/m/Y') }}</td>
+							<td>
+								{% if sentiment.sentimentValue == 'happy' %}
+									<span>
+										<i class="bi bi-emoji-smile icon-large"></i>
+									</span>
+								{% elseif sentiment.sentimentValue == 'neutral' %}
+									<span>
+										<i class="bi bi-emoji-neutral icon-large"></i>
+									</span>
+								{% else %}
+									<span>
+										<i class="bi bi-emoji-frown icon-large"></i>
+									</span>
+								{% endif %}
+							</td>
+							<td>{{ sentiment.comment }}</td>
+							<td class="d-flex flex-nowrap">
+								<a href="{{ path('app_employee_sentiments_show', {'id': sentiment.id}) }}" class="btn btn-info btn-sm me-2">
+									<i class="fas fa-eye"></i>
+								</a>
+								<a href="{{ path('app_employee_sentiments_edit', {'id': sentiment.id}) }}" class="btn btn-primary btn-sm me-2">
+									<i class="fas fa-edit"></i>
+								</a>
+								{% include "employee_sentiments/_delete_form.html.twig" %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<a href="{{ path('app_employee_sentiments_new') }}" class="btn btn-success">Déclarer un sentiment</a>
+
+		{% endblock %}
+	{% endif %}
 {% endblock %}

@@ -32,4 +32,36 @@ class InterviewRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllByCollaborator(int $collaboratorId)
+    {
+        return $this->createQueryBuilder('i')
+            ->leftJoin('i.interviewee', 'collaborator')
+            // ->leftJoin('personal.manager', 'manager')
+            ->andWhere('collaborator.id = :collaboratorId')
+            ->setParameter('collaboratorId', $collaboratorId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllSortedByCollaborator()
+    {
+        return $this->createQueryBuilder('i')
+            ->leftJoin('i.interviewee', 'interviewee')
+            ->orderBy('interviewee.username', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+public function countInterviewsForInterviewerOnDate($interviewer, \DateTime $date): int
+{
+    return $this->createQueryBuilder('i')
+        ->select('COUNT(i.id)')
+        ->where('i.interviewer = :interviewer')
+        ->andWhere('i.date = :date')
+        ->setParameter('interviewer', $interviewer)
+        ->setParameter('date', $date->format('Y-m-d'))
+        ->getQuery()
+        ->getSingleScalarResult();
+}
 }

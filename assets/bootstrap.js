@@ -1,11 +1,10 @@
 import { startStimulusApp } from '@symfony/stimulus-bridge';
 
-// Initialisation de l'application Stimulus pour charger les contrôleurs
+// Registers Stimulus controllers from controllers.json and in the controllers/ directory
 export const app = startStimulusApp(require.context(
-    './controllers', // Chemin relatif au dossier des contrôleurs
-    true, // Recherche récursive dans les sous-dossiers
-    /\.[jt]sx?$/, // Prise en compte des fichiers JavaScript et TypeScript
+    '@symfony/stimulus-bridge/lazy-controller-loader!./controllers',
+    true,
+    /\.[jt]sx?$/
 ));
-
-// Enregistrez des contrôleurs personnalisés tiers ici
+// register any custom, 3rd party controllers here
 // app.register('some_controller_name', SomeImportedController);

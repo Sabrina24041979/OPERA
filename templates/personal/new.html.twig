@@ -1,11 +1,19 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}New Personal{% endblock %}
+{% block title %}New Personal
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Personal</h1>
 
-    {{ include('personal/_form.html.twig') }}
+	{% if is_granted("BLOCKED") %}
+		<p id="paragraphBlockedAccount">Votre compte est bloqué</p>
+	{% else %}
+		{% block content %}
+			<h1>Créer un nouveau collaborateur</h1>
 
-    <a href="{{ path('app_personal_index') }}">back to list</a>
+			{{ include('personal/_form.html.twig') }}
+
+			<a href="{{ path('app_personal_index') }}">Retour</a>
+		{% endblock %}
+	{% endif %}
 {% endblock %}

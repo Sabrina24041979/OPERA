@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/type/interview')]
+#[Route('/type/interview', name: 'app_')]
 class TypeInterviewController extends AbstractController
 {
     #[Route('/', name: 'type_interview_index', methods: ['GET'])]
@@ -33,7 +33,7 @@ class TypeInterviewController extends AbstractController
             $entityManager->persist($typeInterview);
             $entityManager->flush();
 
-            return $this->redirectToRoute('type_interview_index');
+            return $this->redirectToRoute('app_type_interview_index');
         }
 
         return $this->render('type_interview/new.html.twig', [
@@ -59,7 +59,7 @@ class TypeInterviewController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('type_interview_index');
+            return $this->redirectToRoute('app_type_interview_index');
         }
 
         return $this->render('type_interview/edit.html.twig', [
@@ -71,11 +71,11 @@ class TypeInterviewController extends AbstractController
     #[Route('/{id}', name: 'type_interview_delete', methods: ['POST'])]
     public function delete(Request $request, TypeInterview $typeInterview, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$typeInterview->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $typeInterview->getId(), $request->request->get('_token'))) {
             $entityManager->remove($typeInterview);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('type_interview_index');
+        return $this->redirectToRoute('app_type_interview_index');
     }
 }

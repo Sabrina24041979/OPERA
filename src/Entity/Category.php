@@ -52,7 +52,7 @@ class Category
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -64,7 +64,7 @@ class Category
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -76,7 +76,7 @@ class Category
         return $this->created_at;
     }
 
-    public function setCreatedAt(?\DateTimeInterface $created_at): self
+    public function setCreatedAt(?\DateTimeInterface $created_at): static
     {
         $this->created_at = $created_at;
 
@@ -88,7 +88,7 @@ class Category
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): static
     {
         $this->updated_at = $updated_at;
 
@@ -103,7 +103,7 @@ class Category
         return $this->resources;
     }
 
-    public function addResource(Resource $resource): self
+    public function addResource(Resource $resource): static
     {
         if (!$this->resources->contains($resource)) {
             $this->resources->add($resource);
@@ -113,7 +113,7 @@ class Category
         return $this;
     }
 
-    public function removeResource(Resource $resource): self
+    public function removeResource(Resource $resource): static
     {
         if ($this->resources->removeElement($resource)) {
             // set the owning side to null (unless already changed)
@@ -133,7 +133,7 @@ class Category
         return $this->goals;
     }
 
-    public function addGoal(Goal $goal): self
+    public function addGoal(Goal $goal): static
     {
         if (!$this->goals->contains($goal)) {
             $this->goals->add($goal);
@@ -143,9 +143,10 @@ class Category
         return $this;
     }
 
-    public function removeGoal(Goal $goal): self
+    public function removeGoal(Goal $goal): static
     {
         if ($this->goals->removeElement($goal)) {
+            // set the owning side to null (unless already changed)
             if ($goal->getCategory() === $this) {
                 $goal->setCategory(null);
             }

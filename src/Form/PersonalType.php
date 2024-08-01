@@ -2,15 +2,16 @@
 
 namespace App\Form;
 
+use App\Entity\Team;
 use App\Entity\Manager;
-use App\Entity\Personal;
 use App\Entity\Profile;
+use App\Entity\Personal;
 use App\Entity\TeamMember;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PersonalType extends AbstractType
@@ -19,28 +20,40 @@ class PersonalType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('email', EmailType::class)
-            ->add('password', PasswordType::class)
-            ->add('created_at', null, ['widget' => 'single_text'])
-            ->add('updated_at', null, ['widget' => 'single_text'])
-            ->add('entry_date', null, ['widget' => 'single_text'])
-            ->add('exit_date', null, ['widget' => 'single_text'])
-            ->add('matricule')
-            ->add('roles', null, ['expanded' => true, 'multiple' => true])
-            ->add('manager_id')
-            ->add('department')
-            ->add('teamMembers', EntityType::class, [
-                'class' => TeamMember::class,
-                'choice_label' => 'name',
-                'multiple' => true,
+            ->add('email')
+            ->add('password')
+
+            ->add('entry_date', null, [
+                'widget' => 'single_text',
             ])
+            ->add('exit_date', null, [
+                'widget' => 'single_text',
+            ])
+            ->add('matricule')
+            ->add('department')
+            // ->add('firstConnexion', null, [
+            //     'widget' => 'single_text',
+            // ])
+            ->add('type_contract')
+            ->add('status')
+            ->add('SPC')
             ->add('profile', EntityType::class, [
                 'class' => Profile::class,
-                'choice_label' => 'name',
+                'choice_label' => 'id',
+            ])
+            ->add('teams', EntityType::class, [
+                'class' => Team::class,
+                'choice_label' => 'id',
+                'multiple' => true,
             ])
             ->add('manager', EntityType::class, [
                 'class' => Manager::class,
-                'choice_label' => 'name',
+                'choice_label' => 'id',
+                'query_builder' => function (EntityRepository $managerRepository): QueryBuilder {
+                    return $managerRepository->createQueryBuilder('m')
+                        ->orderBy('m.fullname', 'ASC');
+                },
+                'choice_label' => 'fullname',
             ]);
     }
 

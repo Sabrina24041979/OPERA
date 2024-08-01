@@ -37,7 +37,7 @@ class Goal
     private ?\DateTimeInterface $updated_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'goals')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Personal $personal = null;
 
     #[ORM\OneToMany(targetEntity: Action::class, mappedBy: 'goal')]
@@ -45,6 +45,12 @@ class Goal
 
     #[ORM\ManyToOne(inversedBy: 'goals')]
     private ?Category $category = null; // Déclaration de la propriété $category
+
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $goal = null;
+
+    #[ORM\ManyToOne(inversedBy: 'goals')]
+    private ?Interview $interview = null;
 
     public function __construct()
     {
@@ -61,7 +67,7 @@ class Goal
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -73,7 +79,7 @@ class Goal
         return $this->deadline;
     }
 
-    public function setDeadline(?\DateTimeInterface $deadline): self
+    public function setDeadline(?\DateTimeInterface $deadline): static
     {
         $this->deadline = $deadline;
 
@@ -85,7 +91,7 @@ class Goal
         return $this->status;
     }
 
-    public function setStatus(?string $status): self
+    public function setStatus(?string $status): static
     {
         $this->status = $status;
 
@@ -97,7 +103,7 @@ class Goal
         return $this->priority;
     }
 
-    public function setPriority(?string $priority): self
+    public function setPriority(?string $priority): static
     {
         $this->priority = $priority;
 
@@ -109,7 +115,7 @@ class Goal
         return $this->created_at;
     }
 
-    public function setCreatedAt(?\DateTimeInterface $created_at): self
+    public function setCreatedAt(?\DateTimeInterface $created_at): static
     {
         $this->created_at = $created_at;
 
@@ -121,7 +127,7 @@ class Goal
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): static
     {
         $this->updated_at = $updated_at;
 
@@ -133,7 +139,7 @@ class Goal
         return $this->personal;
     }
 
-    public function setPersonal(?Personal $personal): self
+    public function setPersonal(?Personal $personal): static
     {
         $this->personal = $personal;
 
@@ -170,9 +176,41 @@ class Goal
         return $this;
     }
 
-    public function setCategory(?Category $category): self
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
         return $this;
     }
+
+    public function getGoal(): ?goal
+    {
+        return $this->goal;
+    }
+
+    public function setGoal(?Goal $goal): static
+    {
+        $this->goal = $goal;
+        return $this;
+    }
+
+    public function getInterview(): ?Interview
+    {
+        return $this->interview;
+    }
+
+    public function setInterview(?Interview $interview): static
+    {
+        $this->interview = $interview;
+
+        return $this;
+    }
+
+    
+    
 }

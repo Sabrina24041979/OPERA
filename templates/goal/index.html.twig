@@ -1,45 +1,64 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}Goal index{% endblock %}
+{% block title %}Liste des Objectifs
+{% endblock %}
 
 {% block body %}
-    <h1>Goal index</h1>
+	{% if is_granted("BLOCKED") %}
+		<p id="paragraphBlockedAccount">Votre compte est bloqué</p>
+	{% else %}
+		{% block content %}
+			<div class="container mt-4">
+				<h1 class="mb-4">Liste des Objectifs</h1>
+				<div class="text-end mb-3">
+					<a href="{{ path('app_goal_new') }}" class="btn btn-success">
+						<i class="fas fa-plus-circle"></i>
+						Créer un nouvel objectif</a>
+				</div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Description</th>
-                <th>Deadline</th>
-                <th>Status</th>
-                <th>Priority</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for goal in goals %}
-            <tr>
-                <td>{{ goal.id }}</td>
-                <td>{{ goal.description }}</td>
-                <td>{{ goal.deadline ? goal.deadline|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ goal.status }}</td>
-                <td>{{ goal.priority }}</td>
-                <td>{{ goal.createdAt ? goal.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ goal.updatedAt ? goal.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_goal_show', {'id': goal.id}) }}">show</a>
-                    <a href="{{ path('app_goal_edit', {'id': goal.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_goal_new') }}">Create new</a>
+				<table class="table table-hover">
+					<thead class="table-dark">
+						<tr>
+							<th>Collaborateur</th>
+							<th>Description</th>
+							<th>Échéance</th>
+							<th>Statut</th>
+							<th>Priorité</th>
+							<th>Créé le</th>
+							<th>Mis à jour le</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% if goals|length > 0 %}
+							{% for goal in goals %}
+								<tr>
+									<td>{{ goal.personal.username }}</td>
+									<td>{{ goal.description }}</td>
+									<td>{{ goal.deadline ? goal.deadline|date('Y-m-d H:i:s') : 'Non défini' }}</td>
+									<td>{{ goal.status }}</td>
+									<td>{{ goal.priority }}</td>
+									<td>{{ goal.createdAt ? goal.createdAt|date('Y-m-d H:i:s') : 'Non défini' }}</td>
+									<td>{{ goal.updatedAt ? goal.updatedAt|date('Y-m-d H:i:s') : 'Non défini' }}</td>
+									<td class="d-flex flex-nowrap">
+										<a href="{{ path('app_goal_show', {'id': goal.id}) }}" class="btn btn-info btn-sm me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Afficher les détails">
+											<i class="fas fa-eye"></i>
+										</a>
+										<a href="{{ path('app_goal_edit', {'id': goal.id}) }}" class="btn btn-primary btn-sm me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier l'objectif">
+											<i class="fas fa-edit"></i>
+										</a>
+										{{ include('goal/_delete_form.html.twig', { id: goal.id }) }}
+									</td>
+								</tr>
+							{% endfor %}
+						{% else %}
+							<tr>
+								<td colspan="8" class="text-center">Aucun objectif trouvé</td>
+							</tr>
+						{% endif %}
+					</tbody>
+				</table>
+			</div>
+		{% endblock %}
+	{% endif %}
 {% endblock %}

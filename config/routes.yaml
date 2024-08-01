@@ -1,149 +1,233 @@
 dashboard_manager_l1:
-    path: /manager/dashboard
-    controller: App\Controller\ManagerL1Controller::index
-    methods: [GET]
+  path: /manager/dashboard
+  controller: App\Controller\ManagerL1Controller::index
+  methods: [GET]
 
 dashboard_user:
-    path: /dashboard/user
-    controller: App\Controller\UserDashboardController::index
-    methods: [GET]
+  path: /dashboard/user
+  controller: App\Controller\UserDashboardController::index
+  methods: [GET]
 
 app_notre_solution:
-    path: /solutions
-    controller: App\Controller\SolutionController::index
-    methods: [GET]
+  path: /solutions
+  controller: App\Controller\SolutionController::index
+  methods: [GET]
 
 app_history:
-    path: /histoire
-    controller: App\Controller\HistoryController::index
-    methods: [GET]
+  path: /histoire
+  controller: App\Controller\HistoryController::index
+  methods: [GET]
 
 app_values:
-    path: /valeurs
-    controller: App\Controller\ValuesController::index
-    methods: [GET]
+  path: /valeurs
+  controller: App\Controller\ValuesController::index
+  methods: [GET]
 
 app_login:
-    path: /connexion
-    controller: App\Controller\SecurityController::login
-    methods: [GET, POST]
+  path: /connexion
+  controller: App\Controller\SecurityController::login
+  methods: [GET, POST]
 
 demo_request:
-    path: /demande-demo
-    controller: App\Controller\DemoController::demoRequest
-    methods: [GET]
+  path: /demande-demo
+  controller: App\Controller\DemoController::demoRequest
+  methods: [GET]
 
 contact_us:
-    path: /contact
-    controller: App\Controller\ContactController::contactPage
-    methods: [GET]
+  path: /contact
+  controller: App\Controller\ContactController::contactPage
+  methods: [GET]
 
 dashboard:
-    path: /dashboard
-    controller: App\Controller\DashboardController::index
+  path: /dashboard
+  controller: App\Controller\DashboardController::index
 
 # Importez les routes de sécurité
 _security:
-    resource: 'routes/security_routes.yaml'
-    type: 'yaml'
+  resource: "routes/security_routes.yaml"
+  type: "yaml"
 
 app_conditions_utilisation:
-    path: /conditions-utilisation
-    controller: App\Controller\LegalController::conditionsUtilisation
+  path: /conditions-utilisation
+  controller: App\Controller\LegalController::conditionsUtilisation
 
 app_politique_confidentialite:
-    path: /politique-confidentialite
-    controller: App\Controller\PolitiqueConfidentialiteController::index
+  path: /politique-confidentialite
+  controller: App\Controller\PolitiqueConfidentialiteController::index
 
 app_cookies:
-    path: /cookies
-    controller: App\Controller\CookiesController::index
+  path: /cookies
+  controller: App\Controller\CookiesController::index
 
 app_mentions_legales:
-    path: /mentions-legales
-    controller: App\Controller\LegalMentionsController::index
+  path: /mentions-legales
+  controller: App\Controller\LegalMentionsController::index
 
 # app_contact:
 #     path: /contact
 #     controller: App\Controller\ContactController::index
 
 app_forget_password:
-    path: /forget-password
-    controller: App\Controller\SecurityController::forgetPassword
-    methods: [GET, POST] 
+  path: /forget-password
+  controller: App\Controller\SecurityController::forgetPassword
+  methods: [GET, POST]
 
-app_reset_password:
-    path: /reset-password/{token}
-    controller: App\Controller\SecurityController::resetPassword
-    methods: [GET, POST]
+# app_reset_password:
+#     path: /reset-password/{token}
+#     controller: App\Controller\SecurityController::resetPassword
+#     methods: [GET, POST]
 
 app_contact:
-    path: /contact
-    controller: App\Controller\ContactController::contactPage
-
-# config/routes.yaml
+  path: /contact
+  controller: App\Controller\ContactController::contactPage
 
 manager_level1_dashboard:
-    path: /manager/level1/dashboard
-    controller: App\Controller\ManagerLevel1Controller::dashboard
-    methods: [GET]
+  path: /manager/level1/dashboard
+  controller: App\Controller\ManagerLevel1Controller::dashboard
+  methods: [GET]
 
 manager_level1_create_profile:
-    path: /manager/level1/profile/create
-    controller: App\Controller\ManagerLevel1Controller::createProfile
-    methods: [GET, POST]
+  path: /manager/level1/profile/create
+  controller: App\Controller\ManagerLevel1Controller::createProfile
+  methods: [GET, POST]
 
 manager_level1_edit_team:
-    path: /manager/level1/team/edit/{id}
-    controller: App\Controller\ManagerLevel1Controller::editTeam
-    methods: [GET, POST]
+  path: /manager/level1/team/edit/{id}
+  controller: App\Controller\ManagerLevel1Controller::editTeam
+  methods: [GET, POST]
 
 manager_level1_create_goal:
-    path: /manager/level1/goal/create
-    controller: App\Controller\ManagerLevel1Controller::createGoal
-    methods: [GET, POST]
+  path: /manager/level1/goal/create
+  controller: App\Controller\ManagerLevel1Controller::createGoal
+  methods: [GET, POST]
 
 manager_level1_edit_goal:
-    path: /manager/level1/goal/edit/{id}
-    controller: App\Controller\ManagerLevel1Controller::editGoal
-    methods: [GET, POST]
+  path: /manager/level1/goal/edit/{id}
+  controller: App\Controller\ManagerLevel1Controller::editGoal
+  methods: [GET, POST]
 
 manager_level1_create_action:
-    path: /manager/level1/action/create
-    controller: App\Controller\ManagerLevel1Controller::createAction
-    methods: [GET, POST]
+  path: /manager/level1/action/create
+  controller: App\Controller\ManagerLevel1Controller::createAction
+  methods: [GET, POST]
 
 manager_level1_edit_action:
-    path: /manager/level1/action/edit/{id}
-    controller: App\Controller\ManagerLevel1Controller::editAction
-    methods: [GET, POST]
+  path: /manager/level1/action/edit/{id}
+  controller: App\Controller\ManagerLevel1Controller::editAction
+  methods: [GET, POST]
 
 manager_level1_create_feedback:
-    path: /manager/level1/feedback/create
-    controller: App\Controller\ManagerLevel1Controller::createFeedback
-    methods: [GET, POST]
+  path: /manager/level1/feedback/create
+  controller: App\Controller\ManagerLevel1Controller::createFeedback
+  methods: [GET, POST]
 
 manager_level1_edit_feedback:
-    path: /manager/level1/feedback/edit/{id}
-    controller: App\Controller\ManagerLevel1Controller::editFeedback
-    methods: [GET, POST]
+  path: /manager/level1/feedback/edit/{id}
+  controller: App\Controller\ManagerLevel1Controller::editFeedback
+  methods: [GET, POST]
 
 manager_level1_create_sentiments:
-    path: /manager/level1/sentiments/create
-    controller: App\Controller\ManagerLevel1Controller::createSentiments
-    methods: [GET, POST]
+  path: /manager/level1/sentiments/create
+  controller: App\Controller\ManagerLevel1Controller::createSentiments
+  methods: [GET, POST]
 
 manager_level1_edit_sentiments:
-    path: /manager/level1/sentiments/edit/{id}
-    controller: App\Controller\ManagerLevel1Controller::editSentiments
-    methods: [GET, POST]
+  path: /manager/level1/sentiments/edit/{id}
+  controller: App\Controller\ManagerLevel1Controller::editSentiments
+  methods: [GET, POST]
 
 manager_level1_create_workload:
-    path: /manager/level1/workload/create
-    controller: App\Controller\ManagerLevel1Controller::createWorkload
-    methods: [GET, POST]
+  path: /manager/level1/workload/create
+  controller: App\Controller\ManagerLevel1Controller::createWorkload
+  methods: [GET, POST]
 
 manager_level1_edit_workload:
-    path: /manager/level1/workload/edit/{id}
-    controller: App\Controller\ManagerLevel1Controller::editWorkload
-    methods: [GET, POST]
+  path: /manager/level1/workload/edit/{id}
+  controller: App\Controller\ManagerLevel1Controller::editWorkload
+  methods: [GET, POST]
+
+app_interview_index:
+  path: /interview
+  controller: App\Controller\InterviewController::index
+
+app_personal_index:
+  path: /personal
+  controller: App\Controller\PersonalController::index
+
+app_team_index:
+  path: /teams
+  controller: App\Controller\TeamController::index
+  methods: [GET]
+
+app_goal_index:
+  path: /goal
+  controller: App\Controller\GoalController::index
+  methods: [GET]
+
+app_action_index:
+  path: /action
+  controller: App\Controller\ActionController::index
+  methods: [GET]
+
+app_workload_index:
+  path: /workload
+  controller: App\Controller\WorkloadController::index
+  methods: [GET]
+
+app_resource_index:
+  path: /resource
+  controller: App\Controller\ResourceController::index
+  methods: [GET]
+
+app_resource_edit:
+  path: /resource
+  controller: App\Controller\ResourceController::edit
+
+manager_goals:
+  path: /manager/goals
+  controller: App\Controller\GoalController::listForManager
+  methods: [GET]
+
+manager_users:
+  path: /manager/users
+  controller: App\Controller\UserManagementController::index
+  methods: [GET]
+
+manager_teams:
+  path: /manager/teams
+  controller: App\Controller\TeamManagementController::index
+  methods: [GET]
+
+manager_personals:
+  path: /manager/personals
+  controller: App\Controller\PersonalManagementController::index
+  methods: [GET]
+
+manager_planning:
+  path: /manager/planning
+  controller: App\Controller\InterviewController::planning
+  methods: [GET]
+
+app_interview_listAll:
+  path: /interview
+  controller: App\Controller\InterviewController::listAll
+
+# app_feedback_new:
+#     path: /feedback
+#     controller: App\Controller\FeedbackController::new
+
+app_feedback_edit:
+  path: /feedback
+  controller: App\Controller\FeedbackController::edit
+
+# app_resource_new:
+#     path: /resource
+#     controller: App\Controller\ResourceController::new
+
+check_email_submit:
+  path: /email-check
+  controller: App\Controller\SecurityController::check_email
+
+change_password_submit:
+  path: /change-password
+  controller: App\Controller\SecurityController::changePassword

@@ -33,9 +33,10 @@ class Config
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -44,9 +45,10 @@ class Config
         return $this->value;
     }
 
-    public function setValue(string $value): self
+    public function setValue(string $value): static
     {
         $this->value = $value;
+
         return $this;
     }
 }

@@ -3,7 +3,7 @@
 {% block title %}TeamMember{% endblock %}
 
 {% block body %}
-    <h1>TeamMember</h1>
+    <h1>Liste des membre de l'équipe</h1>
 
     <table class="table">
         <tbody>
@@ -34,9 +34,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_team_member_index') }}">back to list</a>
-
-    <a href="{{ path('app_team_member_edit', {'id': team_member.id}) }}">edit</a>
+    <a href="{{ path('app_team_member_index') }}">retour</a>
+    <a href="{{ path('app_team_member_show', {'id': team_member.id}) }}">Voir</a>
+    <a href="{{ path('app_team_member_edit', {'id': team_member.id}) }}">Éditer</a>
+    <a href="{{ path('app_team_member_delete', {'id': team_member.id}) }}">Supprimer</a>
 
     {{ include('team_member/_delete_form.html.twig') }}
 {% endblock %}

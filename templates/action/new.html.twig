@@ -1,11 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}New Action{% endblock %}
+{% block title %}Nouvelle Action{% endblock %}
 
 {% block body %}
-    <h1>Create new Action</h1>
+    <h1>Ajouter une action</h1>
 
+     <div class="d-flex justify-content-end">
+        {% set interviewId = app.request.query.get('interviewId') %}
+        {% if interviewId %}
+            <a href="{{ path('app_interview_show', {'id': interviewId}) }}" class="btn btn-success">Retour</a>
+        {% else %}
+            <a href="{{ path('app_interview_index') }}" class="btn btn-success">Retour</a>
+        {% endif %}
+    </div>
+
+    {# Inclusion du formulaire #}
     {{ include('action/_form.html.twig') }}
 
-    <a href="{{ path('app_action_index') }}">back to list</a>
+    {# Lien pour retourner à la liste des entretiens #}
+    
 {% endblock %}

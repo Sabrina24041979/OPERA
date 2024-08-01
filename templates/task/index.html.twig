@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
 {% block title %}Tasks{% endblock %}
 
@@ -9,8 +9,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Assigned to</th>
+                <th>Nom</th>
+                <th>Assignée à</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,14 +21,14 @@
                 <td>{{ task.name }}</td>
                 <td>{{ task.user.username }}</td>
                 <td>
-                    <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-info">View</a>
-                    <a href="{{ path('task_edit', {'id': task.id}) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-info">Voir</a>
+                    <a href="{{ path('task_edit', {'id': task.id}) }}" class="btn btn-primary">Editer</a>
                     {{ include('task/_delete_form.html.twig', {'task': task}) }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">No tasks found</td>
+                <td colspan="4">Aucune tâche trouvée</td>
             </tr>
         {% endfor %}
         </tbody>

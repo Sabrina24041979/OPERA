@@ -21,9 +21,6 @@ class GoalRepository extends ServiceEntityRepository
         parent::__construct($registry, Goal::class);
     }
 
-    /**
-     * Je récupère les objectifs par catégorie.
-     */
     public function findByCategory($categoryId)
     {
         return $this->createQueryBuilder('g')

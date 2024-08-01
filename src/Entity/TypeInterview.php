@@ -24,6 +24,18 @@ class TypeInterview
     #[ORM\OneToMany(mappedBy: 'typeInterview', targetEntity: Interview::class)]
     private Collection $interviews;
 
+    #[ORM\Column(length: 7, nullable: true)]
+    private ?string $backgroundColor = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $duration = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $intervalDate = null;
+
+    #[ORM\Column]
+    private ?bool $isAutomatic = null;
+
     public function __construct()
     {
         $this->interviews = new ArrayCollection();
@@ -39,9 +51,10 @@ class TypeInterview
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(?string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -50,9 +63,10 @@ class TypeInterview
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -64,7 +78,7 @@ class TypeInterview
         return $this->interviews;
     }
 
-    public function addInterview(Interview $interview): self
+    public function addInterview(Interview $interview): static
     {
         if (!$this->interviews->contains($interview)) {
             $this->interviews->add($interview);
@@ -74,13 +88,62 @@ class TypeInterview
         return $this;
     }
 
-    public function removeInterview(Interview $interview): self
+    public function removeInterview(Interview $interview): static
     {
         if ($this->interviews->removeElement($interview)) {
+            // set the owning side to null (unless already changed)
             if ($interview->getTypeInterview() === $this) {
                 $interview->setTypeInterview(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBackgroundColor(): ?string
+    {
+        return $this->backgroundColor;
+    }
+
+    public function setBackgroundColor(?string $backgroundColor): static
+    {
+        $this->backgroundColor = $backgroundColor;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(?int $duration): static
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getIntervalDate(): ?string
+    {
+        return $this->intervalDate;
+    }
+
+    public function setIntervalDate(string $intervalDate): static
+    {
+        $this->intervalDate = $intervalDate;
+
+        return $this;
+    }
+
+    public function isAutomatic(): ?bool
+    {
+        return $this->isAutomatic;
+    }
+
+    public function setAutomatic(bool $isAutomatic): static
+    {
+        $this->isAutomatic = $isAutomatic;
 
         return $this;
     }

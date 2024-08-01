@@ -1,15 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}New EmployeeSentiments{% endblock %}
+{% block title %}Nouveau Sentiment
+{% endblock %}
 
 {% block body %}
-    <h1>Create new EmployeeSentiments</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
+	<h1>Déclarer un sentiment</h1>
+	{# {{ form_start(form) }}
+						    {{ form_widget(form) }}
+						    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+						    {{ form_end(form) }} #}
 
 
-    {% include 'employee_sentiments/_form.html.twig' with {'form': form, 'button_label': 'Créer'} %}
-    <a href="{{ path('app_employee_sentiments_index') }}">Retour à la liste</a>
+	{% include 'employee_sentiments/_form.html.twig' with {'form': form, 'button_label': 'Créer'} %}
+	<div class="mt-4">
+		<div class="col-md-12 d-flex justify-content-end">
+			<a href="{{ path('app_employee_sentiments_index') }}" class="btn btn-success">Retour à la liste</a>
+		</div>
+	</div>
 {% endblock %}

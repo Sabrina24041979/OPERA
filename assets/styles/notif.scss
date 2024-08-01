@@ -1,0 +1,47 @@
+
+
+#iconeRingNotifications {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin: auto;
+    position: relative;
+    left: 18rem;
+    #divNotificationPlusNumber {
+        position: relative;
+        top: 1rem;
+        margin: auto;
+
+        #iconeNotif {
+            height: 30px;
+            width: 30px;
+            margin: auto;
+        }
+
+        #numberOfNotifcations {
+            height: 20px;
+            width: 20px;
+            position: relative;
+            bottom: 2.3rem;
+            left: 2rem;
+            font-size: 20px;
+            background-color: aqua;
+            text-align: center;
+            border-radius: 50%;
+        }
+    }
+    #listNotifications {
+        width: 300px;
+        min-height: 100px;
+        padding: 1rem;
+        margin-top: 4rem;
+        margin-left: 1.5rem;
+        background-color: #EEC196;
+        position: absolute;
+        list-style-type: none;
+    } 
+}
+
+.clickAndShow {
+    display: none;
+}

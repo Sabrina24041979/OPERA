@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ResourceLinkRepository;
 
@@ -45,9 +46,10 @@ class ResourceLink
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(string $title): static
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -56,9 +58,10 @@ class ResourceLink
         return $this->url;
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(string $url): static
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -67,20 +70,22 @@ class ResourceLink
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string $description): static
     {
         $this->description = $description;
+
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeInterface $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 }

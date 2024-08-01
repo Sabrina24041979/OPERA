@@ -3,7 +3,7 @@
 {% block title %}New TypeInterview{% endblock %}
 
 {% block body %}
-    <h1>Create new TypeInterview</h1>
-    {{ include('type_interview/_form.html.twig', {'form': form, 'button_label': 'Save'}) }}
-    <a href="{{ path('app_type_interview_index') }}" class="btn btn-secondary">Back to list</a>
+    <h1>Créer un nouveau type d'entretien</h1>
+    {{ include('type_interview/_form.html.twig', {'form': form, 'button_label': 'Enregistrer'}) }}
+    <a href="{{ path('app_type_interview_index') }}" class="btn btn-secondary">Retour</a>
 {% endblock %}

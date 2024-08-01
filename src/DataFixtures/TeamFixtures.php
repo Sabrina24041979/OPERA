@@ -17,7 +17,7 @@ class TeamFixtures extends Fixture Implements DependentFixtureInterface
         for ($i = 1; $i <= 5; $i++) {
             $team = new Team();
             $team->setTeamName('Team ' . $i);
-            $team->setDescription('Description ode l\'équipe ' . $i);
+            $team->setDescription('Description de l\'équipe ' . $i);
             $team->setCreatedAt(new \DateTimeImmutable('2024-01-01'));
 
             // Obtenez une référence à un manager existant

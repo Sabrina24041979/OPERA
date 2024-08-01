@@ -1,16 +1,19 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% block title %}New Goal{% endblock %}
+{% block title %}Nouvel objectif{% endblock %}
 
 {% block body %}
-    <h1>Create new Goal</h1>
-    {{ form_start(form) }}
-        {{ form_errors(form) }}
-        {{ form_row(form.description) }}
-        // Autres champs
-    {{ form_end(form) }}
-
+    <h1>Créer un nouvel objectif</h1>
+     <div class="d-flex justify-content-end">
+        {% set interviewId = app.request.query.get('interviewId') %}
+        {% if interviewId %}
+            <a href="{{ path('app_interview_show', {'id': interviewId}) }}" class="btn btn-success">Retour</a>
+        {% else %}
+            <a href="{{ path('app_interview_index') }}" class="btn btn-success">Retour à la liste des entretiens</a>
+        {% endif %}
+    </div>
+    
     {{ include('goal/_form.html.twig') }}
 
-    <a href="{{ path('app_goal_index') }}">back to list</a>
+    
 {% endblock %}

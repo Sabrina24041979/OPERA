@@ -1,47 +1,58 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_bo.html.twig' %}
 
-{% include 'components/resource_management_widget.twig' %}
-{% include 'components/nom_du_fichier.twig' %}
-
-{% block title %}Index des Ressources{% endblock %}
+{% block title %}Bibliothèque des Ressources
+{% endblock %}
 
 {% block body %}
-    <h1>Index des Ressources</h1>
+	{% if is_granted("BLOCKED") %}
+		<p id="paragraphBlockedAccount">Votre compte est bloqué</p>
+	{% else %}
+		{% block content %}
+			{# {% include 'components/resource_management_widget.twig' %} #}
+			<h1>Bibliothèque des Ressources</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Chemin du fichier</th>
-                <th>Date de création</th>
-                <th>Date de mise à jour</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for resource in resources %}
-            <tr>
-                <td>{{ resource.id }}</td>
-                <td>{{ resource.title|e }}</td>
-                <td>{{ resource.description|e }}</td>
-                <td>{{ resource.file_path|e }}</td>
-                <td>{{ resource.created_at ? resource.created_at|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ resource.updated_at ? resource.updated_at|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_resource_show', {'id': resource.id}) }}" class="btn btn-info">Afficher</a>
-                    <a href="{{ path('app_resource_edit', {'id': resource.id}) }}" class="btn btn-primary">Éditer</a>
-                    {{ include('resource/_delete_form.html.twig', {'resource': resource}) }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">Aucun enregistrement trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+			<div class="text-end mb-3">
+				<a href="{{ path('app_resource_new') }}" class="btn btn-success">
+					<i class="fas fa-plus-circle"></i>
+					Créer une nouvelle ressource</a>
+			</div>
 
-    <a href="{{ path('app_resource_new') }}" class="btn btn-success">Créer une nouvelle ressource</a>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead class="table-dark">
+						<tr>
+							<th>Titre</th>
+							<th>Description</th>
+							<th>Chemin du fichier</th>
+							<th>Date de création</th>
+							<th>Date de mise à jour</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for resource in resources %}
+							<tr>
+
+								<td>{{ resource.title|e }}</td>
+								<td>{{ resource.description|e }}</td>
+								<td>{{ resource.filePath|e }}</td>
+								<td>{{ resource.createdAt ? resource.createdAt|date('Y-m-d ') : '' }}</td>
+								<td>{{ resource.updatedAt ? resource.updatedAt|date('Y-m-d') : '' }}</td>
+								<td class="d-flex flex-nowrap">
+									<a href="{{ path('app_resource_show', {'id': resource.id}) }}" class="btn btn-info btn-sm me-2" title="Afficher">
+										<i class="fas fa-eye"></i>
+									</a>
+									<a href="{{ path('app_resource_edit', {'id': resource.id}) }}" class="btn btn-primary btn-sm me-2" title="Modifier">
+										<i class="fas fa-edit"></i>
+									</a>
+									{{ include('resource/_delete_form.html.twig', {'resource': resource}) }}
+								</td>
+							</tr>
+
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		{% endblock %}
+	{% endif %}
 {% endblock %}
